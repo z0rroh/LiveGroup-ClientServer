@@ -75,7 +75,7 @@ class UserAvatar extends Component{
              interactionKind={PopoverInteractionKind.CLICK}
              popoverClassName="pt-popover-content-sizing"
              position={Position.RIGHT}>
-              <button className="upload-icon"><i className="material-icons">add_a_photo</i></button>
+              <button className="upload-icon"><i className="material-icons">&#xE439;</i></button>
               <div className="Popover-Avatar">
                   <form encType="multipart/form-data" onSubmit={(e)=>this.handleSubmit(e)}>
                     <label className="pt-file-upload">

@@ -6,16 +6,7 @@
  */
 const path = require('path');
 module.exports = {
-	index: function (req,res){
 
-		res.writeHead(200, {'content-type': 'text/html'});
-		res.end(
-		'<form action="/archivo/upload" enctype="multipart/form-data" method="post">'+
-		'<input type="file" name="avatar" accept=".png, .jpg, .jpeg"><br>'+
-		'<input type="submit" value="Upload">'+
-		'</form>'
-		)
-	},
 	upload: function  (req, res) {
 		if(req.method === 'GET')
 			return res.json({'status':'GET not allowed'});

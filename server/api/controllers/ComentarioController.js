@@ -9,7 +9,7 @@ module.exports = {
 
 		subscribe: function(req,res){
 				if(req.isSocket && req.session.User){
-						Comentario.find({id_group:req.session.User.id_group}).exec(function (err, comentarios) {
+						Comentario.find({group:req.session.User.group}).exec(function (err, comentarios) {
 						// Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
 								Comentario.subscribe(req, comentarios,['update','create','destroy']);
 						});

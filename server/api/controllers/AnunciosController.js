@@ -12,9 +12,9 @@ module.exports = {
 		res.view('anuncios/index');
 	},
 	subscribe: function(req,res){
-		
+
 			if(req.isSocket && req.session.User){
-					Anuncio.find({id_group:req.session.User.id_group}).exec(function (err, anuncios) {
+					Anuncio.find({group:req.session.User.group}).exec(function (err, anuncios) {
 					// Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
 							Anuncio.subscribe(req, anuncios,['update','create','destroy']);
 					});
@@ -27,7 +27,7 @@ module.exports = {
 	},
 	show: function(req, res, next){
 		/*
-		User.findByGroup(req.session.User.id_group, function(err,users){
+		User.findByGroup(req.session.User.group, function(err,users){
 			res.view({
 				users: users
 			});
@@ -39,7 +39,7 @@ module.exports = {
 		var anuncioObj={
 			text: req.param('text'),
 			autor: req.session.User.id,
-			group: req.session.User.id_group
+			group: req.session.User.group
 		}
 
 		Anuncio.create(anuncioObj,function (err, anuncio) {
@@ -65,7 +65,7 @@ module.exports = {
 	},
 	getAnuncios: function(req, res){
 
-		Anuncio.anunciosFindByGroup(req.session.User.id_group, function(err, anuncios){
+		Anuncio.anunciosFindByGroup(req.session.User.group, function(err, anuncios){
 					res.ok(anuncios);
 			});
 	}

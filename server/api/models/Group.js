@@ -29,6 +29,9 @@ module.exports = {
   	image:{
    		type: 'string'
   	},
+    group_parent:{
+      type: 'string'
+    },
     key:{
       type: 'string'
     },

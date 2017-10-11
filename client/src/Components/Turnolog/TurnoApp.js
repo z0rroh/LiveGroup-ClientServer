@@ -21,7 +21,6 @@ class TurnoApp extends Component{
       this.setState(tokens);
     }.bind(this));
     io.socket.get('/turnolog/entrar', function(turnos) {
-      /*
       var state = true
       for(let i=0; i<turnos.length; i++){
         if (turnos[i].data.length >0){
@@ -30,7 +29,7 @@ class TurnoApp extends Component{
       }
       if(state === true){
         this.setState({hayTurnos: true})
-      }*/
+      }
       this.setState({isFetching:false,turnos: turnos});
     }.bind(this));
     io.socket.on('turnolog', function serverSentEvent(updateTurno) {
@@ -74,7 +73,7 @@ class TurnoApp extends Component{
 
   render(){
     return(
-      <div className="col-lg-12">
+      <div className="ContainerTurnos col-lg-12">
         {this.whatRender()}
       </div>
 

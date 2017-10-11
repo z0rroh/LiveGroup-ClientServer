@@ -11,7 +11,7 @@ module.exports = {
     announce: function(req, res) {
         if(req.isSocket && req.session.User){
 
-                  User.find({id_group:req.session.User.id_group}).exec(function (err, users) {
+                  User.find({id_group:req.session.User.group}).exec(function (err, users) {
                   // Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
                       User.subscribe(req, users,['update','create','destroy']);
                   });
@@ -52,7 +52,7 @@ module.exports = {
       var turnos = [];
       var grupo;
       var admin;
-      user.turnos.map((turno) =>{
+      user.turnos.map(turno =>{
         var dia;
         if( turno.day === "0"){
           dia = "Lunes"
@@ -84,9 +84,7 @@ module.exports = {
         }
         turnos.push(turno);
       })
-      user.group.map(group =>{
-        grupo = group.name;
-      })
+
       if ( user.admin === true){
         admin = "Administrador"
       }
@@ -103,7 +101,7 @@ module.exports = {
         admin: admin,
         user_image: user.user_image,
         turnos: turnos,
-        group: grupo
+        group: user.groupName
       }
       res.ok(userInfo);
     });
@@ -165,7 +163,7 @@ module.exports = {
 	},
   index: function(req, res, next){
 
-      User.find({online: true,id_group:req.session.User.id_group},function foundUsers(err, users){
+      User.find({online: true,id_group:req.session.User.group},function foundUsers(err, users){
 
         if(err) return next();
 
@@ -242,27 +240,38 @@ module.exports = {
     Group.findGroupByKey(req.param('key'),function(err,group){
       if(err){
         var NoValidate =[{message: 'La clave de grupo ingresa no es valida'}]
-        return res.send(NoValidate);
+  			req.session.flash={
+  				err: NoValidate
+  			}
+        return res.view('user/group');
       }
       User.findOne({id:req.session.User.id})
         .then(function(result){
           var user = result;
-          user.id_group = group.id;
+          user.groupName= group.name;
           user.online = true;
-          user.group.add(group.name);
+          user.group= group.id;
           user.save(
             function(err){
-              return res.send(err);
+              req.session.flash={
+                err:err
+              }
             });
             User.publishCreate(user);
 
             req.session.User.group = user.group;
-
-            return res.json(req.session.User);
+            Group.findOne(req.session.User.group, function foundGroup(err, group){
+              if (err) return next(err);
+              req.session.Group = group;
+            });
+            res.redirect('/session/new');
 
         })
         .fail(function(err){
-          return res.send(err);
+          req.session.flash={
+            err:err
+          }
+          return res.view('user/group');
         });
     });
 	}

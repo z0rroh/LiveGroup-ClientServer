@@ -136,7 +136,7 @@ var lang = require('lodash/lang');
        }
 
        if(req.isSocket && req.method === 'GET') {
-         Turnolog.find({group:req.session.User.id_group,estado: 'activo'},function(err,turnologs){
+         Turnolog.find({group:req.session.User.group,estado: 'activo'},function(err,turnologs){
            if(err) {
              sails.log(err);
              sails.log("Error occurred in database operation");

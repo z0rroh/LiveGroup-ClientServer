@@ -23,7 +23,7 @@ module.exports = {
 				  name: req.param('name'),
 				  cupo: req.param('cupos'),
 					day: property,
-					group: req.session.User.id_group,
+					group: req.session.User.group,
 				}
 				turnosObj.push(auxObj);
 			}
@@ -44,7 +44,7 @@ module.exports = {
 	},
 
 	index: function(req, res, next){
-		Turno.find({group:req.session.User.id_group},function foundUsers(err, turnos){
+		Turno.find({group:req.session.User.group},function foundUsers(err, turnos){
 			for(var i in turnos){
 				var diaSemana="";
 
@@ -84,7 +84,7 @@ module.exports = {
 		});
 	},
 	populateTurnolog: function(req,res,next){
-		Turno.find({group: req.session.User.id_group},function(err,turnos){
+		Turno.find({group: req.session.User.group},function(err,turnos){
 			if(err){
 				var noTurn=[{message: 'no hay turnos registrados'}]
 				req.session.flash={
@@ -106,7 +106,7 @@ module.exports = {
 					 cupoActual: 0,
 					 expiracion: exp,
 				   estado: 'activo',
-				   group: req.session.User.id_group,
+				   group: req.session.User.group,
 				   id_turno: turnos[i].id,
 				  }
 					Turnolog.findOrCreate({id_turno: turnos[i].id, estado: 'activo'},turnologObj,function (err,turnologs) {

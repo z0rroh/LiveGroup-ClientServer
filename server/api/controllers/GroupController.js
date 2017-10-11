@@ -15,7 +15,7 @@ module.exports = {
 	},
 
 	show: function(req, res, next){
-		User.usersFindByGroup(req.session.User.id_group, function(err,users){
+		User.usersFindByGroup(req.session.User.group, function(err,users){
 			res.view({
 				users: users
 			});
@@ -24,7 +24,7 @@ module.exports = {
 
 	},
 	getUsers: function(req,res, next){
-		User.usersFindByGroup(req.session.User.id_group, function(err,users){
+		User.usersFindByGroup(req.session.User.group, function(err,users){
 			if(err)
 				return next(err);
 			res.json({
@@ -47,13 +47,12 @@ module.exports = {
 					name: req.param('name'),
 					description: req.param('description'),
 					ubication: req.param('ubication'),
+					group_parent: user.id_group
 				}
 			);
-			user.save(function(err) {
-				return res.send(err);
-			});
+			user.save(function(err) {});
 		});
-		res.send(res);
+		res.redirect('group/show');
 	},
 	index: function(req, res, next){
 
@@ -64,7 +63,7 @@ module.exports = {
 			});
 		});
 */
-		User.findByGroup(req.session.User.id_group, function(err, data){
+		User.findByGroup(req.session.User.group, function(err, data){
 			});
 	},
 	update: function(req, res, next){
@@ -84,7 +83,7 @@ module.exports = {
 		});
 	},
 	active: function(req,res,next){
-		Group.findOne(req.session.User.id_group,{estado: true},function groupSetEstado(err){
+		Group.findOne(req.session.User.group,{estado: true},function groupSetEstado(err){
 			if(err){
 				return next(err);
 			}
@@ -92,7 +91,7 @@ module.exports = {
 		});
 	},
 	desactive: function(req,res,next){
-		Group.findOne(req.session.User.id_group,{estado: false},function groupSetEstado(err){
+		Group.findOne(req.session.User.group,{estado: false},function groupSetEstado(err){
 			if(err){
 				return next(err);
 			}
@@ -100,16 +99,6 @@ module.exports = {
 		});
 	},
 
-
-	showGroups: function(req,res,next){
-
-				User.findOne(req.session.User.id).populate('groups').exec(function(err, user){
-					if(err) return next(err);
-					res.view({
-						user: user
-					});
-				});
-	}
 
 
 

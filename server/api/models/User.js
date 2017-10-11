@@ -45,7 +45,7 @@ module.exports = {
 				type: 'int',
 				defaultsTo : '3'
 			},
-			id_group:{
+			groupName:{
 				type: 'string'
 			},
 			anuncios:{
@@ -53,8 +53,7 @@ module.exports = {
 				via: 'autor',
 			},
 			group:{
-				model: 'group',
-				defaulsTo: ""
+				model: 'group'
 			},
 			turnos:{
 				collection: 'turnolog',
@@ -91,31 +90,15 @@ module.exports = {
 	  },
 
 	  usersFindByGroup: function (options, cb) {
-		 User.find({id_group:options}).exec(function (err, users) {
+		 User.find({group:options}).exec(function (err, users) {
 			 if (err) return cb(err);
 			 if (!users) return cb(new Error('Users not found.'));
 			 return cb(null,users);
 		 });
 	 },
 
-	findByGroup: function (options, cb) {
-				User.find({id_group: options})
-	 			 .then(function (data){
-	 				 var groupHijos = Group.find({ group_parent: options })
-	 							 .then(function(groupData) {
-	 									 var new_data = groupData;
-	 									 delete new_data.createdAt;
-	 									 delete new_data.updatedAt;
-	 									 return new_data;
-	 							 });
-	 				 return cb(null,[data,groupHijos])
-	 			 });
-	},
+
 		// Hook that gets called after the default publishUpdate is run.
 	// We'll use this to tell all public chat rooms about the user update.
-
-
-
-
 
 };
