@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es"></html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalabel=no,initial-scale=1.0,maximun-scale=1.0,minium-scale=1.0">
+  <link rel="stylesheet" href="./css/2flexboxgrid.css">
+  <link rel="stylesheet" href="./css/1materialize.css">
+  <link rel="stylesheet" href="./css/9app.css">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+</head>
+<body>
+  <section class="Layout">
+    <header class="row between-lg">
+      <div class="Header col-lg-12">
+        <div class="box">
+          <div class="row between-lg middle-lg">
+            <div class="User col-lg-4">
+              <div class="box">
+                <div class="row">
+                  <div class="User-image col-lg-2"><img class="circle" src="images/65x65.jpeg"></div>
+                  <div class="col-lg"><a class="User-name dropdown-button" data-activates="User-dropdown">Felipe Rubio<i class="material-icons User-Icon">arrow_drop_down</i></a>
+                    <ul class="dropdown-content" id="User-dropdown">
+                      <li><a>Editar Perfil</a></li>
+                      <li><a>Cerrar Sesión</a></li>
+                    </ul>
+                    <p class="User-empresa">Jumbo La Florida</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="Logo col-lg-4"><img src="images/250x70.jpeg"></div>
+          </div>
+        </div>
+      </div>
+      <div class="Nav col-lg-12">
+        <div class="box">
+          <div class="Nav-Items row around-lg middle-lg">
+            <div class="col-lg"><a class="Nav-Item" href="anuncios.html">Anuncios</a></div>
+            <div class="col-lg"><a class="Nav-Item" href="turnos.html">Turnos</a></div>
+            <div class="col-lg"><a class="Nav-Item" href="turnos.html">Chat</a></div>
+            <div class="col-lg"><a class="Nav-Item" href="turnos.html">Funcionarios</a></div>
+            <div class="col-lg"><a class="Nav-Item" href="turnos.html">Administrar</a></div>
+            <div class="col-lg"><a class="Nav-Item is-active" href="empleados.html">Empleados</a></div>
+            <div class="col-lg"><a class="Nav-Item">Admin</a></div>
+            <div class="col-lg-4"><a class="Nav-Button btn-floating btn-large"><i class="material-icons">add</i></a></div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="Layout-Content row center-lg">
+      <div class="card material-table col-lg-10 col-xlg-8">
+        <div class="table-header"><span class="table-title">Lista de Empleados</span>
+          <div class="actions"><a class="search-toggle waves-effect btn-flat nopadding" href="#"><i class="material-icons">search</i></a></div>
+        </div>
+        <table id="datatable">
+          <thead>
+            <tr>
+              <th> </th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Grupos</th>
+              <th>Tokens</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="Empleados-Item">
+              <th><img class="circle" src="images/50x50.jpeg"></th>
+              <th>Felipe Rubio</th>
+              <th>felipe.andrez@live.cl</th>
+              <th>+569 83413625</th>
+              <th>
+                <select multiple="">
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                </select>
+              </th>
+              <th>
+                <p>3</p>
+              </th>
+              <th><a class="Empleado-Edit btn-flat" href="#Empleado-Modal"><i class="material-icons">edit</i></a>
+                <form class="Destroy-Button">
+                  <input class="btn-flat material-icons" value="close" type="submit">
+                </form>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <div class="modal" id="Empleado-Modal">
+      <div class="modal-content">
+        <h4>Edicion de Usuario</h4>
+        <form class="row center-xs">
+          <div class="col-xs-12 input-field">
+            <input class="validate" id="Signin-Name" type="text">
+            <label for="Signin-Name">Nombre</label>
+          </div>
+          <div class="col-xs-12 input-field">
+            <input class="validate" id="Signin-Email" type="Email">
+            <label for="Signin-Email">Email</label>
+          </div>
+          <div class="col-xs-12 input-field">
+            <input class="validate" id="Signin-Phone" type="text">
+            <label for="Signin-Phone">Telefono</label>
+          </div>
+          <div class="col-xs-12 input-field">
+            <input class="validate" id="Signin-Tokens" type="text">
+            <label for="Signin-Phone">Tokens</label>
+          </div>
+          <div class="Login-Button col-lg-12 input-field"><a class="btn btn-large" type="submit" value="Terminar" href="empleados.html"></a>
+            <input type="hidden" name="_csrf" value="&lt;%=_csrf %&gt;">
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <script src="./js/1jquery.min.js"></script>
+  <script src="./js/2materialize.js"></script>
+  <script src="./js/3jquery.dataTables.min.js"></script>
+  <script src="./js/9app.js"></script>
+</body>

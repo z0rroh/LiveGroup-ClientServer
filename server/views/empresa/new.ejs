@@ -1,0 +1,60 @@
+
+	<div class="row">
+		<div style="margin:0% auto; max-width:300px;">
+			<div class="card-panel grey lighten-4 z-depth-4 center">
+				<form action="/empresa/create" method="POST" accept-charset="utf-8" class="form-new">
+					<div class="row">
+						<h4 class="center">Registro empresa</h4>
+					</div>
+					<div class="row margin">
+						<div class="input-field col s12">
+							<i class="mdi-social-person-outline prefix"></i>
+	            			<input name="name" id="name" type="text" class="validate" autofocus required>
+	            			<label for="name" class="center-align">Nombre empresa</label>
+						</div>
+					</div>
+					<div class="row margin">
+						<div class="input-field col s12">
+							<i class="mdi-social-person-outline prefix"></i>
+	            			<input name="description" id="description" type="text" class="validate" required>
+	            			<label for="description" class="center-align">descripcion</label>
+						</div>
+					</div>
+          <div class="row margin">
+						<div class="input-field col s12">
+							<i class="mdi-social-person-outline prefix"></i>
+	            			<input name="ubication" id="ubication" type="text" class="validate" required>
+	            			<label for="ubication" class="center-align">Ubicacion</label>
+						</div>
+					</div>
+          <div class="row margin">
+						<div class="input-field col s12">
+							<i class="mdi-social-person-outline prefix"></i>
+	            			<input name="user" id="user" type="text" class="validate" required>
+	            			<label for="user" class="center-align">User</label>
+						</div>
+					</div>
+          <div class="row margin">
+            <div class="input-field col s12">
+              <i class="mdi-social-person-outline prefix"></i>
+                    <input name="pass" id="pass" type="password" class="validate" required>
+                    <label for="pass" class="center-align">pass</label>
+            </div>
+          </div>
+          <div class="row margin">
+            <div class="input-field col s12">
+              <i class="mdi-social-person-outline prefix"></i>
+                    <input name="email" id="email" type="email" class="validate" required>
+                    <label for="email" class="center-align">email</label>
+            </div>
+          </div>
+    			<div class="row">
+    				<div class="input-field col s12">
+    					<input type="submit" class="btn waves-effect waves-light col s12" value="Crear empresa"/>
+    					<input type="hidden" name="_csrf" value="<%=_csrf %>"/>
+    				</div>
+    			</div>
+				</form>
+			</div>
+		</div>
+	</div>

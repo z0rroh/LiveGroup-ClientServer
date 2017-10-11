@@ -1,0 +1,301 @@
+header {
+  height: auto;
+  color: #fafafa;
+  background-color: #24292e;
+  width: auto;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  margin: 0;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  padding: 0px; }
+
+.line {
+  height: 4px;
+  background: #8bc34a;
+  border-bottom: 1px solid #000;
+  width: 100%; }
+
+.Header {
+  height: 75px;
+  border-bottom: solid 0.5px #000;
+  width: 100%; }
+  .Header .box {
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 25px; }
+
+.Header-img-logo {
+  height: 60px;
+  width: 60px;
+  text-align: center; }
+  .Header-img-logo img {
+    vertical-align: middle;
+    height: 100%;
+    width: 100%; }
+
+.Header-img {
+  height: 60px;
+  width: 260px;
+  margin-top: 2px;
+  margin-left: -2px; }
+  .Header-img img {
+    height: 100%;
+    width: 100%; }
+
+.User {
+  padding: 0px; }
+  .User .box {
+    width: 100%;
+    height: 100%; }
+  .User .no-padding {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 1rem; }
+  .User .User-name {
+    font-size: 1.3em;
+    letter-spacing: 0;
+    color: #ffffff;
+    cursor: pointer;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right; }
+  .User .User-image {
+    width: 55px;
+    height: 55px; }
+    .User .User-image img {
+      float: right;
+      height: 100%;
+      width: 100%; }
+  .User .User-empresa {
+    text-align: right;
+    margin-right: 8%;
+    color: #8bc34a;
+    margin: 0;
+    font-size: 1.2em;
+    line-height: 1;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+  .User .optionUl {
+    background-color: #24292e;
+    right: 13%;
+    top: 6.5%;
+    padding: 2px;
+    border: solid .5px;
+    width: 200px; }
+    .User .optionUl a {
+      color: #fafafa; }
+    .User .optionUl a:hover {
+      color: #24292e; }
+
+.Logout {
+  border: 1px solid #000;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 3px; }
+  .Logout a {
+    margin: 0px !important;
+    font-size: 37px;
+    height: 50px;
+    width: 50px;
+    color: #fafafa;
+    padding: 6px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.05); }
+
+.Logo {
+  height: 60px;
+  padding-left: 0px;
+  padding-right: 0px;
+  display: inherit; }
+
+.Nav {
+  background-color: #8bc34a;
+  height: 28px;
+  width: 100%; }
+  .Nav .box {
+    padding: 0px;
+    height: 100%; }
+  .Nav .Nav-Items {
+    width: 100%;
+    height: 100%; }
+  .Nav .Nav-Item {
+    margin-top: -1px;
+    text-align: center;
+    width: auto;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    padding-top: 1px; }
+    .Nav .Nav-Item a {
+      padding: 0px 25px;
+      color: #f8f8f8;
+      font-size: 18px;
+      text-transform: none;
+      font-weight: 200;
+      line-height: 28px; }
+  .Nav .Nav-Item:hover {
+    color: #f8f8f8;
+    background-color: #24292e;
+    cursor: pointer;
+    border-bottom: solid 0.5px #000;
+    height: 5px;
+    padding-top: 2px; }
+  .Nav .Nav-Item.is-active {
+    color: #f8f8f8;
+    background-color: #24292e;
+    border-color: #fafafa;
+    border-bottom: solid 0.5px #000;
+    height: 30px;
+    padding-top: 1px; }
+  .Nav .Nav-Button {
+    position: absolute;
+    right: 80px;
+    height: 28px;
+    line-height: 71px; }
+    .Nav .Nav-Button a {
+      background-color: #8bc34a;
+      width: 70px;
+      height: 70px;
+      display: block;
+      position: relative; }
+    .Nav .Nav-Button i {
+      font-size: 2em;
+      line-height: 67px; }
+
+.chat-icon {
+  position: absolute;
+  right: 40px; }
+  .chat-icon a {
+    opacity: 1;
+    text-align: center;
+    color: #fafafa;
+    cursor: pointer;
+    font-size: 18px;
+    text-transform: none;
+    font-weight: 200;
+    height: 28px;
+    line-height: 33px;
+    width: 100%;
+    display: block;
+    position: relative; }
+    .chat-icon a i {
+      font-size: 28px; }
+
+.chat-exit {
+  text-align: center; }
+  .chat-exit a {
+    background-color: #8bc34a;
+    height: 28px; }
+  .chat-exit i {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4px;
+    color: #ffffff;
+    font-size: 25px; }
+
+.chat-tittle {
+  text-align: center;
+  margin-top: 3px;
+  margin-bottom: 5px; }
+  .chat-tittle h6 {
+    margin: auto;
+    color: #8bc34a; }
+
+.chat-exit:hover {
+  background-color: #8bc34a;
+  opacity: 0.9; }
+
+.chat-sidebar {
+  top: 79px; }
+
+.sidebar-name {
+  height: 35px;
+  text-align: initial;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 4px;
+  font-size: 12px; }
+  .sidebar-name a {
+    width: 100%;
+    overflow: hidden;
+    padding-left: inherit;
+    display: block;
+    position: relative;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    white-space: nowrap; }
+    .sidebar-name a span {
+      padding-left: 5px;
+      font-size: 13px;
+      top: -40%;
+      position: relative;
+      line-height: 17px;
+      width: 100%; }
+    .sidebar-name a img {
+      width: 35px;
+      height: 35px; }
+
+.popup-box {
+  display: none;
+  position: fixed;
+  bottom: 0px;
+  right: 220px;
+  height: 300px;
+  background-color: #edeff4;
+  width: 270px;
+  border: 1px solid #7f7f7f; }
+
+.popup-head {
+  background-color: #8bc34a;
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  clear: both; }
+
+.popup-head-left {
+  float: left; }
+
+.popup-head-right {
+  float: right;
+  opacity: 0.8; }
+  .popup-head-right a {
+    text-decoration: none;
+    color: #ffffff; }
+
+.popup-messages {
+  height: 238px;
+  overflow-y: scroll;
+  background-color: #ffffff;
+  border-bottom: .8px solid #7f7f7f;
+  width: 268px; }
+
+.send-messages {
+  font-family: inherit;
+  height: 31px;
+  background-color: #ffffff;
+  border-bottom: .8px solid #7f7f7f;
+  font-size: 14px; }
+  .send-messages textarea {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: inherit;
+    line-height: 30px;
+    padding: 0 5px;
+    color: #000000;
+    width: 268px;
+    height: 100%;
+    border: none; }
+  .send-messages textarea.placeholder {
+    color: #424242; }
+
+@keyframes spin4 {
+  0% {
+    transform: rotate(360deg); }
+  100% {
+    transform: rotate(0deg); } }

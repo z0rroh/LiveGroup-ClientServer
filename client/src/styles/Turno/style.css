@@ -1,0 +1,101 @@
+.no-turnos {
+  height: 400px;
+  width: 400px;
+  background-color: #fafafa;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 30px; }
+  .no-turnos i {
+    position: relative;
+    top: 80px;
+    font-size: 120px;
+    color: rgba(151, 151, 151, 0.5); }
+  .no-turnos h2 {
+    position: relative;
+    top: 120px;
+    color: rgba(151, 151, 151, 0.5) !important;
+    font-size: 30px !important; }
+
+.Semana {
+  margin-bottom: 20px; }
+
+.SemanaTitle {
+  padding: 10px 10px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px; }
+  .SemanaTitle p {
+    margin: 0px; }
+  .SemanaTitle .Tokens {
+    text-align: left; }
+
+.MesName {
+  background: #24292e;
+  color: #fff;
+  height: 40px;
+  width: 100%;
+  text-align: center;
+  line-height: 40px; }
+  .MesName span {
+    font-size: 17px;
+    font-weight: 500;
+    color: #fafafa; }
+
+.SemanaContent {
+  width: 100%;
+  padding-bottom: 15px;
+  border: 1px solid #24292e; }
+  .SemanaContent .Dia-Colour {
+    padding: 10px 10px;
+    font-family: 'Varela Rou';
+    height: auto;
+    border-bottom: 1px solid #24292e; }
+  .SemanaContent .Dia-Title p {
+    margin: 0px;
+    font-size: 16px; }
+  .SemanaContent .Dia-Content {
+    border-top: 0px; }
+  .SemanaContent .Turno {
+    margin: 0;
+    margin-top: 15px; }
+  .SemanaContent .Turno-Info {
+    height: auto;
+    text-align: center;
+    padding-top: 5px; }
+  .SemanaContent .Turno-Info p {
+    margin: 4px;
+    margin-bottom: 1px;
+    font-size: 13px; }
+  .SemanaContent .Turno-Info h5 {
+    margin: 4px;
+    margin-bottom: 6px;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .SemanaContent .Turno-Log {
+    text-align: center;
+    height: auto; }
+  .SemanaContent .Turno-Log h5 {
+    margin: 4px;
+    font-size: 15px; }
+  .SemanaContent .Turno-Button {
+    text-align: center;
+    margin: auto 0;
+    height: auto;
+    padding: 4px; }
+    .SemanaContent .Turno-Button a {
+      background-color: #8bc34a;
+      line-height: 2em;
+      box-shadow: none; }
+    .SemanaContent .Turno-Button a:hover {
+      background-color: #e22838; }
+      .SemanaContent .Turno-Button a:hover i:hover {
+        color: #fafafa; }
+    .SemanaContent .Turno-Button i {
+      font-size: 2em; }
+  .SemanaContent .Turno-progress {
+    margin: 0;
+    height: 5px; }

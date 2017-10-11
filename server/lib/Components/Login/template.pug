@@ -1,0 +1,26 @@
+section.background
+  .row.center-xs.middle-xs
+    .col-xs-4
+      .Login-Card.card-panel.grey.lighten-4
+        .Login-Logo
+          img.circle.responsive-img(src="images/login.jpeg")
+        form.row.center-xs
+          .col-xs-12.input-field
+            i(class="material-icons prefix") mail
+            input#Signin-Email.validate(type="email")
+            label(for="Signin-Email") Email
+          .col-xs-12.input-field
+            i(class="material-icons prefix") lock
+            input#Signin-Password.validate(type="password")
+            label(for="Signin-Password") Password
+          .Login-Remember.col-lg-4.input-field
+            input#Login-Rememberme(type="checkbox")
+            label(for='Login-Rememberme') Recuerdame
+          .Login-Forgot.col-lg-8.input-field
+            a.btn-flat(href="#") Olvidó su password?
+          .Login-Button.col-lg-12.input-field
+            a.btn.btn-large(type="submit",value="Ingresar",href="anuncios.html")
+        .row.center-lg
+          .SignUp.col-lg-12
+            .divider
+            a.SignUp-Button.btn-flat(href="signup.html") Registrate

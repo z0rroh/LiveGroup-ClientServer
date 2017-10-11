@@ -1,0 +1,72 @@
+
+  <header class="row">
+    <div class="line col-lg-12"> </div>
+    <div class="Header col-lg-12">
+      <div class="box col-lg-11">
+        <div class="row box between-lg middle-lg">
+          <div class="Logo col-lg-4">
+            <div class="Header-img-logo" >
+              <img src="/images/newLogo.png" alt="some">
+
+            </div>
+            <div class="Header-img">
+              <img src="/images/logo11.png" alt="some">
+            </div>
+          </div>
+          <% if(session.authenticated && session.User.id_group) { %>
+          <div class="User col-lg-4 col-lg-offset-3">
+            <div class="box">
+              <div class="row">
+                <div class="no-padding col-lg-10">
+                  <a class="User-name dropdown-button"><%= session.User.name  %></a>
+                  <p class="User-empresa"><%= session.Group.name %></p>
+                </div>
+                <div class="User-image"><img src="/images/avatars/<%= session.User.user_image %>"></div>
+              </div>
+            </div>
+            </div>
+          <div class="Logout">
+            <a title="Cerrar Sesion" href="/session/destroy" class="material-icons profile">power_settings_new</a>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+<% if(session.authenticated && session.User.id_group) { %>
+    <div class="Nav col-lg-12">
+      <div class="box">
+        <div class="Nav-Items row center-lg">
+            <div id="Nav-Perfil" class="Nav-Item"><a href="/perfil">Perfil</a></div>
+            <div id="Nav-Anuncios" class="Nav-Item"><a href="/anuncios">Anuncios</a></div>
+            <div id="Nav-Turnos" class="Nav-Item"><a href="/turnos">Turnos</a></div>
+            <% if(session.User.admin) { %>
+              <div id="Nav-Grupos" class="Nav-Item"><a href="/group/show">Funcionarios</a></div>
+
+              <div id="Nav-Admin" class="Nav-Item"><a href="/admin">CrearTurnos</a></div>
+              <div id="Nav-Admin" class="Nav-Item"><a href="/administrar">Administrar</a></div>
+              <div id="Nav-Admin" class="Nav-Item"><a href="/group2">usertable</a></div>
+              <div id="Nav-Button" class="Nav-Button col-lg-1">
+              </div>
+            <% } %>
+            <div class="chat-icon col-lg-1"><a id="chat-on" data-activates="slide-out" class="show-on-large" href=""><i class="material-icons comment">comment</i></a></div>
+            <div id="slide-out" class="side-nav chat-sidebar">
+              <div class="chat-exit"><a href='#' id="chat-off"><i class="tiny material-icons">close</i></a></div>
+
+              <div id="chatbox" class="startChat">
+                <div class="chat-tittle"><h6>Group online</h6></div>
+                <div id="users-lists" >
+                </div>
+              	<div>
+              	    <select id="users-list" class="col-lg-12"size="10"></select>
+              	    <button id="private-msg-button">Send private message to selected user</button>
+              	    <div id="convos"></div>
+              	</div>
+
+              </div>
+              <div id="disconnect" style="display:none">Waiting for reconnect...</div>
+           </div>
+          </div>
+      </div>
+    </div>
+    <% } %>
+  </header>

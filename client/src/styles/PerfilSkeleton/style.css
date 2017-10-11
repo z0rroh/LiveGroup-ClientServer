@@ -1,0 +1,58 @@
+.Perfil-Container-skeleton {
+  padding: 0px;
+  margin: 40px 0; }
+  .Perfil-Container-skeleton .User-Edit-skeleton {
+    background-color: #fafafa;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.24), 0px 0px 2px 0px rgba(0, 0, 0, 0.12); }
+  .Perfil-Container-skeleton .User-Edit-img-skeleton {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px; }
+    .Perfil-Container-skeleton .User-Edit-img-skeleton .user-img-skeleton {
+      height: 120px;
+      width: 120px;
+      border-radius: 50%; }
+  .Perfil-Container-skeleton .Tittle-Element-skeleton {
+    border-bottom: 1px solid #efefef;
+    margin-left: auto;
+    margin-right: auto; }
+    .Perfil-Container-skeleton .Tittle-Element-skeleton h4 {
+      margin-top: 10px;
+      width: 150px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 18px; }
+  .Perfil-Container-skeleton .User-Info-skeleton {
+    display: inherit;
+    padding: 0px;
+    background-color: #fafafa;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.24), 0px 0px 2px 0px rgba(0, 0, 0, 0.12); }
+    .Perfil-Container-skeleton .User-Info-skeleton .User-Info-Datos-skeleton {
+      display: inline-block;
+      border-right: 1px solid #efefef;
+      padding: 0px; }
+    .Perfil-Container-skeleton .User-Info-skeleton .User-element-skeleton {
+      padding: 20px 10px 20px 10px;
+      display: flex; }
+      .Perfil-Container-skeleton .User-Info-skeleton .User-element-skeleton span {
+        margin-left: 30px;
+        float: left;
+        position: relative;
+        height: 16px;
+        width: 200px; }
+    .Perfil-Container-skeleton .User-Info-skeleton .Turno-element-skeleton {
+      padding: 20px 10px 20px 10px;
+      display: flex;
+      border-bottom: 1px solid #efefef; }
+      .Perfil-Container-skeleton .User-Info-skeleton .Turno-element-skeleton span {
+        margin-left: 15px;
+        float: left;
+        height: 16px;
+        font-size: 10px;
+        position: relative;
+        width: 350px; }

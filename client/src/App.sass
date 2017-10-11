@@ -1,0 +1,79 @@
+=test($color)
+  border: 1px solid $color
+  box-sizing: border-box
+
+=placeholder
+  &::-webkit-input-placeholder
+    @content
+  &:-moz-placeholder
+    @content
+  &::-moz-placeholder
+    @content
+  &:-ms-input-placeholder
+    @content
+
+$breakpointv-mobile: 320px
+$breakpointv-tablet: 768px
+$breakpointh-tablet: 1024px
+$breakpointv-desktop: 1200px
+$breakpointh-desktop: 1600px
+
+
+
+
+
+
+body
+  background-color: #f8f8f8
+  //font-size: 16px
+  height: 100%
+
+.col-1-7
+	width: 14.28%
+
+.row
+  margin: 0
+
+.Layout-Content
+
+  padding-top: .5em
+  .card
+    background-color: #fafafa
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.24), 0px 0px 2px 0px rgba(0,0,0,0.12)
+    padding: 0
+    margin-top: 1em
+
+.User-edit-img
+  height: 85px
+  width: 85px
+
+.textCenter
+  text-align: center
+
+
+.material-icons.profile
+  float: left
+  margin-right: 10px
+
+
+#subGroups
+  display: none
+
+
+@import './styles/animate.sass'
+@import './styles/fonts/style.sass'
+@import './styles/ComentarioNuevo/style.sass'
+@import './styles/Login/style.sass'
+@import './styles/Comentario/style.sass'
+@import './styles/Header/style.sass'
+@import './styles/AnuncioNuevo/style.sass'
+@import './styles/Anuncio/style.sass'
+@import './styles/Empleados/style.sass'
+@import './styles/Empleado-Modal/style.sass'
+@import './styles/Turnos-Modal/style.sass'
+@import './styles/Turnos/style.sass'
+@import './styles/Turno/style.sass'
+@import './styles/Perfil/style.sass'
+@import './styles/AnuncioSkeleton/style.sass'
+@import './styles/PerfilSkeleton/style.sass'
+@import './styles/AdminPanel/Panel.sass'

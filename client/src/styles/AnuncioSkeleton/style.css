@@ -1,0 +1,79 @@
+.comments-list-skeleton {
+  position: relative; }
+  .comments-list-skeleton li {
+    margin-bottom: 30px;
+    display: block;
+    position: relative; }
+  .comments-list-skeleton li:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    width: 0; }
+  .comments-list-skeleton .comment-avatar-skeleton {
+    width: 65px;
+    height: 65px;
+    position: relative;
+    z-index: 99;
+    float: left;
+    border: 3px solid #000;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    overflow: hidden; }
+  .comments-list-skeleton .comment-box-skeleton {
+    width: 680px;
+    float: right;
+    position: relative;
+    border: 1px solid #d1d5da; }
+  .comments-list-skeleton .comment-box-skeleton::before, .comments-list-skeleton .comment-box-skeleton:after {
+    content: '';
+    height: 0;
+    width: 0;
+    position: absolute;
+    display: block;
+    border-width: 10px 12px 10px 0;
+    border-style: solid;
+    border-color: transparent #FCFCFC;
+    top: 8px;
+    left: -11px; }
+  .comments-list-skeleton .comment-box-skeleton::before {
+    border-right-color: #d1d5da;
+    left: -12px; }
+  .comments-list-skeleton .comment-head-skeleton {
+    background: #FCFCFC;
+    padding: 7px 12px;
+    overflow: hidden;
+    border-bottom: 1px solid #d1d5da; }
+    .comments-list-skeleton .comment-head-skeleton h6 {
+      height: 14px;
+      float: left;
+      margin-right: 10px;
+      width: 150px; }
+    .comments-list-skeleton .comment-head-skeleton span {
+      float: left;
+      height: 13px;
+      width: 80px;
+      position: relative;
+      top: 5px; }
+    .comments-list-skeleton .comment-head-skeleton i {
+      float: right;
+      margin-left: 14px;
+      position: relative; }
+  .comments-list-skeleton .comment-content-skeleton {
+    background: #FFF;
+    padding: 12px; }
+    .comments-list-skeleton .comment-content-skeleton .text-1 {
+      letter-spacing: 0;
+      word-wrap: break-word;
+      padding-left: 10px;
+      margin: 0 0 7px;
+      width: 200px;
+      height: 10px; }
+    .comments-list-skeleton .comment-content-skeleton .text-2 {
+      letter-spacing: 0;
+      word-wrap: break-word;
+      padding-left: 10px;
+      margin: 0 0 7px;
+      width: 100px;
+      height: 10px; }

@@ -1,0 +1,15 @@
+script(id="turno-template",type="text/template")
+  |{{#Turno-Button}}
+  section.Turno.col-lg-3.card
+    .Turno-Content
+      .row.start-lg
+        .Turno-Info.col-lg-4
+          h5 {{name}}
+          p 15:00 - 17:00
+        .Turno-Log.col-lg-4
+          h4 5/10
+        .Turno-Button.col-lg-4
+          a.btn-floating.btn-large: i.material-icons add
+    .Turno-progress.progress
+      .determinate(style="width: 70%")
+  |{{/turno}}

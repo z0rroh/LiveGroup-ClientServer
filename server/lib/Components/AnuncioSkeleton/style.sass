@@ -1,0 +1,82 @@
+
+.comments-list-skeleton
+  position: relative
+  li
+  	margin-bottom: 30px
+  	display: block
+  	position: relative
+
+  li:after
+  	content: ''
+  	display: block
+  	clear: both
+  	height: 0
+  	width: 0
+  .comment-avatar-skeleton
+  	width: 65px
+  	height: 65px
+  	position: relative
+  	z-index: 99
+  	float: left
+  	border: 3px solid #000
+  	-webkit-border-radius: 4px
+  	-moz-border-radius: 4px
+  	border-radius: 4px
+  	overflow: hidden
+  .comment-box-skeleton
+  	width: 680px
+  	float: right
+  	position: relative
+  	border: 1px solid #d1d5da
+  .comment-box-skeleton::before, .comment-box-skeleton:after
+  	content: ''
+  	height: 0
+  	width: 0
+  	position: absolute
+  	display: block
+  	border-width: 10px 12px 10px 0
+  	border-style: solid
+  	border-color: transparent #FCFCFC
+  	top: 8px
+  	left: -11px
+  .comment-box-skeleton::before
+  	border-right-color: #d1d5da
+  	left: -12px
+  .comment-head-skeleton
+    background: #FCFCFC
+    padding: 7px 12px
+    overflow: hidden
+    border-bottom: 1px solid #d1d5da
+    h6
+     height: 14px
+     float: left
+     margin-right: 10px
+     width: 150px
+    span
+      float: left
+      height: 13px
+      width: 80px
+      position: relative
+      top: 5px
+    i
+      float: right
+      margin-left: 14px
+      position: relative
+
+  .comment-content-skeleton
+    background: #FFF
+    padding: 12px
+    .text-1
+      letter-spacing: 0
+      word-wrap: break-word
+      padding-left: 10px
+      margin: 0 0 7px
+      width: 200px
+      height: 10px
+    .text-2
+      letter-spacing: 0
+      word-wrap: break-word
+      padding-left: 10px
+      margin: 0 0 7px
+      width: 100px
+      height: 10px

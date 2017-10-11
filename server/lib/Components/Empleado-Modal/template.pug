@@ -1,0 +1,25 @@
+#Empleado-Modal.modal
+  .modal-content
+    h4 Edicion de Usuario
+    form.row.center-xs
+      .col-xs-12.input-field
+
+        input#Signin-Name.validate(type="text")
+        label(for="Signin-Name") Nombre
+      .col-xs-12.input-field
+
+        input#Signin-Email.validate(type="Email")
+        label(for="Signin-Email") Email
+      .col-xs-12.input-field
+
+        input#Signin-Phone.validate(type="text")
+        label(for="Signin-Phone") Telefono
+
+      .col-xs-12.input-field
+
+        input#Signin-Tokens.validate(type="text")
+        label(for="Signin-Phone") Tokens
+
+      .Login-Button.col-lg-12.input-field
+        a.btn.btn-large(type="submit",value="Terminar",href="empleados.html")
+        input(type='hidden', name='_csrf', value='<%=_csrf %>')

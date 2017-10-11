@@ -1,0 +1,41 @@
+    <section class="Main">
+      <section class="Group">
+        <div class="Filter row center-xs">
+          <a href="/group/new" class="btn">Todos</a>
+          <input type="text" placeholder="Buscar...">
+        </div>
+        <div class="Group-Items row center-xs">
+          <table class="col-xs-11 bordered">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Ubicacion</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <% _.each(user.groups, function(group){ %>
+
+              <tr>
+                <td><%= group.name %></td>
+                <td><%= group.description %></td>
+                <td><%= group.ubication %></td>
+                <td>
+                  <button class="btn bc-green">Coordinadores</button>
+                </td>
+                <td> <button class="btn btn-floating bc-green"><a href="" class="material-icons">Edit</a></button> </td>
+                <td>
+                  <form action="/group/destroy/<%= group.id %>"  method="POST" accept-charset="utf-8">
+                    <input type="hidden" name="_method" value="Clear"/>
+                    <input type="submit" class="btn btn-floating bc-green" value="Clear"></input>
+                    <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+                  </form></td>
+                </tr>
+
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>

@@ -1,0 +1,27 @@
+<tr data-id="<%= user.id %>" data-model="user" class="Empleados-Item">
+  <th><img class="Empleado-Image" src="/images/avatars/default_user.png"></th>
+  <th><%= user.name %></th>
+  <th><%= user.email %></th>
+  <th><%= user.phone %></th>
+  <th>
+    <select class="subGroups" id="subGroups" multiple="" data-link="ajax" >
+
+      <option value=""><%= user.id_group %></option>
+
+    </select>
+  </th>
+  <th class="textCenter">
+    <p><%= user.tokens %></p>
+  </th>
+
+  <th>
+    <a class="btn-flat Empleado-Edit" href="#Empleado-Modal" value="<%= user.id %>" data-link="ajax"><i class="material-icons">edit</i></a>
+    <% if(user.admin==false){ %>
+    <form class="Destroy-Button" action="/user/destroy/<%= user.id %>" method="POST" accept-charset="utf-8">
+      <input type="hidden" name="_method" value="Clear"/>
+      <input class="btn-flat material-icons" value="close" type="submit">
+      <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+    </form>
+    <% } %>
+  </th>
+</tr>

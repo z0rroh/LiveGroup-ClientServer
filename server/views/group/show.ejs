@@ -1,0 +1,53 @@
+
+<script type=text/javascript>
+  window.overlord = { csrf: "<%= _csrf %>"};
+</script>
+<section class="Layout-Content row center-lg">
+      <div class="card material-table col-lg-10 col-xlg-8">
+        <div class="table-header"><span class="table-title">Lista de Funcionarios</span>
+          <div class="actions"><a class="search-toggle waves-effect btn-flat nopadding" href="#"><i class="material-icons">search</i></a></div>
+        </div>
+        <table id="datatable">
+          <thead>
+            <tr>
+              <th> </th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Grupo</th>
+              <th class="textCenter">Tokens</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% _.each(users, function(user){ %>
+            <tr data-id="<%= user.id %>" data-model="user" class="Empleados-Item">
+              <th><img class="Empleado-Image" src="/images/avatars/default_user.png"></th>
+              <th><%= user.name %></th>
+              <th><%= user.email %></th>
+              <th><%= user.phone %></th>
+              <th>
+                <select class="subGroups" id="subGroups" multiple="" data-link="ajax" >
+                  <option value=""><%= req.session.Group.name %></option>
+                </select>
+              </th>
+              <th class="textCenter">
+                <p><%= user.tokens %></p>
+              </th>
+              <th>
+                <a class="btn-flat Empleado-Edit" href="#Empleado-Modal" value="<%= user.id %>" data-link="ajax"><i class="material-icons">edit</i></a>
+                <% if(user.admin==false){ %>
+                <form class="Destroy-Button" action="/user/destroy/<%= user.id %>" method="POST" accept-charset="utf-8">
+                  <input type="hidden" name="_method" value="Clear"/>
+                  <input class="btn-flat material-icons" value="close" type="submit">
+                  <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+                </form>
+                <% } %>
+              </th>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <%- partial('../user/modal') %>
+  </section>
