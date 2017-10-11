@@ -6,7 +6,7 @@ import Login from '../Login/Login.js'
 
 const UnauthorizedLayout = (props) =>
 
-  { 
+  {
     return (  <div className="unauthorized-layout">
       {/*
 
@@ -17,7 +17,7 @@ const UnauthorizedLayout = (props) =>
 
       */}
       <Switch>
-        <Route path="/" component={Login} />
+        <Route path="/auth/login" component={Login} />
         <Redirect to="/auth/login" />
       </Switch>
     </div>

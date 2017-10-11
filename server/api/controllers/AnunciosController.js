@@ -12,10 +12,7 @@ module.exports = {
 		res.view('anuncios/index');
 	},
 	subscribe: function(req,res){
-			var infoUser = {
-				name: req.session.User.name,
-				group: req.session.User.id_group
-			}
+		
 			if(req.isSocket && req.session.User){
 					Anuncio.find({id_group:req.session.User.id_group}).exec(function (err, anuncios) {
 					// Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)

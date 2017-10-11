@@ -2384,7 +2384,7 @@ body {
   .Login-Card .input-field i {
     margin-top: .4em;
     color: #424242;
-    color: #558B2F; }
+    color: #8bc34a; }
   .Login-Card .Login-Remember {
     margin-top: .4em !important; }
   .Login-Card .Login-Forgot a {
@@ -2393,12 +2393,12 @@ body {
     padding: 0;
     text-transform: capitalize;
     text-decoration: underline;
-    color: #558B2F; }
+    color: #8bc34a; }
   .Login-Card .Login-Button {
     margin-top: 2em; }
     .Login-Card .Login-Button input {
       padding: 0 5em;
-      background-color: #558B2F; }
+      background-color: #8bc34a; }
 
 .Login-Logo {
   position: absolute;

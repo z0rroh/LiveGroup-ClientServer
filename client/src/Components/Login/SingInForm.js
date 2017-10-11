@@ -11,7 +11,7 @@ class SignInForm extends Component{
       email: "",
       password: "",
       errors: "",
-      isValid: true
+
     }
   }
 
@@ -27,12 +27,10 @@ class SignInForm extends Component{
     delete userData.errors;
     this.props.loginServer(userData)
     .then((res) => {
-      this.setState({isValid: true});
-      this.props.history.push('/app')
+      this.props.history.push('/anuncios')
     })
     .catch((err)=>{
       console.log(err.res);
-      this.setState({isValid: false})
     });
 
   }

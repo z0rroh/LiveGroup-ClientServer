@@ -47,12 +47,12 @@ module.exports = {
   },
 
   getUser: function(req,res){
-    User.findOne({id: req.session.User.id}).populate('groups').populate('turnos')
+    User.findOne({id: req.session.User.id}).populate('group').populate('turnos')
     .then(function(user){
       var turnos = [];
       var grupo;
       var admin;
-      user.turnos.map(turno =>{
+      user.turnos.map((turno) =>{
         var dia;
         if( turno.day === "0"){
           dia = "Lunes"
@@ -84,7 +84,7 @@ module.exports = {
         }
         turnos.push(turno);
       })
-      user.groups.map(group =>{
+      user.group.map(group =>{
         grupo = group.name;
       })
       if ( user.admin === true){

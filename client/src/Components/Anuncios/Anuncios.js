@@ -16,7 +16,6 @@ class Anuncios extends Component{
   }
 
   componentDidMount(){
-    //const io = sailsIOClient(socketIOClient);
 
     this.setState({isFetching:true});
     axios.get('/anuncios/getAnuncios')
@@ -27,7 +26,17 @@ class Anuncios extends Component{
     .catch((err)=>{
       console.log(err);
     })
-
+    io.socket.on('anuncio', function serverSentEvent(anuncio) {
+      var autor = {
+        name: anuncio.data.autor.name,
+        id: anuncio.data.autor.id,
+        user_img: anuncio.data.autor.user_img
+      }
+      let newAnuncio = {autor: anuncio.data.autor, id: anuncio.data.id, text: anuncio.data.text, fecha: anuncio.data.fecha, comment: anuncio.data.comment}
+      let newState = this.state.anuncios;
+      newState.splice(0,0,newAnuncio)
+      this.setState({anuncios: newState})
+    }.bind(this));
 
   }
 

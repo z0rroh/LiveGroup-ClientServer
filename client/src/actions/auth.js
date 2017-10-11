@@ -18,9 +18,9 @@ export function isFetching(isFetching){
 export function loginServer(data){
   return dispatch =>{
     dispatch(isFetching(true));
-    return axios.post('http://localhost:1337/session/create',data)
+    console.log(data);
+    return axios.post('/session/create',data)
     .then(res => {
-      console.log(res);
       dispatch(setCurrentUser(res.data));
       dispatch(isFetching(false));
     })
