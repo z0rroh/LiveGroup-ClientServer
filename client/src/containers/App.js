@@ -9,13 +9,15 @@ import AdminPanelApp from '../Components/AdminPanel/AdminPanelApp.js'
 import AuthorizedRoute from '../AuthorizedRoute.js'
 import UnauthorizedLayout from '../Components/Layouts/UnauthorizedLayout.js'
 import PrimaryLayout from '../Components/Layouts/PrimaryLayout.js'
+import ToastList from './ToastList/ToastList.js'
+import Header from '../Components/Header/Header'
 
 const Routes = () => (
   <main>
+    <ToastList/>
     <Switch>
       <Route path="/auth" component={UnauthorizedLayout} />
       <AuthorizedRoute path="/" component={PrimaryLayout} />
-      <Redirect to="/auth" />
     </Switch>
   </main>
 )

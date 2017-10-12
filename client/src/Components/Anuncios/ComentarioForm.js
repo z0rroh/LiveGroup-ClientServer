@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { connect } from 'react-redux'
 
 class ComentarioForm extends Component {
 
@@ -35,10 +36,11 @@ class ComentarioForm extends Component {
   };
 
   render(){
+    const user = this.props.user;
     return(
         <div className="ComentarioNuevo col-lg-12">
           <div className="row start-lg">
-            <div className="ComentarioNuevo-Image col-lg-1"><img src={"/images/avatars/default_user.png"}/></div>
+            <div className="ComentarioNuevo-Image col-lg-1"><img src={"/images/avatars/"+user.user_image}/></div>
             <div className="ComentarioNuevo-Form col-lg-11">
                 <form onSubmit={(e) => this.onSubmit(e)}
                       onKeyDown={(e) => { this.handleKeyDown(e); }}
@@ -59,4 +61,10 @@ class ComentarioForm extends Component {
   }
 }
 
-export default ComentarioForm;
+const stateToProps = ({ auth }) => ({
+  user: auth.user,
+})
+
+
+
+export default connect(stateToProps)(ComentarioForm)

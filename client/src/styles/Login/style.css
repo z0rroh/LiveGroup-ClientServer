@@ -1,6 +1,5 @@
 .Header-login {
-  height: 70px;
-  background-color: #24292e; }
+  height: 70px; }
   .Header-login .box-login {
     display: flex;
     flex-direction: column;
@@ -27,16 +26,19 @@
   min-height: 100vh; }
 
 .Login-Card {
+  background-color: #fff !important;
   margin-top: 60px; }
-  .Login-Card form {
-    margin-top: .5em; }
-  .Login-Card .input-field label {
-    width: initial !important;
-    left: 4%; }
   .Login-Card .input-field i {
-    margin-top: .4em;
-    color: #424242;
+    width: 30px !important;
+    margin-top: 3px;
     color: #8bc34a; }
+  .Login-Card .input-field .inputParams {
+    margin-left: 2.5rem !important;
+    width: calc(100% - 2.5rem);
+    margin-bottom: 0px;
+    background-color: #f5f8fa;
+    height: 2.5rem;
+    border: none !important; }
   .Login-Card .Login-Remember {
     margin-top: .4em !important; }
   .Login-Card .Login-Forgot a {
@@ -50,7 +52,12 @@
     margin-top: 2em; }
     .Login-Card .Login-Button input {
       padding: 0 5em;
-      background-color: #8bc34a; }
+      background-color: #8bc34a;
+      width: 100%;
+      border-radius: 30px;
+      height: 42px; }
+    .Login-Card .Login-Button input:hover {
+      color: #fff; }
 
 .Login-Logo {
   position: absolute;
@@ -62,9 +69,11 @@
     width: 100px; }
 
 .SignUp {
-  margin-top: 1em; }
+  margin-top: 1em;
+  border-top: 1px solid #e0e0e0; }
   .SignUp .SignUp-Button {
     margin-top: 1rem;
     color: #424242;
     text-transform: capitalize;
-    font-size: 1.3em; }
+    font-size: 1.3em;
+    text-decoration: none; }

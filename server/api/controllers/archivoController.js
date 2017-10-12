@@ -32,6 +32,7 @@ module.exports = {
 							if(err){
 							}
 							User.publishUpdate(req.session.User.id, user)
+							return res.json(user);
 					})
 				}
 			});
@@ -39,6 +40,5 @@ module.exports = {
 		    //message: uploadedFiles.length + ' file(s) uploaded successfully!'
 		  //});
 		});
-		res.redirect('/perfil');
 	}
 };

@@ -32,7 +32,6 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'GET /': 'SessionController.new',
   'GET /user/new': 'UserController.new',
   'GET /user/group': 'UserController.addGroup',
   'GET /turnos/index': 'TurnosController.index',

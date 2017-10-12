@@ -36,6 +36,7 @@ class UserAvatar extends Component{
       }
       axios.post("/archivo/upload", avatar, config)
       .then((response)=>{
+        console.log(response.data[0]);
         if(response.status === 200)
           console.log("se subio bien!");
       })

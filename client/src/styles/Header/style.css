@@ -105,7 +105,8 @@ header {
     color: #fafafa;
     padding: 6px;
     border-radius: 3px;
-    border: 1px solid rgba(255, 255, 255, 0.05); }
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-decoration: none !important; }
 
 .Logo {
   height: 60px;
@@ -124,20 +125,21 @@ header {
     width: 100%;
     height: 100%; }
   .Nav .Nav-Item {
+    all: inherit;
     margin-top: -1px;
     text-align: center;
     width: auto;
-    display: block;
-    position: relative;
     cursor: pointer;
     padding-top: 1px; }
-    .Nav .Nav-Item a {
-      padding: 0px 25px;
+    .Nav .Nav-Item .navItemLink {
+      all: inherit;
+      padding: 0px 30px;
       color: #f8f8f8;
       font-size: 18px;
       text-transform: none;
       font-weight: 200;
-      line-height: 28px; }
+      line-height: 28px;
+      text-decoration: none !important; }
   .Nav .Nav-Item:hover {
     color: #f8f8f8;
     background-color: #24292e;
@@ -145,7 +147,7 @@ header {
     border-bottom: solid 0.5px #000;
     height: 5px;
     padding-top: 2px; }
-  .Nav .Nav-Item.is-active {
+  .Nav .navItemActive {
     color: #f8f8f8;
     background-color: #24292e;
     border-color: #fafafa;

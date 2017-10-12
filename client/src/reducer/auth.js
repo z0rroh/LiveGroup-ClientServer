@@ -19,7 +19,7 @@ export default (state = initialState, action = {}) => {
         return Object.assign({},state,{
           isFetching: action.isFetching
         })
-
+        break;
 
     /* case SET_TOKEN:
        return Object.assign({}, state, {

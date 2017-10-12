@@ -5,6 +5,7 @@ import { loginServer } from '../../actions/auth'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router'
+import { addToast } from '../../actions/Toast.js'
 
 class Login extends Component{
   constructor(){
@@ -12,7 +13,7 @@ class Login extends Component{
   }
 
   render(){
-    const loginServer = this.props.loginServer;
+    const {loginServer, addToast, history} = this.props;
     return(
       <div className="LoginContainer">
         <header className="row">
@@ -35,9 +36,10 @@ class Login extends Component{
         <section className="background">
           <div className="row center-xs middle-xs">
             <div className="col-xs-4">
-              <div className="Login-Card card-panel grey lighten-4">
+              <div className="Login-Card card-panel">
                 <SignInForm
-                  history={this.props.history}
+                  addToast={addToast}
+                  history={history}
                   loginServer={loginServer}/>
               </div>
             </div>
@@ -50,8 +52,9 @@ class Login extends Component{
 }
 
 Login.propTypes = {
-  loginServer: PropTypes.func.isRequired
+  loginServer: PropTypes.func.isRequired,
+  addToast: PropTypes.func.isRequired
 };
 
 
-export default connect(null,{loginServer })(Login);
+export default connect(null,{loginServer, addToast })(Login);

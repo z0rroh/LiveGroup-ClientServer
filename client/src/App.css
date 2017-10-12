@@ -2347,8 +2347,7 @@ body {
     font-weight: 250; }
 
 .Header-login {
-  height: 70px;
-  background-color: #24292e; }
+  height: 70px; }
   .Header-login .box-login {
     display: flex;
     flex-direction: column;
@@ -2375,16 +2374,19 @@ body {
   min-height: 100vh; }
 
 .Login-Card {
+  background-color: #fff !important;
   margin-top: 60px; }
-  .Login-Card form {
-    margin-top: .5em; }
-  .Login-Card .input-field label {
-    width: initial !important;
-    left: 4%; }
   .Login-Card .input-field i {
-    margin-top: .4em;
-    color: #424242;
+    width: 30px !important;
+    margin-top: 3px;
     color: #8bc34a; }
+  .Login-Card .input-field .inputParams {
+    margin-left: 2.5rem !important;
+    width: calc(100% - 2.5rem);
+    margin-bottom: 0px;
+    background-color: #f5f8fa;
+    height: 2.5rem;
+    border: none !important; }
   .Login-Card .Login-Remember {
     margin-top: .4em !important; }
   .Login-Card .Login-Forgot a {
@@ -2398,7 +2400,12 @@ body {
     margin-top: 2em; }
     .Login-Card .Login-Button input {
       padding: 0 5em;
-      background-color: #8bc34a; }
+      background-color: #8bc34a;
+      width: 100%;
+      border-radius: 30px;
+      height: 42px; }
+    .Login-Card .Login-Button input:hover {
+      color: #fff; }
 
 .Login-Logo {
   position: absolute;
@@ -2410,12 +2417,14 @@ body {
     width: 100px; }
 
 .SignUp {
-  margin-top: 1em; }
+  margin-top: 1em;
+  border-top: 1px solid #e0e0e0; }
   .SignUp .SignUp-Button {
     margin-top: 1rem;
     color: #424242;
     text-transform: capitalize;
-    font-size: 1.3em; }
+    font-size: 1.3em;
+    text-decoration: none; }
 
 .Comentario {
   padding: .5em;
@@ -2569,7 +2578,8 @@ header {
     color: #fafafa;
     padding: 6px;
     border-radius: 3px;
-    border: 1px solid rgba(255, 255, 255, 0.05); }
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-decoration: none !important; }
 
 .Logo {
   height: 60px;
@@ -2588,20 +2598,21 @@ header {
     width: 100%;
     height: 100%; }
   .Nav .Nav-Item {
+    all: inherit;
     margin-top: -1px;
     text-align: center;
     width: auto;
-    display: block;
-    position: relative;
     cursor: pointer;
     padding-top: 1px; }
-    .Nav .Nav-Item a {
-      padding: 0px 25px;
+    .Nav .Nav-Item .navItemLink {
+      all: inherit;
+      padding: 0px 30px;
       color: #f8f8f8;
       font-size: 18px;
       text-transform: none;
       font-weight: 200;
-      line-height: 28px; }
+      line-height: 28px;
+      text-decoration: none !important; }
   .Nav .Nav-Item:hover {
     color: #f8f8f8;
     background-color: #24292e;
@@ -2609,7 +2620,7 @@ header {
     border-bottom: solid 0.5px #000;
     height: 5px;
     padding-top: 2px; }
-  .Nav .Nav-Item.is-active {
+  .Nav .navItemActive {
     color: #f8f8f8;
     background-color: #24292e;
     border-color: #fafafa;

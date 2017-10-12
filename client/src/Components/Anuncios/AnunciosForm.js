@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { connect } from 'react-redux'
+
 class AnunciosForm extends Component {
 
   constructor(props){
@@ -34,11 +36,12 @@ class AnunciosForm extends Component {
   };
 
   render(){
+    const user = this.props.user;
     return(
         <section className="col-lg-8 card">
             <div className="AnuncioNuevo">
               <div className="row center-lg">
-                <div className="AnuncioNuevo-Image col-lg-1"><img src={"/images/avatars/default_user.png"}/></div>
+                <div className="AnuncioNuevo-Image col-lg-1"><img src={"/images/avatars/"+user.user_image}/></div>
                 <div className="AnuncioNuevo-Form col-lg-10">
                   <form onSubmit={(e) => this.onSubmit(e)}
                         onKeyDown={(e) => { this.handleKeyDown(e); }}
@@ -57,4 +60,10 @@ class AnunciosForm extends Component {
     )}
 }
 
-export default AnunciosForm
+const stateToProps = ({ auth }) => ({
+  user: auth.user,
+})
+
+
+
+export default connect(stateToProps)(AnunciosForm)

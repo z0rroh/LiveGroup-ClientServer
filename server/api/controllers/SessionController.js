@@ -7,81 +7,67 @@
 var bcrypt=require('bcrypt');
 
 module.exports = {
-	new: function(req,res){
-		if(req.session.User && req.session.authenticated){
-				res.redirect('anuncios');
-		}
-		else {
-				res.view('session/new');
-		}
-	},
+
 	create: function(req, res, next){
-		console.log(req.param('email'), req.param('password'));
+
 		if(!req.param('email') || !req.param('password')) {
-			var NoEmailOrPassword =[{message: 'Debe ingresar Email y Contraseña'}]
-			req.session.flash={
-				err: NoEmailOrPassword
-			}
-			return res.redirect('/session/new');
+			return res.json({
+				code: 'SIGNIN_NO_E_NO_P',
+				message: 'Debe ingresar Email y contraseña'
+			});
 		}
 
 		User.findOneByEmail(req.param('email'), function foundUser (err, user) {
-                if (err) return next(err);
 
-                if(!user) {
-                  var noAccountError = [{ name: 'noAccount', message: 'El email ingresado: '+req.param('email') + ' no se encuentra' }]
-                  req.session.flash = {
-                    err: noAccountError
-                  }
-                  res.redirect('/session/new');
-                  return;
-                }
+        if (err){
+					return res.json({
+					code: 'SIGNIN_ERR',
+					message: 'Ah ocurrido un error inesperado'
+					});
+				}
 
-                bcrypt.compare(req.param('password'), user.password, function (err, valid) {
+        if(!user) {
+					return res.json({
+						code: 'SIGNIN_NO_E',
+						message: 'El email ingresado no se encuentra registrado'
+					});
+        }
 
-                  if (err) return next(err);
-                  if(!valid) {
-                    var usernamePasswordMismatchError = [{ name: 'usernamePasswordMismatch', message: 'Combinacion de email y contraseña invalida' }]
-                    req.session.flash = {
-                      err: usernamePasswordMismatchError
-                    }
-                    res.redirect('/session/new');
-                    return;
-                  }
+        bcrypt.compare(req.param('password'), user.password, function (err, valid) {
 
+					if (err){
+						return res.json({
+						code: 'SIGNIN_ERR',
+						message: 'Ah ocurrido un error inesperado'
+						});
+					}
+          if(!valid) {
+						return res.json({
+							code: 'SIGNIN_INVALID',
+							message: 'La cambinacion de email y contraseña no es valida'
+						});
+          }
+          req.session.authenticated = true;
+          req.session.User = user;
+					user.online = true;
+					user.save(function(err){
+						if (err) return next(err);
+					});
+					User.publishUpdate(user.id, user);
 
-                  //if the password is valid we get here and log the user in
-                  req.session.authenticated = true;
-                  req.session.User = user;
+					if(user.group == null){
+						return res.json({
+							code: 'NO_GROUP',
+							message: 'No eres parte de ningun grupo'
+						});
+					}
 
-									user.online = true;
-									user.save(function(err){
-										if (err) return next(err);
-
-									});
-									User.publishUpdate(user.id,{
-										id: user.id,
-										name: user.name,
-										group: user.group,
-										online: true
-									});
-
-
-									if(user.group == null){
-											return res.redirect('/user/group')
-									}
-                  //redirect the user to the profile page
-
-                  Group.findOne(req.session.User.group, function foundGroup(err, group){
-                    if (err) return next(err);
-                    req.session.Group = group;
-                    res.redirect('/anuncios');
-                  });
-
-
-
-                }); //end bcrypt.compare
-              });//end findOneByEmail
+					return res.json({
+						code:'SUCCESS',
+						user: user
+					});
+        }); //end bcrypt.compare
+      });//end findOneByEmail
 	},
   destroy: function(req, res, next){
 

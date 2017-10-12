@@ -12,8 +12,8 @@ class AnuncioItem extends Component {
       anuncio : this.props.anuncio,
       itemLimit: 2,
       showMore: true,
-      answer: false,
-      answerHide: true
+      answer: true,
+      answerHide: false
     }
     this.showMore = this.showMore.bind(this);
     this.showLess = this.showLess.bind(this);

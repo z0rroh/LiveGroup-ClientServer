@@ -4,16 +4,12 @@ import { connect } from 'react-redux'
 
 class AuthorizedRoute extends React.Component {
 
-  componentWillMount() {
-
-  }
-
   render() {
     const { component: Component, isFetching, isAuthenticated, ...rest } = this.props
-
     return (
       <Route {...rest} render={props => {
-        if (isFetching) return <div>Loading...</div>
+        if (isFetching)
+        return <div>Loading...</div>
         return isAuthenticated
           ? <Component {...props} />
           : <Redirect to="/auth/login" />
