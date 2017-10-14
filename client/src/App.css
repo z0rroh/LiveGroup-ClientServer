@@ -3627,7 +3627,8 @@ div.material-table {
 .sub-layout {
   display: flex; }
   .sub-layout .primary-content {
-    margin: 2em; }
+    margin: 2em 1em 1em 1em;
+    width: 100%; }
   .sub-layout .Panel-container {
     width: 230px;
     height: 100%;
@@ -3685,13 +3686,12 @@ div.material-table {
       height: 36px;
       text-align: center;
       vertical-align: middle;
-      font-size: 25px;
-      padding: 10px 20px 10px 30px !important; }
+      font-size: 24px;
+      padding: 10px 20px 10px 40px !important; }
     .sub-layout .main-menu .nav-text {
       position: relative;
       display: table-cell;
       vertical-align: middle;
-      font-family: 'Titillium Web', sans-serif;
       text-align: left;
       font-size: 14px;
       font-weight: 500; }

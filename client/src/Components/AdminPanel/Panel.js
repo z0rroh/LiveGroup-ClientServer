@@ -15,7 +15,7 @@ class Panel extends Component {
             <ul>
               <li>
                 <NavLink className="navLinkSub" to={`${match.path}/grupo`} exact activeClassName="navLinkSubActive">
-                  <i className="fa fa-home fa-2x nav-icon"></i><span className="nav-text">Grupo</span>
+                  <i className="fa fa-users fa-2x nav-icon"></i><span className="nav-text">Grupo</span>
                 </NavLink>
               </li>
               <li>
