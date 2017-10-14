@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-
+import { NavLink, withRouter } from 'react-router-dom'
 
 class Panel extends Component {
   constructor(){
@@ -9,71 +9,30 @@ class Panel extends Component {
 
 
   render(){
+    const match = this.props.match;
     return(
-      <div className="Panel-container">
         <nav className="main-menu">
             <ul>
               <li>
-                <a >
-                    <i className="fa fa-home fa-2x"></i>
-                    <span className="nav-text">
-                        Grupo
-                    </span>
-                </a>
-              </li>
-              <li className="has-subnav">
-                  <a >
-                      <i className="fa fa-laptop fa-2x"></i>
-                      <span className="nav-text">
-                          Crear Turnos
-                      </span>
-                  </a>
-
-              </li>
-              <li className="has-subnav">
-                  <a >
-                     <i className="fa fa-list fa-2x"></i>
-                      <span className="nav-text">
-                          Buscar Turnos
-                      </span>
-                  </a>
-
-              </li>
-              <li className="has-subnav">
-                  <a >
-                     <i className="fa fa-folder-open fa-2x"></i>
-                      <span className="nav-text">
-                          Pages
-                      </span>
-                  </a>
-
+                <NavLink className="navLinkSub" to={`${match.path}/grupo`} exact activeClassName="navLinkSubActive">
+                  <i className="fa fa-home fa-2x nav-icon"></i><span className="nav-text">Grupo</span>
+                </NavLink>
               </li>
               <li>
-                  <a >
-                      <i className="fa fa-bar-chart-o fa-2x"></i>
-                      <span className="nav-text">
-                          Graphs and Statistics
-                      </span>
-                  </a>
+                <NavLink className="navLinkSub" to={`${match.path}/hola2`} activeClassName="navLinkSubActive">
+                  <i className="fa fa-home fa-2x nav-icon"></i><span className="nav-text">Grupo</span>
+                </NavLink>
               </li>
               <li>
-                  <a >
-                      <i className="fa fa-font fa-2x"></i>
-                      <span className="nav-text">
-                          Typography and Icons
-                      </span>
-                  </a>
+                <NavLink className="navLinkSub" to={`${match.path}/hola3`} activeClassName="navLinkSubActive">
+                  <i className="fa fa-home fa-2x nav-icon"></i><span className="nav-text">Grupo</span>
+                </NavLink>
               </li>
-
             </ul>
         </nav>
-      </div>
     );
   }
 
 }
 
-
-
-
-export default Panel;
+export default withRouter(Panel)

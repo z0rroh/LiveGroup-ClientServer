@@ -5,7 +5,9 @@ import { connect } from 'react-redux'
 class AuthorizedRoute extends React.Component {
 
   render() {
+    console.log("AUTORIZADO");
     const { component: Component, isFetching, isAuthenticated, ...rest } = this.props
+    console.log(isAuthenticated);
     return (
       <Route {...rest} render={props => {
         if (isFetching)
