@@ -70,24 +70,18 @@ module.exports = {
       });//end findOneByEmail
 	},
   destroy: function(req, res, next){
-
 		User.findOne(req.session.User.id, function foundUser(err,user){
-			var userId = req.session.User.id;
 
 			user.online = false;
 			user.save(function(err){
 				if (err) return next(err);
 			});
-			User.publishUpdate(user.id,{
-				id: user.id,
-				name: user.name,
-				group: user.group,
-				online: false
-			});
-
+			User.publishUpdate(user.id,user);
 			req.session.destroy();
-			res.redirect('/');
-
+			return res.json({
+				code: 'LOGOUT',
+				message: 'Session destruida'
+			});
 		});
 
   }

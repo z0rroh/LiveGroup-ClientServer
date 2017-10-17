@@ -10,11 +10,13 @@ class PrimaryHeader extends Component{
   }
 
   render(){
-    const user = this.props.user;
+    const {user, history} = this.props;
     return(
       <header>
         <div className="line col-lg-12"> </div>
-        <Header user={user}/>
+        <Header
+          history={history}
+          user={user} />
 
         <nav className="Nav col-lg-12">
           <ul className="Nav-Items row center-lg">

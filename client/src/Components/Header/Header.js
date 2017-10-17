@@ -1,12 +1,26 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
+import { addToast } from '../../actions/Toast'
+import { logout } from '../../actions/auth'
+import { Intent } from '@blueprintjs/core'
 
 class Header extends Component{
   constructor(){
     super();
   }
 
+  onClick(){
+    this.props.logout()
+    .then(res => {
+      this.props.addToast({
+        intent: Intent.SUCCESS,
+        message: "HASTA LA PROXIMA!"
+      })
+      this.props.history.push('/auth')
+    })
+  }
   render(){
     const user = this.props.user;
     return(
@@ -34,7 +48,9 @@ class Header extends Component{
               </div>
             </div>
             <div className="Logout">
-              <a title="Cerrar Sesion" href="/session/destroy" className="material-icons profile">power_settings_new</a>
+              <a title="Cerrar Sesion"
+                 className="material-icons profile"
+                 onClick = {()=>this.onClick()}>power_settings_new</a>
             </div>
           </div>
         </div>
@@ -46,4 +62,10 @@ class Header extends Component{
 
 }
 
-export default Header;
+Header.propTypes = {
+  logout: PropTypes.func.isRequired,
+  addToast: PropTypes.func.isRequired
+};
+
+
+export default connect(null,{logout, addToast })(Header);

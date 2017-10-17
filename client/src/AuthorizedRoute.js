@@ -13,8 +13,8 @@ class AuthorizedRoute extends React.Component {
         if (isFetching)
         return <div>Loading...</div>
         return isAuthenticated
-          ? <Component {...props} />
-          : <Redirect to="/auth/login" />
+          && <Component {...props} />
+
       }} />
     )
   }

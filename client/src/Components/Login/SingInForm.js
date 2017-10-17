@@ -62,7 +62,6 @@ class SignInForm extends Component{
           </div>
           <div className="col-xs-12 input-field"><i className="material-icons prefix">lock</i>
             <input
-              className=""
               onChange={ e => this.onChange(e)}
               name="password"
               value={this.state.password}

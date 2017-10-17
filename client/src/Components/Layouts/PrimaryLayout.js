@@ -8,10 +8,10 @@ import SubLayout from '../Layouts/SubLayout'
 class PrimaryLayout extends Component{
 
   render(){
-    const match = this.props.match;
+    const {match, history} = this.props;
     return(
       <div className="primary-layout">
-        <PrimaryHeader/>
+        <PrimaryHeader history={history}/>
         <main>
           <Switch>
             <Route path={`${match.path}perfil`} component={PerfilApp} />

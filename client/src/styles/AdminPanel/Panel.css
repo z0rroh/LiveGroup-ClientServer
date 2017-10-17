@@ -17,6 +17,10 @@
   .sub-layout .primary-content {
     margin: 2em 1em 1em 1em;
     width: 100%; }
+    .sub-layout .primary-content .react-datepicker__input-container input {
+      padding: 0 5px; }
+    .sub-layout .primary-content .react-datepicker__time-list {
+      padding: 0px !important; }
   .sub-layout .Panel-container {
     width: 230px;
     height: 100%;

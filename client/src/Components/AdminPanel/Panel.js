@@ -19,8 +19,8 @@ class Panel extends Component {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navLinkSub" to={`${match.path}/hola2`} activeClassName="navLinkSubActive">
-                  <i className="fa fa-home fa-2x nav-icon"></i><span className="nav-text">Grupo</span>
+                <NavLink className="navLinkSub" to={`${match.path}/turnos`} activeClassName="navLinkSubActive">
+                  <i className="fa fa-calendar fa-2x nav-icon"></i><span className="nav-text">Crear Turnos</span>
                 </NavLink>
               </li>
               <li>

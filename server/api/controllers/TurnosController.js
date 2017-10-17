@@ -15,32 +15,8 @@ module.exports = {
 	create: function(req, res,next){
 		var params = req.params.all();
 		var turnosObj=[]
-		for( var property in params){
-  		if(params[property] === 'on'){
-				auxObj= {
-				  start: req.param('start'),
-				  end : req.param('end'),
-				  name: req.param('name'),
-				  cupo: req.param('cupos'),
-					day: property,
-					group: req.session.User.group,
-				}
-				turnosObj.push(auxObj);
-			}
-		}
-		if (turnosObj.length == 0){
-				var noTurn=[{message: 'Debes seleccionar almenos un dia para crear un turno'}]
-				req.session.flash={
-						err: noTurn
-				}
-				res.redirect('/admin');
-		}
-		else{
-				Turno.create(turnosObj).exec(function(err, created){
-				res.redirect('/admin');
-			});
-		}
-
+		console.log(params);
+		return res.ok()
 	},
 
 	index: function(req, res, next){

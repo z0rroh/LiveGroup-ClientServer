@@ -42,7 +42,13 @@ export function loginServer(data){
 
 
 export function logout(){
-  return dispatch => {
-    dispatch(setCurrentUser({}));
+  return dispatch =>{
+    return axios.get('/session/destroy')
+    .then(res => {
+      dispatch(setCurrentUser({}));
+    })
+    .catch(err =>{
+      console.log(err);
+    })
   }
 }
