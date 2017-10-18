@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import { TimePicker,TimePickerPrecision } from "@blueprintjs/datetime";
 import moment from 'moment';
 import axios from 'axios'
-
+import { addToast } from '../../actions/Toast.js'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
+import { Intent } from '@blueprintjs/core'
 
 class CrearTurnos extends Component {
   constructor(props){
@@ -12,10 +15,10 @@ class CrearTurnos extends Component {
       timeStart: "00:00",
       timeEnd: "00:00",
       name: "",
-      cupos: "",
+      cupo: 0,
       todos: false,
-      lunes: {id:1, value: false},
-      martes: {id:2, value: false}
+      lunes: {id:0, value: false},
+      martes: {id:1, value: false}
     }
 
   }
@@ -25,13 +28,6 @@ class CrearTurnos extends Component {
     const target = e.target;
     const value = target.value;
     const name = target.name;
-    /*if(name === "todos"){
-      this.setState({
-        todos: target.checked,
-        lunes: target.checked,
-        martes: target.checked
-      })
-    }*/
     this.setState({
       [name]: value
     });
@@ -44,18 +40,18 @@ class CrearTurnos extends Component {
     if(name === "todos"){
       this.setState({
         todos: target.checked,
-        lunes: {id:1, value: target.checked},
-        martes: {id:2, value: target.checked}
+        lunes: {id:0, value: target.checked},
+        martes: {id:1, value: target.checked}
       })
     }else{
       if(name ==="lunes"){
         this.setState({
-          lunes: {id:1, value: target.checked}
+          lunes: {id:0, value: target.checked}
         })
       }
       if(name ==="martes"){
         this.setState({
-          martes: {id:2, value: target.checked}
+          martes: {id:1, value: target.checked}
         })
       }
     }
@@ -82,12 +78,32 @@ class CrearTurnos extends Component {
       }
     }
 
-    axios.post('/turnos/create', {timeStart:this.state.timeStart,timeEnd: this.state.timeEnd,name: this.state.name,cupos: this.state.cupos,dias: dias})
-    .then((res)=>{
-      console.log(res);
+    axios.post('/turnos/create', {
+      timeStart:this.state.timeStart,
+      timeEnd: this.state.timeEnd,
+      name: this.state.name,
+      cupo: this.state.cupo,
+      dias: dias})
+    .then((response)=>{
+      console.log(response);
+      const res = response.data
+      this.props.addToast({
+        intent: Intent.SUCCESS,
+        message: res.message
+      })
+      this.setState({
+        timeStart: "00:00",
+        timeEnd: "00::00",
+        name: "",
+        cupo: 0
+      })
     })
-    .catch((err)=>{
-      console.log(err);
+    .catch((error)=>{
+      const err = error.response.data;
+      this.props.addToast({
+        intent: Intent.WARNING,
+        message: err.message
+      })
     })
   }
 
@@ -129,11 +145,11 @@ class CrearTurnos extends Component {
                   required="true"/>
               </div>
               <div className="Turno-Cupo col-xs-12">
-                <span>Cupos:</span>
+                <span>Cupo:</span>
                 <input
                   onChange={(e) => this.handleChange(e)}
-                  name="cupos"
-                  value={this.state.cupos}
+                  name="cupo"
+                  value={this.state.cupo}
                   type="number"
                   className="pt-input"
                   placeholder="Ej:10..."
@@ -182,4 +198,8 @@ class CrearTurnos extends Component {
 
 }
 
-export default CrearTurnos
+CrearTurnos.propTypes = {
+  addToast: PropTypes.func.isRequired
+};
+
+export default connect(null,{addToast })(CrearTurnos);

@@ -4,19 +4,64 @@
  * @description :: Server-side logic for managing turnos
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var moment = require('moment');
 
 module.exports = {
-	new:function (req, res){
-	//console.log("pagina de registro");
-	res.view('turnos/new');
-	//req.session.flas={};
 
-	},
 	create: function(req, res,next){
 		var params = req.params.all();
 		var turnosObj=[]
-		console.log(params);
-		return res.ok()
+		if(!params.name.length){
+			return res.status(400).json({code: 'NO_NAME', message: 'Debes ingresar un nombre'});
+		}
+		if(params.cupo === 0){
+			return res.status(400).json({code: 'NO_CUPO', message: 'Debes ingresar la cantidad de cupos'});
+		}
+		if(!params.dias.length){
+			return res.status(400).json({code: 'NO_DIAS', message: 'No se ha seleccionado ningun dia'});
+		}
+		else{
+			for (var i in params.dias){
+				auxObj= {
+					start: params.timeStart,
+					end : params.timeEnd,
+					name: params.name,
+					cupo: params.cupo,
+					day: params.dias[i].id,
+					group: req.session.User.group,
+				}
+				turnosObj.push(auxObj);
+			}
+			Turno.create(turnosObj).exec(function(err, turnos){
+
+				for(var i in turnos){
+					var exp = Turnolog.expiracion(turnos[i].day,turnos[i].start,function(fecha){
+						return fecha;
+					});
+					var turnologObj={
+					 name: turnos[i].name,
+					 start: turnos[i].start,
+					 end: turnos[i].end,
+					 day: turnos[i].day,
+					 cupoTotal: turnos[i].cupo,
+					 cupoActual: 0,
+					 expiracion: exp,
+					 estado: 'activo',
+					 group: turnos[i].group,
+					 id_turno: turnos[i].id,
+					}
+					Turnolog.findOrCreate({id_turno: turnos[i].id, estado: 'activo'},turnologObj,function (err,turnologs) {
+						if(err){
+							return next(err);
+						}
+
+					});
+				}
+				return res.json({code: 'SUCCESS', message: 'Turnos creados correctamente'})
+			});
+
+		}
+
 	},
 
 	index: function(req, res, next){

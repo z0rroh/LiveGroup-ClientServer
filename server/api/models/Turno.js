@@ -21,11 +21,12 @@ module.exports = {
       required: true
     },
     day:{
-      type: 'int',
+      type: 'string',
       required: true
     },
     cupo:{
-      type: 'int'
+      type: 'int',
+      required: true
     },
     group: {
       model: 'group'

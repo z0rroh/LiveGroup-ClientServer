@@ -21,15 +21,6 @@ class TurnoApp extends Component{
       this.setState(tokens);
     }.bind(this));
     io.socket.get('/turnolog/entrar', function(turnos) {
-      var state = true
-      for(let i=0; i<turnos.length; i++){
-        if (turnos[i].data.length >0){
-          state = false
-        }
-      }
-      if(state === true){
-        this.setState({hayTurnos: true})
-      }
       this.setState({isFetching:false,turnos: turnos});
     }.bind(this));
     io.socket.on('turnolog', function serverSentEvent(updateTurno) {
