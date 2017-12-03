@@ -5,22 +5,26 @@ import AuthorizedRoute from '../AuthorizedRoute.js'
 import UnauthorizedLayout from '../Components/Layouts/UnauthorizedLayout.js'
 import PrimaryLayout from '../Components/Layouts/PrimaryLayout.js'
 import ToastList from './ToastList/ToastList.js'
+import { connect } from 'react-redux'
 
-const Routes = () => (
-  <main>
-    <ToastList/>
-    <Switch>
-      <Route path="/auth" component={UnauthorizedLayout} />
-      <AuthorizedRoute path="/" component={PrimaryLayout} />
-      <Redirect to="/auth" />
-    </Switch>
-  </main>
-)
+const Routes = () => {
+
+  return(
+    <main>
+      <ToastList/>
+      <Switch>
+        <Route path="/auth" component={UnauthorizedLayout} />
+        <AuthorizedRoute path="" component={PrimaryLayout} />
+      </Switch>
+    </main>)
+
+}
 
 
 
 class App extends Component {
   render() {
+
     return (
       <div className="App">
         <Routes/>
@@ -29,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App

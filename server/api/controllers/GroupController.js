@@ -27,14 +27,9 @@ module.exports = {
 		User.usersFindByGroup(req.session.User.group, function(err,users){
 			if(err)
 				return next(err);
-			res.json({
-				users: users
-			});
-
+				
+			return res.ok(users)
 		});
-	},
-	groupdatatable: function(req,res, next){
-		res.view('group/groupdatatable')
 	},
 
 	create: function(req, res){
@@ -54,18 +49,7 @@ module.exports = {
 		});
 		res.redirect('group/show');
 	},
-	index: function(req, res, next){
 
-		/*User.findOne(req.session.User.id).populateAll().exec(function(err, user){
-			if(err) return next(err);
-			res.view({
-				user: user
-			});
-		});
-*/
-		User.findByGroup(req.session.User.group, function(err, data){
-			});
-	},
 	update: function(req, res, next){
 		Group.update(req.param('id'), req.params.all(), function groupUpdate(err){
 			if(err) {

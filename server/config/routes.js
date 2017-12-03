@@ -32,7 +32,6 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'GET /user/new': 'UserController.new',
   'GET /user/group': 'UserController.addGroup',
   'GET /turnos/index': 'TurnosController.index',
   'GET /salir': 'SessionController.destroy',
@@ -40,10 +39,8 @@ module.exports.routes = {
   'GET /populateturnos': 'TurnosController.populateTurnolog',
   'GET /turnos': 'TurnologController.index',
   'GET /anuncios': 'AnunciosController.index',
-  'GET /perfil': 'UserController.perfil',
   'GET /user': 'UserController.index',
-  'GET /administrar': 'UserController.administrar',
-  'GET /group2': 'GroupController.groupdatatable'
+  'GET /groupList': 'GroupController.getUsers',
   //'delete /userDelete/:id?': 'UserController.destroy'
 
 

@@ -3,26 +3,11 @@ import { Redirect, Switch, Route, NavLink } from 'react-router-dom'
 import Panel from '../AdminPanel/Panel.js'
 import GroupList from '../AdminPanel/GroupList'
 import CrearTurnos from '../AdminPanel/CrearTurnos'
+import SearchTurns from '../AdminPanel/SearchTurns'
 // Sub Layouts
 //import BrowseUsersPage from '../pages/BrowseUsersPage'
 //import AddUserPage from '../pages/AddUserPage'
 //import UserProfilePage from '../pages/UserProfilePage'
-
-const HOLA = () => (
-  <div>
-    <h2>hola</h2>
-  </div>
-)
-const HOLA2 = () => (
-  <div>
-    <h2>HOLA2</h2>
-  </div>
-)
-const HOLA3 = () => (
-  <div>
-    <h2>HOLA2</h2>
-  </div>
-)
 
 const SubLayout = ({ match }) => (
 
@@ -33,8 +18,8 @@ const SubLayout = ({ match }) => (
     <div className="primary-content">
       <Switch>
         <Route path={`${match.path}/grupo`} component={GroupList} />
-        <Route path={`${match.path}/turnos`} component={CrearTurnos} />
-        <Route path={`${match.path}/hola3`} component={HOLA3} />
+        <Route path={`${match.path}/turnos/crear`} component={CrearTurnos} />
+        <Route path={`${match.path}/turnos/buscar`} component={SearchTurns} />
         <Redirect to={`${match.path}/grupo`}/>
       </Switch>
     </div>

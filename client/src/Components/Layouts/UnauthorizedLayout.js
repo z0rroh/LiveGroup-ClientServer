@@ -7,7 +7,7 @@ import Login from '../Login/Login.js'
 const UnauthorizedLayout = (props) =>
 
   {
-    {console.log("NO AUTORIZADO") }
+    {console.log("NO AUTORIZADO")}
     return (
         <div className="unauthorized-layout">
         {/*

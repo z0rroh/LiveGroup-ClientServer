@@ -19,12 +19,12 @@ class Panel extends Component {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navLinkSub" to={`${match.path}/turnos`} activeClassName="navLinkSubActive">
+                <NavLink className="navLinkSub" to={`${match.path}/turnos/crear`} activeClassName="navLinkSubActive">
                   <i className="fa fa-calendar fa-2x nav-icon"></i><span className="nav-text">Crear Turnos</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navLinkSub" to={`${match.path}/hola3`} activeClassName="navLinkSubActive">
+                <NavLink className="navLinkSub" to={`${match.path}/turnos/buscar`} activeClassName="navLinkSubActive">
                   <i className="fa fa-home fa-2x nav-icon"></i><span className="nav-text">Grupo</span>
                 </NavLink>
               </li>

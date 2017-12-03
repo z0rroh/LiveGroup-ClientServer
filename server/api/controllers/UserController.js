@@ -107,16 +107,6 @@ module.exports = {
     });
   },
 
-  new:function (req, res){
-    if(req.session.User && req.session.authenticated){
-        res.redirect('anuncios');
-    }
-    else {
-        res.view('user/new');
-    }
-
-	},
-
 	create: function(req, res,next){
     User.Validate(req.param('email'),function(response){
       if(!response){
@@ -174,35 +164,15 @@ module.exports = {
       });
     },
 
-  perfil: function(req,res, next){
-    res.view('user/perfil')
-  },
-  administrar: function(req,res, next){
-    res.view('admin/panel')
-  },
-
-	edit: function(req, res, next){
-		User.findOne(req.param('id'), function userFounded(err, user){
-			if(err) return next(err);
-			if(!user) return next(err);
-			res.view({
-				user: user
-			});
-		});
-	},
   	updateUser: function(req, res, next){
-      var userObj={
-        name : req.param('name'),
-        email : req.param('email'),
-        phone: req.param('phone')
-      }
+      var id = req.param('id');
+      var param = req.param('param')
 
-  		User.update(req.param('id'), userObj, function userUpdate(err){
+  		User.update(id, param, function userUpdate(err){
   			if(err) {
-  				return res.redirect('user/edit/' + req.param('id'));
+  				return res.status(400).json({code: "BAD_R", message: "No fue posible modificar el usuario"})
   			}
-      	res.redirect('user/edit/' + req.param('id'));
-
+      	return res.json({code: "SUCCESS", message: "Usuario modificado correctamente"});
   		});
   	},
 

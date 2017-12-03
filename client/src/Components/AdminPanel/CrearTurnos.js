@@ -7,6 +7,9 @@ import { addToast } from '../../actions/Toast.js'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import { Intent } from '@blueprintjs/core'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import 'moment/locale/es';
 
 class CrearTurnos extends Component {
   constructor(props){

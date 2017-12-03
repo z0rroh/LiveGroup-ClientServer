@@ -90,11 +90,27 @@ module.exports = {
 	  },
 
 	  usersFindByGroup: function (options, cb) {
-		 User.find({group:options}).exec(function (err, users) {
-			 if (err) return cb(err);
-			 if (!users) return cb(new Error('Users not found.'));
-			 return cb(null,users);
-		 });
+			 var groupList = [];
+			 User.find({group:options}).populateAll()
+	      .then(function(users){
+				 	users.map(user =>{
+						var newUser = {
+							id: user.id,
+							rut: "123456789",
+							name: user.name,
+							email: user.email,
+							telefono: user.phone,
+							direccion: user.adress,
+							tipo: user.admin,
+							tokens: user.tokens
+						}
+						groupList.push(newUser)
+					})
+					return cb(null,groupList);
+			 })
+			 .catch(function(err){
+					 throw err;
+			 })
 	 },
 
 
