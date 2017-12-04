@@ -2645,11 +2645,18 @@ header {
       font-size: 2em;
       line-height: 67px; }
 
+.chat-container {
+  position: absolute;
+  right: 0px;
+  height: 100%; }
+
 .chat-icon {
   position: absolute;
-  right: 40px; }
+  right: 55px;
+  width: 58px; }
   .chat-icon a {
     opacity: 1;
+    text-decoration: none;
     text-align: center;
     color: #fafafa;
     cursor: pointer;
@@ -2660,21 +2667,29 @@ header {
     line-height: 33px;
     width: 100%;
     display: block;
-    position: relative; }
+    position: relative;
+    font-size: 28px; }
     .chat-icon a i {
-      font-size: 28px; }
+      font-size: 28px;
+      height: inherit;
+      line-height: inherit; }
+  .chat-icon a:hover {
+    background-color: inherit;
+    color: #24292e; }
 
 .chat-exit {
-  text-align: center; }
+  text-align: center;
+  background-color: #8bc34a; }
   .chat-exit a {
-    background-color: #8bc34a;
-    height: 28px; }
-  .chat-exit i {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 4px;
+    height: 28px;
+    line-height: 28px;
+    margin: 0px;
+    display: inherit;
+    height: inherit;
+    width: inherit;
     color: #ffffff;
-    font-size: 25px; }
+    font-size: 25px;
+    text-decoration: none; }
 
 .chat-tittle {
   text-align: center;
@@ -2689,7 +2704,16 @@ header {
   opacity: 0.9; }
 
 .chat-sidebar {
-  top: 79px; }
+  position: relative;
+  top: 0px;
+  bottom: 0;
+  height: 100%;
+  width: 200px;
+  -webkit-transition: width .05s linear;
+  transition: width .05s linear;
+  -webkit-transform: translateZ(0) scale(1, 1);
+  z-index: 1000;
+  overflow-y: inherit; }
 
 .sidebar-name {
   height: 35px;
@@ -2714,10 +2738,12 @@ header {
       top: -40%;
       position: relative;
       line-height: 17px;
+      display: inline-block;
       width: 100%; }
     .sidebar-name a img {
       width: 35px;
-      height: 35px; }
+      height: 35px;
+      vertical-align: middle; }
 
 .popup-box {
   display: none;

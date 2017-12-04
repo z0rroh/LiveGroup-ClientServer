@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Header from './Header'
+import ChatApp from '../Chat/ChatApp.js'
 
 class PrimaryHeader extends Component{
   constructor(){
@@ -32,6 +33,7 @@ class PrimaryHeader extends Component{
             <div className="Nav-Item">
               <li><NavLink className="navItemLink" activeClassName="navItemActive" to='/administrar'>Administrar</NavLink></li>
             </div>
+            <ChatApp/>
           </ul>
         </nav>
 
