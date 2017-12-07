@@ -5,10 +5,14 @@ import PropTypes from 'prop-types';
 import { addToast } from '../../actions/Toast'
 import { logout } from '../../actions/auth'
 import { Intent } from '@blueprintjs/core'
+import io from '../../io.js'
 
 class Header extends Component{
   constructor(){
     super();
+    this.state={
+      user: {}
+    }
   }
 
   onClick(){
@@ -21,8 +25,14 @@ class Header extends Component{
       this.props.history.push('/auth')
     })
   }
+  
+  componentDidMount(){
+    this.setState({user: this.props.user});
+  }
+
   render(){
-    const user = this.props.user;
+    const user = this.state.user;
+    console.log(user);
     return(
       <div className="Header col-lg-12">
         <div className="box col-lg-11">

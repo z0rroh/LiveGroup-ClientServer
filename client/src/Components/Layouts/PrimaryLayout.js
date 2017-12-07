@@ -5,14 +5,15 @@ import AnunciosApp from '../Anuncios/AnunciosApp.js'
 import TurnoApp from '../Turnolog/TurnoApp.js'
 import PerfilApp from '../User/PerfilApp.js'
 import SubLayout from '../Layouts/SubLayout'
+import { connect } from 'react-redux'
 
 class PrimaryLayout extends Component{
 
   render(){
-    const {match, history} = this.props;
+    const {match, history, user} = this.props;
     return(
       <div className="primary-layout">
-        <PrimaryHeader history={history}/>
+        <PrimaryHeader history={history} user={user}/>
         <main>
           <Switch>
             <Route path={`${match.path}perfil`} component={PerfilApp} />
@@ -30,5 +31,11 @@ class PrimaryLayout extends Component{
 
 }
 
+function mapStateToProps({auth}) {
+    return {
+        user: auth.user
+    };
+}
 
-export default PrimaryLayout
+
+export default connect(mapStateToProps)(PrimaryLayout)

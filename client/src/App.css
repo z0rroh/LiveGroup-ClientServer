@@ -2488,7 +2488,7 @@ header {
   width: 100%; }
 
 .Header {
-  height: 75px;
+  height: 85px;
   border-bottom: solid 0.5px #000;
   width: 100%; }
   .Header .box {
@@ -2592,7 +2592,7 @@ header {
 
 .Nav {
   background-color: #8bc34a;
-  height: 28px;
+  height: 30px;
   width: 100%; }
   .Nav .box {
     padding: 0px;
@@ -2602,19 +2602,18 @@ header {
     height: 100%; }
   .Nav .Nav-Item {
     all: inherit;
-    margin-top: -1px;
+    margin-top: -2px;
     text-align: center;
     width: auto;
     cursor: pointer;
     padding-top: 1px; }
     .Nav .Nav-Item .navItemLink {
-      all: inherit;
       padding: 0px 30px;
       color: #f8f8f8;
       font-size: 18px;
       text-transform: none;
       font-weight: 200;
-      line-height: 28px;
+      line-height: 30px;
       text-decoration: none !important; }
   .Nav .Nav-Item:hover {
     color: #f8f8f8;
@@ -2628,7 +2627,7 @@ header {
     background-color: #24292e;
     border-color: #fafafa;
     border-bottom: solid 0.5px #000;
-    height: 30px;
+    height: 32px;
     padding-top: 1px; }
   .Nav .Nav-Button {
     position: absolute;
@@ -2681,8 +2680,8 @@ header {
   text-align: center;
   background-color: #8bc34a; }
   .chat-exit a {
-    height: 28px;
-    line-height: 28px;
+    height: 30px;
+    line-height: 30px;
     margin: 0px;
     display: inherit;
     height: inherit;
@@ -2692,18 +2691,15 @@ header {
     text-decoration: none; }
 
 .chat-tittle {
-  text-align: center;
-  margin-top: 3px;
-  margin-bottom: 5px; }
+  text-align: left; }
   .chat-tittle h6 {
     margin: auto;
-    color: #8bc34a; }
-
-.chat-exit:hover {
-  background-color: #8bc34a;
-  opacity: 0.9; }
+    color: #4c4c4c;
+    padding: 5px 0px;
+    padding-left: 10px; }
 
 .chat-sidebar {
+  background-color: #f6f7f8;
   position: relative;
   top: 0px;
   bottom: 0;
@@ -2715,41 +2711,53 @@ header {
   z-index: 1000;
   overflow-y: inherit; }
 
-.sidebar-name {
-  height: 35px;
+.users-lists .sidebar-name {
+  height: 40px;
   text-align: initial;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 4px;
-  font-size: 12px; }
-  .sidebar-name a {
+  font-size: 12px;
+  padding: 0px;
+  margin: 0px;
+  width: 100%; }
+  .users-lists .sidebar-name a {
     width: 100%;
     overflow: hidden;
     padding-left: inherit;
     display: block;
-    position: relative;
     height: 100%;
     text-decoration: none;
-    color: inherit;
-    white-space: nowrap; }
-    .sidebar-name a span {
+    white-space: nowrap;
+    padding: 4px 10px;
+    position: relative; }
+    .users-lists .sidebar-name a span {
       padding-left: 5px;
       font-size: 13px;
       top: -40%;
-      position: relative;
       line-height: 17px;
-      display: inline-block;
-      width: 100%; }
-    .sidebar-name a img {
-      width: 35px;
-      height: 35px;
-      vertical-align: middle; }
+      width: 100%;
+      color: #333; }
+    .users-lists .sidebar-name a img {
+      border-radius: 50%;
+      width: 32px;
+      height: 32px; }
 
-.popup-box {
-  display: none;
+.ChatBoxList {
+  width: 100%;
+  max-width: 70%;
+  margin-right: 210px;
+  right: 0px;
+  z-index: 300;
   position: fixed;
   bottom: 0px;
-  right: 220px;
+  height: 10px;
+  background-color: red; }
+
+.popup-box {
+  display: block;
+  position: relative;
+  margin-left: 20px;
+  top: -290px;
+  float: right;
+  right: 0px;
   height: 300px;
   background-color: #edeff4;
   width: 270px;
@@ -2761,24 +2769,25 @@ header {
   color: white;
   font-weight: bold;
   font-size: 14px;
-  clear: both; }
-
-.popup-head-left {
-  float: left; }
-
-.popup-head-right {
-  float: right;
-  opacity: 0.8; }
-  .popup-head-right a {
-    text-decoration: none;
-    color: #ffffff; }
+  clear: both;
+  height: 29px; }
+  .popup-head .popup-head-left {
+    float: left; }
+  .popup-head .popup-head-right {
+    float: right;
+    opacity: 0.8; }
+    .popup-head .popup-head-right a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 20px; }
 
 .popup-messages {
-  height: 238px;
+  height: 239px;
   overflow-y: scroll;
   background-color: #ffffff;
   border-bottom: .8px solid #7f7f7f;
-  width: 268px; }
+  width: 268px;
+  color: #000; }
 
 .send-messages {
   font-family: inherit;
@@ -2786,7 +2795,7 @@ header {
   background-color: #ffffff;
   border-bottom: .8px solid #7f7f7f;
   font-size: 14px; }
-  .send-messages textarea {
+  .send-messages input {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: inherit;
     line-height: 30px;
@@ -2794,8 +2803,10 @@ header {
     color: #000000;
     width: 268px;
     height: 100%;
-    border: none; }
-  .send-messages textarea.placeholder {
+    border: 0 none #FFF;
+    overflow: hidden;
+    outline: none; }
+  .send-messages input.placeholder {
     color: #424242; }
 
 @keyframes spin4 {

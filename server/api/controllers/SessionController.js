@@ -53,7 +53,7 @@ module.exports = {
 					user.save(function(err){
 						if (err) return next(err);
 					});
-					User.publishUpdate(user.id, user);
+					User.publishUpdate(user.id, {id:user.id, name: user.name, user_image: user.user_image,online: user.online});
 
 					if(user.group == null){
 						return res.json({
@@ -76,7 +76,7 @@ module.exports = {
 			user.save(function(err){
 				if (err) return next(err);
 			});
-			User.publishUpdate(user.id,user);
+			User.publishUpdate(user.id,{id:user.id, name: user.name, user_image: user.user_image,online: user.online});
 			req.session.destroy();
 			return res.json({
 				code: 'LOGOUT',

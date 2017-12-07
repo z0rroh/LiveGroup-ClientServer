@@ -13,7 +13,7 @@ header
   border-bottom: 1px solid #000
   width: 100%
 .Header
-  height: 75px
+  height: 85px
   border-bottom: solid 0.5px #000
   width: 100%
   .box
@@ -123,7 +123,7 @@ header
 
 .Nav
   background-color: #8bc34a
-  height: 28px
+  height: 30px
   width: 100%
   .box
     padding: 0px
@@ -133,28 +133,24 @@ header
     height: 100%
   .Nav-Item
     all: inherit
-    margin-top: -1px
+    margin-top: -2px
     text-align: center
     width: auto
     cursor: pointer
     padding-top: 1px
     .navItemLink
-      all: inherit
       padding: 0px 30px
       color: #f8f8f8
       font-size: 18px
       text-transform: none
       font-weight: 200
-      line-height: 28px
+      line-height: 30px
       text-decoration: none !important
+
   .Nav-Item:hover
     color: #f8f8f8
     background-color: #24292e
-    //border-color: #fafafa
     cursor: pointer
-    //border-radius: 0 0 5px 5px
-    //border-left: solid 0.5px #000
-    //border-right: solid 0.5px #000
     border-bottom: solid 0.5px #000
     height: 5px
     padding-top: 2px
@@ -165,7 +161,7 @@ header
     border-color: #fafafa
     //border-radius: 0 0 5px 5px
     border-bottom: solid 0.5px #000
-    height: 30px
+    height: 32px
     padding-top: 1px
 
   .Nav-Button
@@ -219,8 +215,8 @@ header
   text-align: center
   background-color: #8bc34a
   a
-    height: 28px
-    line-height: 28px
+    height: 30px
+    line-height: 30px
     margin: 0px
     display: inherit
     height: inherit
@@ -229,18 +225,17 @@ header
     font-size: 25px
     text-decoration: none
 .chat-tittle
-  text-align: center
-  margin-top: 3px
-  margin-bottom: 5px
+  text-align: left
   h6
     margin: auto
-    color: #8bc34a
+    color: #4c4c4c
+    padding: 5px 0px
+    padding-left: 10px
 
-.chat-exit:hover
-    background-color: #8bc34a
-    opacity: 0.9
+
 
 .chat-sidebar
+  background-color: #f6f7f8
   position: relative
   top: 0px
   bottom: 0
@@ -252,44 +247,55 @@ header
   z-index: 1000
   overflow-y: inherit
 
+.users-lists
 
-.sidebar-name
-  height: 35px
-  text-align: initial
-  padding-left: 10px
-  padding-right: 10px
-  margin-bottom: 4px
-  font-size: 12px
-
-  a
+  .sidebar-name
+    height: 40px
+    text-align: initial
+    font-size: 12px
+    padding: 0px
+    margin: 0px
     width: 100%
-    overflow: hidden
-    padding-left: inherit
-    display: block
-    position: relative
-    height: 100%
-    text-decoration: none
-    color: inherit
-    white-space: nowrap
-
-    span
-      padding-left: 5px
-      font-size: 13px
-      top: -40%
-      position: relative
-      line-height: 17px
-      display: inline-block
+    a
       width: 100%
-    img
-      width: 35px
-      height: 35px
-      vertical-align: middle
+      overflow: hidden
+      padding-left: inherit
+      display: block
+      height: 100%
+      text-decoration: none
+      white-space: nowrap
+      padding: 4px 10px
+      position: relative
+      span
+        padding-left: 5px
+        font-size: 13px
+        top: -40%
+        line-height: 17px
+        width: 100%
+        color: #333
+      img
+        border-radius: 50%
+        width: 32px
+        height: 32px
 
-.popup-box
-    display: none
+.ChatBoxList
+    width: 100%
+    max-width: 70%
+    margin-right: 210px
+    right: 0px
+    z-index: 300
     position: fixed
     bottom: 0px
-    right: 220px
+    height: 10px
+    background-color: red
+
+.popup-box
+    display: block
+    position: relative
+    margin-left: 20px
+    top: -290px
+    float: right
+    right: 0px
     height: 300px
     background-color: rgb(237, 239, 244)
     width: 270px
@@ -303,33 +309,33 @@ header
     font-weight: bold
     font-size: 14px
     clear: both
+    height: 29px
+    .popup-head-left
+        float: left
 
-
-.popup-head-left
-    float: left
-
-
-.popup-head-right
-    float: right
-    opacity: 0.8
-    a
-      text-decoration: none
-      color: #ffffff
+    .popup-head-right
+        float: right
+        opacity: 0.8
+        a
+          text-decoration: none
+          color: #ffffff
+          font-size: 20px
 
 
 .popup-messages
-    height: 238px
+    height: 239px
     overflow-y: scroll
     background-color: #ffffff
     border-bottom: .8px solid #7f7f7f
     width: 268px
+    color: #000
 .send-messages
   font-family: inherit
   height: 31px
   background-color: #ffffff
   border-bottom: .8px solid #7f7f7f
   font-size: 14px
-  textarea
+  input
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
     margin: inherit
     line-height: 30px
@@ -337,8 +343,10 @@ header
     color: #000000
     width: 268px
     height: 100%
-    border: none
-  textarea.placeholder
+    border: 0 none #FFF
+    overflow: hidden
+    outline: none
+  input.placeholder
       color: #424242
 
 

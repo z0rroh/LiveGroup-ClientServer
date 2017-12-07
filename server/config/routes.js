@@ -41,6 +41,9 @@ module.exports.routes = {
   'GET /anuncios': 'AnunciosController.index',
   'GET /user': 'UserController.index',
   'GET /groupList': 'GroupController.getUsers',
+  'GET /chat/groupOnline': 'ChatController.groupOnline',
+  'POST /chat/message/create': 'ChatController.createMessage',
+  'GET /chat/getmessages': 'ChatController.searchMessages'
   //'delete /userDelete/:id?': 'UserController.destroy'
 
 

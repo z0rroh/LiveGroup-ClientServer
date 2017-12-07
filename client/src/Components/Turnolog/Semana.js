@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react';
 import Dia from './Dia'
-
+import moment from 'moment'
 import {Spinner} from "@blueprintjs/core";
 
 
@@ -14,15 +14,17 @@ class Semana extends Component{
     this.state = {
       fecha: [],
       hora: new Date(),
+      mesName: ""
     };
 
   }
 
   getDate(){
+    var currMonthName  = moment().format('MMMM').toUpperCase();
     var fecha = new Date();
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     var hoy = new Intl.DateTimeFormat('es-Ch',options).format(fecha);
-    this.setState({fecha: hoy})
+    this.setState({mesName: currMonthName, fecha: hoy})
   }
   componentDidMount(){
     this.getDate();
@@ -57,7 +59,7 @@ class Semana extends Component{
 
           </div>
         </div>
-        <div className="MesName"><span>Septiembre</span></div>
+        <div className="MesName"><span>{this.state.mesName}</span></div>
         <div className="SemanaContent row center-xs">
           { Dias }
         </div>

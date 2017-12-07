@@ -22,19 +22,6 @@ module.exports = {
 					sails.log( 'Usuario suscrito a anuncios con la id: ' + req.socket.id );
 			}
 	},
-	new: function(req,res){
-		res.view('anuncios/new');
-	},
-	show: function(req, res, next){
-		/*
-		User.findByGroup(req.session.User.group, function(err,users){
-			res.view({
-				users: users
-			});
-		});
-*/
-
-	},
 	create: function(req, res){
 		var anuncioObj={
 			text: req.param('text'),

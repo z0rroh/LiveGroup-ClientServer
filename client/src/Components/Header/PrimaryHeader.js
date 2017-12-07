@@ -1,13 +1,34 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Link, NavLink } from 'react-router-dom'
-import { connect } from 'react-redux'
 import Header from './Header'
 import ChatApp from '../Chat/ChatApp.js'
+import ChatBoxList from '../Chat/ChatBoxList'
 
 class PrimaryHeader extends Component{
+
   constructor(){
     super();
+    this.state={
+      chatsOpen: []
+    }
+    this.handleAddUser=this.handleAddUser.bind(this);
+    this.handleRemoveUser=this.handleRemoveUser.bind(this);
+  }
+
+  handleAddUser(user){
+    const addUser = user;
+    var newState = this.state.chatsOpen;
+    let exist = newState.findIndex( user => user.id === addUser.id )
+    if(exist === -1){
+      newState.splice(0,0,addUser)
+      this.setState({chatsOpen: newState})
+    }
+  }
+
+  handleRemoveUser(user){
+    const removeUser = user;
+    this.setState(prevState => ({ chatsOpen: prevState.chatsOpen.filter(user => user.id !== removeUser.id) }))
   }
 
   render(){
@@ -33,10 +54,12 @@ class PrimaryHeader extends Component{
             <div className="Nav-Item">
               <li><NavLink className="navItemLink" activeClassName="navItemActive" to='/administrar'>Administrar</NavLink></li>
             </div>
-            <ChatApp/>
+            <ChatApp handleAddUser={this.handleAddUser}/>
           </ul>
         </nav>
-
+        <ChatBoxList
+          chatsOpen={this.state.chatsOpen}
+          handleRemoveUser={this.handleRemoveUser}/>
       </header>
     );
   }
@@ -45,10 +68,4 @@ class PrimaryHeader extends Component{
 
 }
 
-const stateToProps = ({ auth }) => ({
-  user: auth.user,
-})
-
-
-
-export default connect(stateToProps)(PrimaryHeader)
+export default PrimaryHeader

@@ -30,10 +30,11 @@ class Perfil extends Component{
       console.log(err);
     })
     io.socket.on('user', function serverSentEvent(user) {
+      /*console.log(user.data[0].user_image);
       this.setState({
         avatar: user.data[0].user_image
-      })
-
+    })*/
+    console.log(user);
     }.bind(this));
 
   }

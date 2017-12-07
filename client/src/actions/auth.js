@@ -39,7 +39,21 @@ export function loginServer(data){
   }
 }
 
-
+export function editAvatar(avatar, config){
+    return dispatch =>{
+      return axios.post("/archivo/upload", avatar, config)
+      .then(res =>{
+        switch (res.data.code) {
+            case "SUCCESS":
+              dispatch(setCurrentUser(res.data.user[0]));
+              break;
+            default:
+              return res.data.message
+              break;
+          }
+      })
+    }
+}
 
 export function logout(){
   return dispatch =>{

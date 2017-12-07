@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import {Button, Intent, Popover, PopoverInteractionKind, Position} from "@blueprintjs/core";
 import axios from 'axios'
 import {Skeleton} from "@blueprintjs/core";
+import PropTypes from 'prop-types';
+import { editAvatar } from '../../actions/auth'
+import { connect } from 'react-redux'
+import { addToast } from '../../actions/Toast.js'
 
 class UserAvatar extends Component{
     constructor(props){
@@ -19,6 +23,7 @@ class UserAvatar extends Component{
     }
 
     handleSubmit(e){
+      const {editAvatar, addToast} = this.props;
       e.preventDefault();
       let reader = new FileReader();
       var avatar = new FormData();
@@ -34,15 +39,21 @@ class UserAvatar extends Component{
       const config = {
           headers: { 'content-type': 'multipart/form-data' }
       }
-      axios.post("/archivo/upload", avatar, config)
-      .then((response)=>{
-        console.log(response.data[0]);
-        if(response.status === 200)
-          console.log("se subio bien!");
+      editAvatar(avatar, config)
+      .then(res=>{
+          if(res){
+            addToast({
+            intent: Intent.DANGER,
+            message: res
+          })
+          }
+          else{
+            addToast({
+              intent: Intent.SUCCESS,
+              message: "ACTUALIZACIÓN EXITOSA!"
+            })
+          }
       })
-      .catch((err)=>{
-        console.log(err);
-      });
     }
     handleChange(e){
       e.preventDefault();
@@ -99,5 +110,9 @@ class UserAvatar extends Component{
       )
     }
 }
+UserAvatar.propTypes = {
+  editAvatar: PropTypes.func.isRequired,
+  addToast: PropTypes.func.isRequired
+};
 
-export default UserAvatar;
+export default connect(null,{editAvatar, addToast })(UserAvatar);

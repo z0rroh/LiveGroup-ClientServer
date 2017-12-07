@@ -7,8 +7,59 @@
 
 module.exports = {
 
-			index: function(req, res, next){
-				res.view('chat/index');
+			subscribeGroupChat: function(req, res, next){
+
+				if(req.isSocket && req.session.User){
+						User.find({group:req.session.User.group}).exec(function (err, users) {
+						// Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
+								User.subscribe(req, users,['update']);
+						});
+						User.watch(req);
+						sails.log( 'Usuario suscrito a chat con la id: ' + req.socket.id );
+				}
+			},
+			groupOnline: function(req, res){
+				Chat.usersOnline(req.session.User.group, function(err, users){
+						res.ok(users);
+				});
+			},
+
+			createMessage(req, res){
+					var newMessage={
+						text: req.param('text'),
+						to: req.param('to'),
+						from: req.session.User.id
+					}
+
+					Chat.create(newMessage, function(err, message){
+						if(err){
+							res.json({code: "FAIL", error: "OCURRIO UN PROBLEMA AL ENVIAR EL MENSAJE" })
+						}
+						res.json({code:"SUCCESS", message: message})
+					})
+
+			},
+
+			searchMessages(req, res){
+					var allMessages = [];
+					var to = req.param('to')
+					var from = req.session.User.id
+					Chat.find({from: from, to: to}).populate('from').populate('to').sort({ createdAt: 'desc' })
+					.then( (messagesSend) =>{
+							allMessages.push(messagesSend)
+							if( to !== from ){
+								Chat.find({from: to, to:from}).populate('from').populate('to').sort({ createdAt: 'desc' })
+								.then((messagesReceive)=>{
+										allMessages.push(messagesReceive);
+										console.log(allMessages);
+
+								})
+							}
+							else{
+								res.json(allMessages);
+							}
+
+					})
 			},
 
 			private: function(req, res) {

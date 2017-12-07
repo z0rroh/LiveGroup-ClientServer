@@ -2671,8 +2671,6 @@ nav {
         margin-top: -2px;
         margin-left: 15px;
         margin-right: 15px; }
-      nav ul a:hover {
-        background-color: rgba(0, 0, 0, 0.1); }
     nav ul.left {
       float: left; }
   nav form {

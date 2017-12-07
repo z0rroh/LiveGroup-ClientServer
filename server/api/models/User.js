@@ -64,6 +64,14 @@ module.exports = {
 				type: 'boolean',
 				defaultsTo: false
 			},
+			messagesSent:{
+				collection: 'chat',
+				via: 'from',
+			},
+			messagesReceive:{
+				collection: 'chat',
+				via: 'to',
+			},
 	  	toJSON: function(){
 		 	var obj= this.toObject();
 		  	//delete obj.password;

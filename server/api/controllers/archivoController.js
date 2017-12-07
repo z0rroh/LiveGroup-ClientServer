@@ -24,15 +24,23 @@ module.exports = {
 			}
 			archivo.create(obj,function(err, image){
 				if (err){
-					console.log(err);
+					return res.json({
+						code: 'FAIL',
+						message: 'OCURRIO UN PROBLEMA AL SUBIR LA IMAGEN'
+					});
 				}
 				else{
-
 					User.update({id:image.owner},{user_image:image.name},function editImage(err, user){
 							if(err){
+								return res.json({
+									code: 'FAIL',
+									message: 'OCURRIO UN PROBLEMA AL SUBIR LA IMAGEN'
+								});
 							}
-							User.publishUpdate(req.session.User.id, user)
-							return res.json(user);
+							return res.json({
+								code:'SUCCESS',
+								user: user
+							});
 					})
 				}
 			});
