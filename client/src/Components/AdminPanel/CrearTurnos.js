@@ -21,7 +21,12 @@ class CrearTurnos extends Component {
       cupo: 0,
       todos: false,
       lunes: {id:0, value: false},
-      martes: {id:1, value: false}
+      martes: {id:1, value: false},
+      miercoles: {id:2, value: false},
+      jueves: {id:3, value: false},
+      viernes: {id:4, value: false},
+      sabado: {id:5, value: false},
+      domingo: {id:6, value: false}
     }
 
   }
@@ -40,25 +45,23 @@ class CrearTurnos extends Component {
     const target = e.target;
     const value = target.checked
     const name = target.name;
+    const id = target.id
     if(name === "todos"){
       this.setState({
         todos: target.checked,
         lunes: {id:0, value: target.checked},
-        martes: {id:1, value: target.checked}
+        martes: {id:1, value: target.checked},
+        miercoles: {id:2, value: target.checked},
+        jueves: {id:3, value: target.checked},
+        viernes: {id:4, value: target.checked},
+        sabado: {id:5, value: target.checked},
+        domingo: {id:6, value: target.checked},
       })
     }else{
-      if(name ==="lunes"){
-        this.setState({
-          lunes: {id:0, value: target.checked}
-        })
-      }
-      if(name ==="martes"){
-        this.setState({
-          martes: {id:1, value: target.checked}
-        })
-      }
+      this.setState({
+        [name]: {id: id, value: value}
+      });
     }
-
   }
 
   changeHour(time,name){
@@ -71,13 +74,28 @@ class CrearTurnos extends Component {
     e.preventDefault();
     const dias = [];
     if(this.state.todos){
-      dias.push(this.state.lunes, this.state.martes)
+      dias.push(this.state.lunes, this.state.martes, this.state.miercoles, this.state.jueves, this.state.viernes, this.state.sabado, this.state.domingo)
     }else{
       if(this.state.lunes.value){
         dias.push(this.state.lunes)
       }
       if(this.state.martes.value){
-        dias.push(this.state.lunes)
+        dias.push(this.state.martes)
+      }
+      if(this.state.miercoles.value){
+        dias.push(this.state.miercoles)
+      }
+      if(this.state.jueves.value){
+        dias.push(this.state.jueves)
+      }
+      if(this.state.viernes.value){
+        dias.push(this.state.viernes)
+      }
+      if(this.state.sabado.value){
+        dias.push(this.state.sabado)
+      }
+      if(this.state.domingo.value){
+        dias.push(this.state.domingo)
       }
     }
 
@@ -172,6 +190,7 @@ class CrearTurnos extends Component {
               </label>
               <label className="pt-control pt-checkbox pt-inline">
                 <input
+                  id="0"
                   name="lunes"
                   checked={this.state.lunes.value}
                   onChange={(e) => this.handleCheckChange(e)}
@@ -181,12 +200,63 @@ class CrearTurnos extends Component {
               </label>
               <label className="pt-control pt-checkbox pt-inline">
                 <input
+                  id="1"
                   name="martes"
                   checked={this.state.martes.value}
                   onChange={(e) => this.handleCheckChange(e)}
                   type="checkbox" />
                 <span className="pt-control-indicator"></span>
                 Martes
+              </label>
+              <label className="pt-control pt-checkbox pt-inline">
+                <input
+                  id="2"
+                  name="miercoles"
+                  checked={this.state.miercoles.value}
+                  onChange={(e) => this.handleCheckChange(e)}
+                  type="checkbox" />
+                <span className="pt-control-indicator"></span>
+                Miercoles
+              </label>
+              <label className="pt-control pt-checkbox pt-inline">
+                <input
+                  id="3"
+                  name="jueves"
+                  checked={this.state.jueves.value}
+                  onChange={(e) => this.handleCheckChange(e)}
+                  type="checkbox" />
+                <span className="pt-control-indicator"></span>
+                Jueves
+              </label>
+              <label className="pt-control pt-checkbox pt-inline">
+                <input
+                  id="4"
+                  name="viernes"
+                  checked={this.state.viernes.value}
+                  onChange={(e) => this.handleCheckChange(e)}
+                  type="checkbox" />
+                <span className="pt-control-indicator"></span>
+                Viernes
+              </label>
+              <label className="pt-control pt-checkbox pt-inline">
+                <input
+                  id="5"
+                  name="sabado"
+                  checked={this.state.sabado.value}
+                  onChange={(e) => this.handleCheckChange(e)}
+                  type="checkbox" />
+                <span className="pt-control-indicator"></span>
+                Sabado
+              </label>
+              <label className="pt-control pt-checkbox pt-inline">
+                <input
+                  id="6"
+                  name="domingo"
+                  checked={this.state.domingo.value}
+                  onChange={(e) => this.handleCheckChange(e)}
+                  type="checkbox" />
+                <span className="pt-control-indicator"></span>
+                Domingo
               </label>
 
             </div>

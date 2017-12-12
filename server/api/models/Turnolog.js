@@ -71,9 +71,6 @@ module.exports = {
       }
       return cb(salida.format());
     },
-    validarExpiracion: function(date,cb){
 
-
-    },
 
 };

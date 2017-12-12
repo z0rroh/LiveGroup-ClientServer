@@ -18,9 +18,109 @@ var lang = require('lodash/lang');
        }
    },
 
-   entrar:function (req,res) {
+   getTurnos: (req,res)=>{
+       Turnolog.find({group:req.session.User.group,estado: 'activo'}).populate('users')
+       .exec(function(err,turnologs){
+         var tokens = req.session.User.tokens;
+         if(err) {
+           return res.json({code:"FAIL", message:"Ah ocurrido un error inesperado"})
+         }
+         /*if(!turnologs.length){
+           return res.json({code:"NO_TURNOS", message:"No hay turnos creados"})
+         }*/
+         var allDays = [];
+         var tokensUpdate;
+         var lunes = [];
+         var martes = [];
+         var miercoles = [];
+         var jueves = [];
+         var viernes = [];
+         var sabado = [];
+         var domingo = [];
 
-       if(req.isSocket && req.method === 'POST') {
+         for(var i in turnologs){
+           if ( turnologs[i].day === '0' )
+               lunes.push(turnologs[i]);
+           if ( turnologs[i].day === '1' )
+               martes.push(turnologs[i]);
+           if ( turnologs[i].day === '2' )
+               miercoles.push(turnologs[i]);
+           if ( turnologs[i].day === '3' )
+               jueves.push(turnologs[i]);
+           if ( turnologs[i].day === '4' )
+               viernes.push(turnologs[i]);
+           if ( turnologs[i].day === '5' )
+               sabado.push(turnologs[i]);
+           if ( turnologs[i].day === '6' )
+               domingo.push(turnologs[i]);
+         }
+
+         for(var i=0; i<7; i++){
+           var aux;
+           if( i === 0){
+             aux = {
+               name: "Lunes",
+               id: i,
+               data: lunes
+             }
+             allDays.push(aux);
+           }
+           if( i === 1){
+             aux = {
+               name: "Martes",
+               id: i,
+               data: martes
+             }
+             allDays.push(aux);
+           }
+           if( i === 2){
+             aux = {
+               name: "Miercoles",
+               id: i,
+               data: miercoles
+             }
+             allDays.push(aux);
+           }
+           if( i === 3){
+             aux = {
+               name: "Jueves",
+               id: i,
+               data: jueves
+             }
+             allDays.push(aux);
+           }
+           if( i === 4){
+             aux = {
+               name: "Viernes",
+               id: i,
+               data: viernes
+             }
+             allDays.push(aux);
+           }
+           if( i === 5){
+             aux = {
+               name: "Sabado",
+               id: i,
+               data: sabado
+             }
+             allDays.push(aux);
+           }
+           if( i === 6){
+             aux = {
+               name: "Domingo",
+               id: i,
+               data: domingo
+             }
+             allDays.push(aux);
+           }
+         }
+
+         res.json({code:"SUCCESS", allDays})
+       });
+   },
+
+   postTurno:function (req,res) {
+
          Turnolog.findOne(req.param('id')).populate('users')
                  .then(function(result){
                    var turnolog = result;
@@ -29,7 +129,6 @@ var lang = require('lodash/lang');
                        turnolog.users.map(user =>{
                          if(user.id === req.session.User.id){
                            resul = true;
-                           console.log("El usuario ya tomo este turno");
                          }
                        })
                        if(resul){
@@ -44,39 +143,29 @@ var lang = require('lodash/lang');
                            parsed = parsed + 1;
                            turnolog.cupoActual = parsed;
                            turnolog.users.add(req.session.User.id);
-
                            turnolog.save(function(err){
-                             var sucessTurno=[{message: 'Se tomo correctamente el turno'}]
-                             req.session.flash={
-                                 err: sucessTurno
-                             }
-
+                               Turnolog.publishUpdate(turnolog.id, {
+                                 id: turnolog.id,
+                                 name: turnolog.name,
+                                 start: turnolog.start,
+                                 end: turnolog.end,
+                                 day: turnolog.day,
+                                 cupoTotal: turnolog.cupoTotal,
+                                 cupoActual: turnolog.cupoActual,
+                                 expiracion: turnolog.expiracion,
+                                 estado: turnolog.estado,
+                                 group: turnolog.group,
+                                 createdAt: turnolog.createdAt,
+                                 updatedAt: turnolog.updatedAt,
+                                 users: turnolog.users
+                               });
                            });
-                           Turnolog.publishUpdate(turnolog.id, {
-                           id: turnolog.id,
-                           name: turnolog.name,
-                           start: turnolog.start,
-                           end: turnolog.end,
-                           day: turnolog.day,
-                           cupoTotal: turnolog.cupoTotal,
-                           cupoActual: turnolog.cupoActual,
-                           expiracion: turnolog.expiracion,
-                           estado: turnolog.estado,
-                           group: turnolog.group,
-                           createdAt: turnolog.createdAt,
-                           updatedAt: turnolog.updatedAt,
-                           users: turnolog.users
-                           });
-
                            var tk = req.session.User.tokens;
-
                            tk = tk-1;
                            req.session.User.tokens = tk;
                            req.session.save();
                            User.update({id:req.session.User.id},{tokens:tk},function(err, user) {
-                             if (err){
-                             }
-                             res.send({tk: tk})
+                             return res.json({code:"SUCCESS", message: "El turno fue tomado con exito"})
                            });
                        }
                      }
@@ -93,27 +182,21 @@ var lang = require('lodash/lang');
                          turnolog.users.add(req.session.User.id);
 
                          turnolog.save(function(err){
-                           var sucessTurno=[{message: 'Se tomo correctamente el turno'}]
-                           req.session.flash={
-                               err: sucessTurno
-                           }
-
-
-                         });
-                         Turnolog.publishUpdate(turnolog.id, {
-                         id: turnolog.id,
-                         name: turnolog.name,
-                         start: turnolog.start,
-                         end: turnolog.end,
-                         day: turnolog.day,
-                         cupoTotal: turnolog.cupoTotal,
-                         cupoActual: turnolog.cupoActual,
-                         expiracion: turnolog.expiracion,
-                         estado: turnolog.estado,
-                         group: turnolog.group,
-                         createdAt: turnolog.createdAt,
-                         updatedAt: turnolog.updatedAt,
-                         users: turnolog.users
+                             Turnolog.publishUpdate(turnolog.id, {
+                             id: turnolog.id,
+                             name: turnolog.name,
+                             start: turnolog.start,
+                             end: turnolog.end,
+                             day: turnolog.day,
+                             cupoTotal: turnolog.cupoTotal,
+                             cupoActual: turnolog.cupoActual,
+                             expiracion: turnolog.expiracion,
+                             estado: turnolog.estado,
+                             group: turnolog.group,
+                             createdAt: turnolog.createdAt,
+                             updatedAt: turnolog.updatedAt,
+                             users: turnolog.users
+                             });
                          });
 
                          var tk = req.session.User.tokens;
@@ -123,132 +206,15 @@ var lang = require('lodash/lang');
                          User.update({id:req.session.User.id},{tokens:tk},function(err, user) {
                            if (err){
                            }
-                           res.send({tk: tk})
+                           return res.json({code:"SUCESS", message: "El turno fue tomado con exito"})
                          });
                        }
 
                      }
-                     //console.log(turnolog);
+
          })
          .fail(function(err){
            res.json({code:"FAIL", message:"Ocurrio un problema al tomar el turno"})
          });
-
        }
-      else if(req.isSocket){
-
-        console.log("hola");
-
-       }
-
-       if(req.isSocket && req.method === 'GET') {
-         Turnolog.find({group:req.session.User.group,estado: 'activo'},function(err,turnologs){
-           if(err) {
-             sails.log(err);
-             sails.log("Error occurred in database operation");
-           }
-           else {
-             //res.send(turnologs);
-             var allDays = [];
-             var tokensUpdate;
-             var lunes = [];
-             var martes = [];
-             var miercoles = [];
-             var jueves = [];
-             var viernes = [];
-             var sabado = [];
-             var domingo = [];
-             for(var i in turnologs){
-               if ( turnologs[i].day === '0' )
-                   lunes.push(turnologs[i]);
-               if ( turnologs[i].day === '1' )
-                   martes.push(turnologs[i]);
-               if ( turnologs[i].day === '2' )
-                   miercoles.push(turnologs[i]);
-               if ( turnologs[i].day === '3' )
-                   jueves.push(turnologs[i]);
-               if ( turnologs[i].day === '4' )
-                   viernes.push(turnologs[i]);
-               if ( turnologs[i].day === '5' )
-                   sabado.push(turnologs[i]);
-               if ( turnologs[i].day === '6' )
-                   domingo.push(turnologs[i]);
-             }
-
-             for(var i=0; i<7; i++){
-               var aux;
-               if( i === 0){
-                 aux = {
-                   name: "Lunes",
-                   id: i,
-                   data: lunes
-                 }
-                 allDays.push(aux);
-               }
-               if( i === 1){
-                 aux = {
-                   name: "Martes",
-                   id: i,
-                   data: martes
-                 }
-                 allDays.push(aux);
-               }
-               if( i === 2){
-                 aux = {
-                   name: "Miercoles",
-                   id: i,
-                   data: miercoles
-                 }
-                 allDays.push(aux);
-               }
-               if( i === 3){
-                 aux = {
-                   name: "Jueves",
-                   id: i,
-                   data: jueves
-                 }
-                 allDays.push(aux);
-               }
-               if( i === 4){
-                 aux = {
-                   name: "Viernes",
-                   id: i,
-                   data: viernes
-                 }
-                 allDays.push(aux);
-               }
-               if( i === 5){
-                 aux = {
-                   name: "Sabado",
-                   id: i,
-                   data: sabado
-                 }
-                 allDays.push(aux);
-               }
-               if( i === 6){
-                 aux = {
-                   name: "Domingo",
-                   id: i,
-                   data: domingo
-                 }
-                 allDays.push(aux);
-               }
-             }
-
-             //console.log(allDays);
-
-             res.send(allDays);
-             }
-         });
-       }
-
-   },
-   tokens: function(req, res){
-      if(req.isSocket && req.method === 'GET') {
-       tokens = req.session.User.tokens;
-       res.send({tokens: tokens});
-      }
-   },
-
-
  };

@@ -50,10 +50,11 @@ module.exports = {
 					 group: turnos[i].group,
 					 id_turno: turnos[i].id,
 					}
-					Turnolog.findOrCreate({id_turno: turnos[i].id, estado: 'activo'},turnologObj,function (err,turnologs) {
+					Turnolog.create(turnologObj,function (err,turnolog) {
 						if(err){
-							return next(err);
+							return res.json({code: 'FAIL', message: 'Se produjo un error en el servidor'})
 						}
+						Turnolog.publishCreate(turnolog);
 
 					});
 				}
