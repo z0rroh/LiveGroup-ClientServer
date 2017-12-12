@@ -12,7 +12,7 @@ class PerfilApp extends Component {
     io.socket.get('/user/announce', ()=> {
     })
   }
-
+  static isPrivate = true;
   render() {
     return (
       <Perfil/>

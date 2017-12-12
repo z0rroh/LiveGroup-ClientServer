@@ -87,7 +87,7 @@ class GroupList extends Component {
               filterMethod: (filter, rows) =>
                 matchSorter(rows, filter.value, { keys: ["rut"] }),
               filterAll: true,
-              Cell: this.renderEditable,
+              Cell: this.renderEditable
             }, {
               Header: 'Name',
               id: 'name',
@@ -123,6 +123,8 @@ class GroupList extends Component {
                id: 'admin',
                accessor: 'tipo',
                width: 80,
+               id: "type",
+               Cell: this.renderEditable,
                Cell: ({ value }) => (value === true ? "Admin" : "Comun"),
                filterMethod: (filter, row) => {
                   if (filter.value === "all") {
@@ -147,22 +149,22 @@ class GroupList extends Component {
               id: 'tokens',
               accessor: 'tokens',
               width: 70,
-              //Cell: props => <span className='number'>{props.value}</span>,
+              Cell: props => <span className='number'>{props.value}</span>,
               Cell: this.renderEditable
-          }]}
+            }]}
           loading= {isFetching}
           showPagination= {true}
           showPaginationBottom= {true}
           showPageSizeOptions= {false}
           //pageSizeOptions= {[5, 10, 20, 30]}
-          defaultPageSize= {8}
+          defaultPageSize= {10}
           filterable= {true}
           defaultSortMethod= {this.defaultSort}
           style={{
              height: "570px"
            }}
           onFetchData={this.fetchData}
-        />);
+        />)
 
   }
 

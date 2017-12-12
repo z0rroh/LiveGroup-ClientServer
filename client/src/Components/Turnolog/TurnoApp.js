@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Semana from './Semana.js';
 import io from '../../io.js'
-
+import axios from 'axios'
 
 class TurnoApp extends Component{
   constructor(){
@@ -17,6 +17,9 @@ class TurnoApp extends Component{
   }
   componentDidMount(){
     this.setState({isFetching: true})
+    io.socket.get('/turnolog/subscribe', function(res) {
+      console.log("Subscrito a turnos");
+    }.bind(this));
     io.socket.get('/turnolog/tokens', function(tokens) {
       this.setState(tokens);
     }.bind(this));
@@ -41,7 +44,10 @@ class TurnoApp extends Component{
   handlePostTurno(id){
     var data = {id:id};
     io.socket.post('/turnolog/entrar/',data,(resData) => {
-      this.setState({tokens: this.state.tokens-1});
+      console.log(resData);
+      if(this.state.tokens > 0){
+        this.setState({tokens: this.state.tokens-1});
+      }
     });
   }
 

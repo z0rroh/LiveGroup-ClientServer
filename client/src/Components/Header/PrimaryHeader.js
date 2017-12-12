@@ -54,12 +54,9 @@ class PrimaryHeader extends Component{
             <div className="Nav-Item">
               <li><NavLink className="navItemLink" activeClassName="navItemActive" to='/administrar'>Administrar</NavLink></li>
             </div>
-            <ChatApp handleAddUser={this.handleAddUser}/>
+            
           </ul>
         </nav>
-        <ChatBoxList
-          chatsOpen={this.state.chatsOpen}
-          handleRemoveUser={this.handleRemoveUser}/>
       </header>
     );
   }

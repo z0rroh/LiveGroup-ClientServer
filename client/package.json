@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@blueprintjs/core": "^1.27.0",
+    "@blueprintjs/core": "^1.33.0",
     "@blueprintjs/datetime": "^1.23.0",
     "axios": "^0.16.2",
     "match-sorter": "^2.0.2",
@@ -15,8 +15,9 @@
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.14",
+    "react-scripts": "1.0.15",
     "react-table": "^6.6.0",
+    "react-x-editable": "0.0.8-beta",
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
     "redux-logger": "^3.0.6",
@@ -35,5 +36,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:1337"
+  "proxy": "http://localhost:1337",
+  "devDependencies": {
+    "react-edit-inline": "^1.0.8"
+  }
 }

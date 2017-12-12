@@ -8,7 +8,7 @@ import SubLayout from '../Layouts/SubLayout'
 import { connect } from 'react-redux'
 
 class PrimaryLayout extends Component{
-
+  static isPrivate = true;
   render(){
     const {match, history, user} = this.props;
     return(

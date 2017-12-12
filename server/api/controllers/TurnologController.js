@@ -7,9 +7,17 @@
 var lang = require('lodash/lang');
  module.exports = {
 
-   index: function(req,res){
-     res.view('turnolog/index');
+   subscribe: function(req,res){
+       if(req.isSocket && req.session.User){
+           Turnolog.find({group:req.session.User.group}).exec(function (err, turnologs) {
+           // Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
+               Turnolog.subscribe(req,turnologs);
+           });
+           Turnolog.watch(req);
+           sails.log( 'Usuario suscrito a turnolog con la id: ' + req.socket.id );
+       }
    },
+
    entrar:function (req,res) {
 
        if(req.isSocket && req.method === 'POST') {
@@ -24,9 +32,13 @@ var lang = require('lodash/lang');
                            console.log("El usuario ya tomo este turno");
                          }
                        })
-
+                       if(resul){
+                          return res.json({code:"FAIL", message: "Ya has tomado este turno"});
+                       }
+                       if(req.session.User.tokens <= 0){
+                         return res.json({code:"FAIL", message: "No tienes tokens disponibles"});
+                       }
                        if (resul===false && turnolog.estado==='activo' && turnolog.cupoActual<turnolog.cupoTotal && req.session.User.tokens>0){
-                           console.log("El usuario no a tomado este turno")
                            var actual = turnolog.cupoActual;
                            var parsed = parseInt(actual, 10);
                            parsed = parsed + 1;
@@ -69,6 +81,9 @@ var lang = require('lodash/lang');
                        }
                      }
                      else{
+                       if(req.session.User.tokens <= 0){
+                         return res.json({code:"FAIL", message: "No tienes tokens disponibles"});
+                       }
                        if(turnolog.estado==='activo' && turnolog.cupoActual<turnolog.cupoTotal && req.session.User.tokens>0){
 
                          var actual = turnolog.cupoActual;
@@ -102,7 +117,6 @@ var lang = require('lodash/lang');
                          });
 
                          var tk = req.session.User.tokens;
-
                          tk = tk-1;
                          req.session.User.tokens = tk;
                          req.session.save();
@@ -117,21 +131,13 @@ var lang = require('lodash/lang');
                      //console.log(turnolog);
          })
          .fail(function(err){
-           var failTurno=[{message: 'No se pudo tomar el turno'}]
-           req.session.flash={
-               err: failTurno
-           }
-           res.redirect('/turnolog/index');
-
+           res.json({code:"FAIL", message:"Ocurrio un problema al tomar el turno"})
          });
 
        }
       else if(req.isSocket){
 
-         Turnolog.find({}).exec(function(e,turnologs){
-            Turnolog.subscribe(req.socket,turnologs);
-         });
-         sails.log( 'Usuario suscrito a la id: ' + req.socket.id );
+        console.log("hola");
 
        }
 
@@ -244,14 +250,5 @@ var lang = require('lodash/lang');
       }
    },
 
-   showEmpleados: function(req, res, next){
-
- 		Turnolog.find({id_turno: req.param('id')}, function(err, turnolog){
- 			res.view({
- 				turnolog: turnolog
- 			});
- 		});
-
- 	}
 
  };

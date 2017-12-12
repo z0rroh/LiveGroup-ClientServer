@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import {EditableText} from "@blueprintjs/core";
 
+import Editable from 'react-x-editable';
+
 class UserInfo extends Component{
 
     constructor(props){
@@ -17,11 +19,11 @@ class UserInfo extends Component{
         tokens: this.props.user.tokens,
         admin: this.props.user.admin
       }
-      this.handleChange = this.handleChange.bind(this);
+      this.handleChange=this.handleChange.bind(this);
     }
-    handleChange(e,name){
-      console.log(e);
-      this.setState({[name]: e});
+    handleChange(e){
+      console.log(e.target.value);
+      this.setState({[e.target.name]: e.target.value})
       /*
       const data = {
         id: this.props.funcionario.id,
@@ -38,11 +40,17 @@ class UserInfo extends Component{
             </div>
             <div className="User-element col-lg">
               <strong>Nombre:</strong>
-            <EditableText
-              className="pt-intent-success"
-              value={this.props.user.name}
-              selectAllOnFocus={true}
-              onChange={(e)=>this.handleChange(e,'name')}></EditableText>
+              <Editable
+                className="edit-value"
+                name="name"
+                dataType="text"
+                mode={"inline"}
+                title="Editar Nombre"
+                placeholder="Ingresa tu nombre"
+                value={this.state.name}
+                onChange={this.handleChange}
+                showButtons={false}
+              />
             </div>
             <div className="User-element col-lg">
               <strong>Grupo:</strong>
@@ -53,9 +61,10 @@ class UserInfo extends Component{
               <strong>Email:</strong>
             <EditableText
               className="pt-intent-success"
-              value={this.props.user.email}
+              value={this.state.email}
               selectAllOnFocus={true}
-              onChange={(e)=>this.handleChange(e,'email')}></EditableText>
+              name="email"
+              onChange={this.handleChange}></EditableText>
             </div>
             <div className="User-element col-lg">
               <strong>Telefono:</strong>

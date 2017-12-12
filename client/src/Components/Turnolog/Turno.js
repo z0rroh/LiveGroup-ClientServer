@@ -10,7 +10,7 @@ class Turno extends Component {
     super(props);
   }
 
-  handleClick(event, id){
+  handleClick(e, id){
     this.props.onPostTurno(id);
   }
 
@@ -27,7 +27,7 @@ class Turno extends Component {
               <p>{this.props.data.start} - {this.props.data.end}</p>
             </div>
             <div className="Turno-Button col-lg-12">
-                <a onClick={event => this.handleClick(event,this.props.data.id)} className="btn waves-effect waves-light">
+                <a onClick={(e)=>this.handleClick(e,this.props.data.id)} className="btn waves-effect waves-light">
                 <i className="material-icons">add</i>
                 </a>
             </div>

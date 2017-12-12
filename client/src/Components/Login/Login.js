@@ -12,6 +12,7 @@ class Login extends Component{
     super();
   }
 
+  static isPrivate = false;
   render(){
     const {loginServer, addToast, history} = this.props;
     return(

@@ -25,14 +25,13 @@ class Header extends Component{
       this.props.history.push('/auth')
     })
   }
-  
+
   componentDidMount(){
     this.setState({user: this.props.user});
   }
 
   render(){
     const user = this.state.user;
-    console.log(user);
     return(
       <div className="Header col-lg-12">
         <div className="box col-lg-11">

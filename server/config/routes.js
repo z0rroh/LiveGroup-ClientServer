@@ -37,7 +37,6 @@ module.exports.routes = {
   'GET /salir': 'SessionController.destroy',
   'GET /admin': 'TurnosController.index',
   'GET /populateturnos': 'TurnosController.populateTurnolog',
-  'GET /turnos': 'TurnologController.index',
   'GET /anuncios': 'AnunciosController.index',
   'GET /user': 'UserController.index',
   'GET /groupList': 'GroupController.getUsers',
