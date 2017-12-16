@@ -27,6 +27,7 @@ class Anuncios extends Component{
       console.log(err);
     })
     io.socket.on('anuncio', function serverSentEvent(anuncio) {
+      console.log(anuncio);
       var autor = {
         name: anuncio.data.autor.name,
         id: anuncio.data.autor.id,

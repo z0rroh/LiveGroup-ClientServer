@@ -19,6 +19,7 @@ class TurnoApp extends Component{
     }
     this.handlePostTurno = this.handlePostTurno.bind(this);
   }
+
   componentDidMount(){
     this.setState({isFetching: true})
     io.socket.get('/turnolog/subscribe', function(res) {
@@ -43,6 +44,7 @@ class TurnoApp extends Component{
           this.setState({isFetching:false})
           break;
         default:
+          this.setState({isFetching:false})
           break;
       }
     })
@@ -75,8 +77,6 @@ class TurnoApp extends Component{
         default:
           break;
       }
-
-
 
     }.bind(this));
   }
@@ -123,6 +123,8 @@ class TurnoApp extends Component{
 
   }
 
+  static isPrivate = false;
+
   render(){
     console.log(this.state.turnos);
     return(
@@ -137,7 +139,7 @@ class TurnoApp extends Component{
 
 TurnoApp.propTypes = {
   addToast: PropTypes.func.isRequired,
-
+  turnos: PropTypes.array
 };
 
 

@@ -7,6 +7,9 @@ import PerfilApp from '../User/PerfilApp.js'
 import SubLayout from '../Layouts/SubLayout'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+import TypeRoute from '../../TypeRoute'
+
+const NotFound = ()=> (<h1>40444444</h1>);
 
 class PrimaryLayout extends Component{
   static isPrivate = true;
@@ -17,11 +20,28 @@ class PrimaryLayout extends Component{
         <PrimaryHeader history={history} user={user}/>
         <main>
           <Switch>
-            <Route path={`${match.path}perfil`} component={PerfilApp} />
-            <Route path={`${match.path}anuncios`} component={AnunciosApp} />
-            <Route path={`${match.path}turnos`} component={TurnoApp}  />
-            <Route path={`${match.path}administrar`} component={SubLayout} />
-            <Redirect to={`${match.url}`} />
+            <TypeRoute
+              exact
+              path={`${match.path}perfil`}
+              user={user}
+              component={PerfilApp}/>
+            <TypeRoute
+              exact
+              path={`${match.path}anuncios`}
+              user={user}
+              component={AnunciosApp}/>
+            <TypeRoute
+              exact
+              path={`${match.path}turnos`}
+              user={user}
+              component={TurnoApp}/>
+            <TypeRoute
+              path={`${match.path}administrar`}
+              user={user}
+              component={SubLayout}/>
+            <TypeRoute
+              user={user}
+              component={NotFound}/>
           </Switch>
         </main>
       </div>

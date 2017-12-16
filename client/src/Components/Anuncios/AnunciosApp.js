@@ -3,10 +3,6 @@ import Anuncios from './Anuncios.js'
 import io from '../../io.js'
 
 class AnunciosApp extends Component {
-  constructor(){
-    super();
-
-  }
 
   componentDidMount(){
 
@@ -19,6 +15,8 @@ class AnunciosApp extends Component {
         console.log("Subscrito a comentarios");
     }.bind(this));
   }
+  
+  static isPrivate = false;
 
   render() {
     return (

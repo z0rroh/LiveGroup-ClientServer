@@ -51,10 +51,10 @@ class PrimaryHeader extends Component{
             <div className="Nav-Item">
               <li><NavLink className="navItemLink" activeClassName="navItemActive" to='/turnos'>Turnos</NavLink></li>
             </div>
-            <div className="Nav-Item">
-              <li><NavLink className="navItemLink" activeClassName="navItemActive" to='/administrar'>Administrar</NavLink></li>
-            </div>
-            
+            {user.admin &&
+             <div className="Nav-Item">
+                <li><NavLink className="navItemLink" activeClassName="navItemActive" to='/administrar'>Administrar</NavLink></li>
+              </div>}
           </ul>
         </nav>
       </header>
