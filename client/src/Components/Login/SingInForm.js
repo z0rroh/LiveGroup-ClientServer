@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Route, Redirect } from 'react-router'
+import { Route, Redirect, Link } from 'react-router-dom'
 import { Intent } from '@blueprintjs/core'
 
 class SignInForm extends Component{
@@ -12,6 +12,7 @@ class SignInForm extends Component{
       email: "",
       password: ""
     }
+
   }
 
   onChange(e){
@@ -19,7 +20,6 @@ class SignInForm extends Component{
   }
 
   onSubmit(e){
-    this.setState({ error: {} });
     e.preventDefault();
     const userData = {};
     Object.assign(userData,this.state);
@@ -54,7 +54,7 @@ class SignInForm extends Component{
             <input
               onChange={ e => this.onChange(e) }
               name="email"
-              value={this.state.name}
+              value={this.state.email}
               type="email"
               className="pt-input pt-round inputParams"
               placeholder="Email"
@@ -76,7 +76,7 @@ class SignInForm extends Component{
         </form>
         <div className="row center-lg">
           <div className="SignUp col-lg-12">
-            <a className="SignUp-Button btn-flat" href="">Registrate</a>
+            <Link className="SignUp-Button btn-flat" to="/auth/registrar">Registrate</Link>
           </div>
         </div>
     </div>

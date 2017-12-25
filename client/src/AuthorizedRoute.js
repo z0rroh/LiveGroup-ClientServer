@@ -11,7 +11,6 @@ const PUBLIC_ROOT = '/auth/login';
 
 const AuthRoute = ({component, ...props}) => {
   const { isPrivate } = component;
-
   if (props.isAuthenticated) {
     //User is Authenticated
     if (isPrivate === true) {

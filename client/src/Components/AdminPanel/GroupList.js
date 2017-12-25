@@ -157,11 +157,11 @@ class GroupList extends Component {
           showPaginationBottom= {true}
           showPageSizeOptions= {false}
           //pageSizeOptions= {[5, 10, 20, 30]}
-          defaultPageSize= {10}
+          defaultPageSize= {14}
           filterable= {true}
           defaultSortMethod= {this.defaultSort}
           style={{
-             height: "570px"
+             height: "auto"
            }}
           onFetchData={this.fetchData}
         />)

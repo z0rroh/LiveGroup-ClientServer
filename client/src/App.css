@@ -2481,6 +2481,21 @@ header {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   padding: 0px; }
 
+.ContainerLoader {
+  text-align: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #24292e; }
+  .ContainerLoader .LoaderPosition {
+    position: fixed;
+    left: 45%;
+    top: 35%; }
+    .ContainerLoader .LoaderPosition h5 {
+      color: #fff; }
+  .ContainerLoader svg {
+    position: relative;
+    top: 30%; }
+
 .line {
   height: 4px;
   background: #8bc34a;
@@ -3835,3 +3850,163 @@ nav {
         background-color: #8bc34a;
         color: #fff;
         width: 30%; }
+
+.addUsersContainer {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f7f8;
+  transition: box-shadow .25s;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+  .addUsersContainer .addUsersTitle {
+    padding: 0;
+    background-color: #24292e;
+    margin: 0 auto; }
+    .addUsersContainer .addUsersTitle h3 {
+      color: #fff;
+      margin: 0px;
+      padding: 5px 0;
+      font-weight: 300; }
+  .addUsersContainer .addUsersFormContainer {
+    margin: 0 auto;
+    padding: 15px 0 20px 0; }
+    .addUsersContainer .addUsersFormContainer .addUsersEmail {
+      padding: 0px; }
+      .addUsersContainer .addUsersFormContainer .addUsersEmail span {
+        padding-right: 10px; }
+      .addUsersContainer .addUsersFormContainer .addUsersEmail input {
+        width: 80%; }
+    .addUsersContainer .addUsersFormContainer .addUsersSearchButton {
+      padding: 0px;
+      margin: 0px; }
+      .addUsersContainer .addUsersFormContainer .addUsersSearchButton input {
+        display: inline;
+        position: relative;
+        top: -1px;
+        padding: 0 5em;
+        background-color: #8bc34a;
+        border-radius: 20px;
+        height: 30px;
+        line-height: 30px; }
+      .addUsersContainer .addUsersFormContainer .addUsersSearchButton input:focus {
+        outline: none;
+        color: #fff; }
+      .addUsersContainer .addUsersFormContainer .addUsersSearchButton input:hover {
+        color: #fff; }
+  .addUsersContainer .addUsersResContainer {
+    border-top: 1px solid #e0e0e0;
+    margin: 0 auto;
+    padding: 15px 0 15px 0; }
+    .addUsersContainer .addUsersResContainer .noGroup {
+      margin: 0 auto; }
+      .addUsersContainer .addUsersResContainer .noGroup p {
+        font-size: 15px; }
+      .addUsersContainer .addUsersResContainer .noGroup .btnsContainer {
+        margin: 0px;
+        padding: 0px; }
+        .addUsersContainer .addUsersResContainer .noGroup .btnsContainer .btnContainer {
+          margin: 0px;
+          padding: 0px; }
+          .addUsersContainer .addUsersResContainer .noGroup .btnsContainer .btnContainer input:focus {
+            outline: none;
+            color: #fff; }
+          .addUsersContainer .addUsersResContainer .noGroup .btnsContainer .btnContainer input:hover {
+            color: #fff; }
+          .addUsersContainer .addUsersResContainer .noGroup .btnsContainer .btnContainer .accept {
+            background-color: #8bc34a;
+            height: 30px;
+            line-height: 30px;
+            width: 140px; }
+          .addUsersContainer .addUsersResContainer .noGroup .btnsContainer .btnContainer .cancel {
+            background-color: #b50c0c;
+            height: 30px;
+            line-height: 30px;
+            width: 140px; }
+    .addUsersContainer .addUsersResContainer .yesGroup {
+      margin: 0 auto; }
+      .addUsersContainer .addUsersResContainer .yesGroup p {
+        margin: 0px;
+        padding-right: 60px;
+        color: red;
+        font-size: 15px; }
+
+.error-container {
+  text-align: center;
+  font-size: 180px;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 800;
+  margin: 20px 15px;
+  background-color: #fafafa; }
+  .error-container .circle-container {
+    height: 380px;
+    width: 380px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 10px; }
+    .error-container .circle-container .errorStyles {
+      padding-top: 25px;
+      padding-right: 14px; }
+    .error-container .circle-container .errorStyles > h2 {
+      color: rgba(151, 151, 151, 0.5) !important;
+      font-size: 32px; }
+    .error-container .circle-container .errorStyles > span {
+      display: inline-block;
+      line-height: 0.7;
+      position: relative;
+      color: #FFB485; }
+    .error-container .circle-container .errorStyles > span > span {
+      display: inline-block;
+      position: relative; }
+    .error-container .circle-container .errorStyles > span:nth-of-type(1) {
+      perspective: 1000px;
+      perspective-origin: 500% 50%;
+      color: #F0E395; }
+    .error-container .circle-container .errorStyles > span:nth-of-type(1) > span {
+      transform-origin: 50% 100% 0px;
+      transform: rotateX(0);
+      animation: easyoutelastic 8s infinite; }
+    .error-container .circle-container .errorStyles > span:nth-of-type(3) {
+      perspective: none;
+      perspective-origin: 50% 50%;
+      color: #D15C95; }
+    .error-container .circle-container .errorStyles > span:nth-of-type(3) > span {
+      transform-origin: 100% 100% 0px;
+      transform: rotate(0deg);
+      animation: rotatedrop 8s infinite; }
+
+@keyframes easyoutelastic {
+  0% {
+    transform: rotateX(0); }
+  9% {
+    transform: rotateX(210deg); }
+  13% {
+    transform: rotateX(150deg); }
+  16% {
+    transform: rotateX(200deg); }
+  18% {
+    transform: rotateX(170deg); }
+  20% {
+    transform: rotateX(180deg); }
+  60% {
+    transform: rotateX(180deg); }
+  80% {
+    transform: rotateX(0); }
+  100% {
+    transform: rotateX(0); } }
+
+@keyframes rotatedrop {
+  0% {
+    transform: rotate(0); }
+  10% {
+    transform: rotate(30deg); }
+  15% {
+    transform: rotate(90deg); }
+  70% {
+    transform: rotate(90deg); }
+  80% {
+    transform: rotate(0); }
+  100% {
+    transform: rotateX(0); } }

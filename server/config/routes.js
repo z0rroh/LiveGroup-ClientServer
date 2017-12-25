@@ -38,11 +38,10 @@ module.exports.routes = {
   'GET /admin': 'TurnosController.index',
   'GET /populateturnos': 'TurnosController.populateTurnolog',
   'GET /anuncios': 'AnunciosController.index',
-  'GET /user': 'UserController.index',
   'GET /groupList': 'GroupController.getUsers',
-  'GET /chat/groupOnline': 'ChatController.groupOnline',
-  'POST /chat/message/create': 'ChatController.createMessage',
-  'GET /chat/getmessages': 'ChatController.searchMessages'
+  'POST /newAccount': 'UserController.create',
+  'GET /buscar/user': 'UserController.searchUser',
+  'POST /agregar/user': 'UserController.addUserToGroup',
   //'delete /userDelete/:id?': 'UserController.destroy'
 
 

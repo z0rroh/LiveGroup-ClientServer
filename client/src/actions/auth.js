@@ -18,7 +18,6 @@ export function isFetching(isFetching){
 export function loginServer(data){
   return dispatch =>{
     dispatch(isFetching(true));
-    console.log(data);
     return axios.post('/session/create',data)
     .then(res => {
       switch (res.data.code) {
@@ -36,6 +35,20 @@ export function loginServer(data){
       console.log(err);
       dispatch(isFetching(false));
     })
+  }
+}
+
+
+export const SignupServer = data => {
+  return dispatch => {
+    return axios.post(`/newAccount`, data)
+      .then( res => {
+        //dispatch(setCurrentUser(res.data.user))
+        return res.data;
+      })
+      .catch( err => {
+        console.log(err.response);
+      })
   }
 }
 

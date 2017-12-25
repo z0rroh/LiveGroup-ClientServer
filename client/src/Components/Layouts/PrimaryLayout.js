@@ -9,7 +9,22 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import TypeRoute from '../../TypeRoute'
 
-const NotFound = ()=> (<h1>40444444</h1>);
+const NotFound = ({props})=>{
+  return(
+    <section className="error-container">
+      <div className="circle-container">
+        <div className="errorStyles">
+          <span>
+            <span>4</span>
+          </span>
+          <span>0</span>
+          <span>
+            <span>4</span>
+          </span>
+          <h2>Page Not Found</h2>
+        </div>
+      </div>
+  </section>);}
 
 class PrimaryLayout extends Component{
   static isPrivate = true;

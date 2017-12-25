@@ -36,7 +36,7 @@ class UserInfo extends Component{
       return(
         <div className="User-Info-Datos col-lg-6 col-xs-6">
             <div className="Tittle-Element col-lg">
-              <h4>Detalles Cuenta</h4>
+              <h4>Cuenta</h4>
             </div>
             <div className="User-element col-lg">
               <strong>Nombre:</strong>

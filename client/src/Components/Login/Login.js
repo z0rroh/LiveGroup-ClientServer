@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import SignInForm from './SingInForm.js'
-import { loginServer } from '../../actions/auth'
+import SignUpForm from './SingUpForm.js'
+import { loginServer, SignupServer } from '../../actions/auth'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router'
+import { Switch, Route, Redirect } from 'react-router'
 import { addToast } from '../../actions/Toast.js'
 
 class Login extends Component{
@@ -14,7 +15,7 @@ class Login extends Component{
 
   static isPrivate = false;
   render(){
-    const {loginServer, addToast, history} = this.props;
+    const {loginServer, addToast, history, SignupServer} = this.props;
     return(
       <div className="LoginContainer">
         <header className="row">
@@ -34,14 +35,15 @@ class Login extends Component{
             </div>
           </div>
         </header>
-        <section className="background">
+        <section className="background particles-js">
           <div className="row center-xs middle-xs">
             <div className="col-xs-4">
               <div className="Login-Card card-panel">
-                <SignInForm
-                  addToast={addToast}
-                  history={history}
-                  loginServer={loginServer}/>
+                <Switch>
+                  <Route exact path="/auth/login" component={() => <SignInForm addToast={addToast} history={history} loginServer={loginServer}/>}/>
+                  <Route exact path="/auth/registrar" component={() => <SignUpForm addToast={addToast} history={history} SignupServer={SignupServer}/>}/>
+                  <Redirect to="/auth/login"/>
+                </Switch>
               </div>
             </div>
           </div>
@@ -54,8 +56,9 @@ class Login extends Component{
 
 Login.propTypes = {
   loginServer: PropTypes.func.isRequired,
-  addToast: PropTypes.func.isRequired
+  addToast: PropTypes.func.isRequired,
+  SignupServer: PropTypes.func.isRequired
 };
 
 
-export default connect(null,{loginServer, addToast })(Login);
+export default connect(null,{loginServer, addToast, SignupServer })(Login);

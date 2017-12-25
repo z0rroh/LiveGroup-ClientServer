@@ -14,8 +14,13 @@ class Panel extends Component {
         <nav className="main-menu">
             <ul>
               <li>
+                <NavLink className="navLinkSub" to={`${match.path}/agregar`} exact activeClassName="navLinkSubActive">
+                  <i className="fa fa-plus-circle fa-2x nav-icon"></i><span className="nav-text">Agregar Usuarios</span>
+                </NavLink>
+              </li>
+              <li>
                 <NavLink className="navLinkSub" to={`${match.path}/grupo`} exact activeClassName="navLinkSubActive">
-                  <i className="fa fa-users fa-2x nav-icon"></i><span className="nav-text">Grupo</span>
+                  <i className="fa fa-users fa-2x nav-icon"></i><span className="nav-text">Listar Grupo</span>
                 </NavLink>
               </li>
               <li>
@@ -25,7 +30,7 @@ class Panel extends Component {
               </li>
               <li>
                 <NavLink className="navLinkSub" to={`${match.path}/turnos/buscar`} activeClassName="navLinkSubActive">
-                  <i className="fa fa-home fa-2x nav-icon"></i><span className="nav-text">Listar Turnos</span>
+                  <i className="fa fa-list-alt fa-2x nav-icon"></i><span className="nav-text">Listar Turnos</span>
                 </NavLink>
               </li>
             </ul>

@@ -66,7 +66,7 @@ class UserAvatar extends Component{
     }
 
     handleInteraction() {
-      this.setState({ isOpen: true });
+      this.setState({ isOpen: !this.state.isOpen });
     }
 
     componentDidMount(){

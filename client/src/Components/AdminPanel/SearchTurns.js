@@ -161,7 +161,7 @@ class SearchTurns extends Component {
           filterable= {true}
           defaultSortMethod= {this.defaultSort}
           style={{
-             height: "570px"
+             height: "auto"
            }}
           onFetchData={this.fetchData}
         />)

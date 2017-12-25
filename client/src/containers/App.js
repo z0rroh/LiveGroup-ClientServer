@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import { Switch, Route,  Redirect, withRouter } from 'react-router-dom'
 import AuthRoute from '../AuthorizedRoute.js'
-import UnauthorizedLayout from '../Components/Layouts/UnauthorizedLayout.js'
 import PrimaryLayout from '../Components/Layouts/PrimaryLayout.js'
 import ToastList from './ToastList/ToastList.js'
 import { connect } from 'react-redux'
 import Login from '../Components/Login/Login'
+import Loading from 'react-loading-components';
 
 const NoMatch = ({ location }) => (
   <div>
@@ -24,26 +24,30 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.setState({
-      isFetch: false
-    })
+    setTimeout(() => this.setState({ isFetch: false }), 1000);
   }
 
   render() {
-      const isFetch = this.state;
+      const isFetch = this.state.isFetch;
       return (
-        <div className="App">
+        isFetch ?
+        (<div className="ContainerLoader">
+          <div className="LoaderPosition">
+            <div><Loading type='circles' width={110} height={110} fill='#fff'/></div>
+
+          </div>
+        </div>) :
+        (<div className="App">
           <ToastList/>
           <Switch>
             <AuthRoute
-              exact
-              path="/auth/login"
+              path="/auth"
               component={Login}/>
             <AuthRoute
               path="/"
               component={PrimaryLayout}/>
           </Switch>
-        </div>
+        </div>)
       );
   }
 }

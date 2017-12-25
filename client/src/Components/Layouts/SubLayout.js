@@ -4,7 +4,7 @@ import Panel from '../AdminPanel/Panel.js'
 import GroupList from '../AdminPanel/GroupList'
 import CrearTurnos from '../AdminPanel/CrearTurnos'
 import SearchTurns from '../AdminPanel/SearchTurns'
-
+import addUsers from '../AdminPanel/addUsers'
 
 
 
@@ -21,10 +21,11 @@ class SubLayout extends Component {
         </div>
         <div className="primary-content">
           <Switch>
+            <Route path={`${match.path}/agregar`} component={addUsers} />
             <Route path={`${match.path}/grupo`} component={GroupList} />
             <Route path={`${match.path}/turnos/crear`} component={CrearTurnos} />
             <Route path={`${match.path}/turnos/buscar`} component={SearchTurns} />
-            <Redirect to={`${match.path}/grupo`}/>
+            <Redirect to={`${match.path}/agregar`}/>
           </Switch>
         </div>
       </div>)

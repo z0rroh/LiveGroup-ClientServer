@@ -107,91 +107,52 @@ module.exports = {
     });
   },
 
-	create: function(req, res,next){
-    User.Validate(req.param('email'),function(response){
+	create: function(req, res){
+    const newUser = req.allParams();
+    User.Validate(newUser.email,function(response){
       if(!response){
-        var NoValidate =[{message: 'El email ya está registrado'}]
-  			req.session.flash={
-  				err: NoValidate
-  			}
-        return res.redirect('user/new')
+        return res.json({code:"EMAIL_FOUND", message:"El correo ingresado ya se encuentra registrado"})
       }
       var userObj={
-  			name : req.param('name'),
-  			email : req.param('email'),
-        password: req.param('password'),
+  			name : newUser.name,
+  			email : newUser.email,
+        password: newUser.password
   		}
   		User.create(userObj,function (err, user) {
-
   			if(err){
-          var error = [{message: "Se produjo un error al crear el Usuario"}]
-  				req.session.flash={
-            err: error
-  				}
-  				return res.redirect('user/new');
+          return res.json({code:"FAIL", message:"Se produjo un error al crear la cuenta"})
   			}
-        req.session.authenticated = false;
-        req.session.User = user;
-        //User.publishCreate(user);
-        var sucess =[{message: 'Usuario creado correctamente'}]
-        req.session.flash={
-          err: sucess
-        }
-  			res.redirect('user/group');
-
+        return res.json({code:"SUCCESS", message:"Cuenta creada con exito!", user: user})
   		});
     });
 
 	},
 
-	show: function(req, res, next){
-		User.findOne(req.param('id'), function userFounded(err, user){
-			if(err) return next(err);
-			if(!user) return next(err);
-			res.json(user);
-		});
-	},
-  index: function(req, res, next){
+	updateUser: function(req, res, next){
+    var id = req.param('id');
+    var param = req.param('param')
 
-      User.find({online: true,id_group:req.session.User.group},function foundUsers(err, users){
-
-        if(err) return next();
-
-        res.json({
-          users
-        });
-
-      });
-    },
-
-  	updateUser: function(req, res, next){
-      var id = req.param('id');
-      var param = req.param('param')
-
-  		User.update(id, param, function userUpdate(err){
-  			if(err) {
-  				return res.status(400).json({code: "BAD_R", message: "No fue posible modificar el usuario"})
-  			}
-      	return res.json({code: "SUCCESS", message: "Usuario modificado correctamente"});
-  		});
-  	},
-
-	update: function(req, res, next){
-    var userObj={
-      name : req.param('name'),
-      email : req.param('email'),
-      phone: req.param('phone'),
-      tokens: req.param('tokens')
-    }
-
-		User.update(req.param('id'), userObj, function userUpdate(err){
+		User.update(id, param, function userUpdate(err){
 			if(err) {
-				return res.redirect('user/edit/' + req.param('id'));
+				return res.status(400).json({code: "BAD_R", message: "No fue posible modificar el usuario"})
 			}
-    	res.redirect('/group/show');
-
+    	return res.json({code: "SUCCESS", message: "Usuario modificado correctamente"});
 		});
 	},
+
+  searchUser: function(req,res){
+    var email = req.param('email');
+
+    User.findOne({email: email}, function (err, user){
+      if(err){
+        return res.json({code: 'FAIL', message:"Se produjo un error inesperado"})
+      }
+      if(!user){
+        return res.json({code: 'FAIL', message:"El correo ingresado no se encuentra registrado"})
+      }
+      return res.json({code: 'SUCCESS', user: user})
+    })
+  },
 
 	destroy: function(req, res, next){
       User.findOne(req.param('id'), function foundUser(err, user){
@@ -205,6 +166,28 @@ module.exports = {
         res.redirect('/group/show');
       });
 	},
+
+  addUserToGroup: function(req,res){
+    var addUser = req.param('user');
+    User.findOne({id:addUser.id}, function(err, user){
+      if(err){
+        return res.json({code:"FAIL", message: "Se produjo un error"})
+      }
+      if(user.group !== null){
+        user.groupName = req.session.User.groupName;
+        user.group = req.session.User.group;
+        user.save(
+          function(err){
+          
+        });
+      }
+      else{
+        return res.json({code:"FAIL", message: "Este usuario ya fue asociado a un grupo de trabajo"})
+      }
+
+    })
+    return res.json({code:"SUCCESS", message: "El usuario fue agregado correctamente a tu grupo de trabajo"})
+  },
 
   addGroup: function(req,res){
     Group.findGroupByKey(req.param('key'),function(err,group){

@@ -58,7 +58,7 @@ module.exports = {
 					if(user.group == null){
 						return res.json({
 							code: 'NO_GROUP',
-							message: 'No eres parte de ningun grupo'
+							message: 'No formas parte de ningun grupo'
 						});
 					}
 
