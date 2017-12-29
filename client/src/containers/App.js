@@ -7,12 +7,17 @@ import ToastList from './ToastList/ToastList.js'
 import { connect } from 'react-redux'
 import Login from '../Components/Login/Login'
 import Loading from 'react-loading-components';
+import noGroup from '../Components/NoGroup/noGroup'
 
-const NoMatch = ({ location }) => (
-  <div>
-    <h3>No match for <code>{location.pathname}</code></h3>
-  </div>
-)
+class newGroup extends Component {
+  static isPrivate = true;
+  render() {
+      console.log("componente crear grupo");
+      return (<h1>crear grupo</h1>)
+  }
+
+}
+
 
 class App extends Component {
 
@@ -34,7 +39,6 @@ class App extends Component {
         (<div className="ContainerLoader">
           <div className="LoaderPosition">
             <div><Loading type='circles' width={110} height={110} fill='#fff'/></div>
-
           </div>
         </div>) :
         (<div className="App">
@@ -43,6 +47,9 @@ class App extends Component {
             <AuthRoute
               path="/auth"
               component={Login}/>
+            <AuthRoute
+              path="/noGroup"
+              component={noGroup}/>
             <AuthRoute
               path="/"
               component={PrimaryLayout}/>

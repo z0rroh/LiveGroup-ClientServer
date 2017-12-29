@@ -13,10 +13,6 @@ module.exports = {
   		required: true
 
   	},
-    estado:{
-      type: 'boolean',
-      defaulsTo: false
-    },
   	description:{
   		type: 'text',
   		required: true
@@ -25,15 +21,6 @@ module.exports = {
     ubication:{
       type: 'string',
       required: true
-    },
-  	image:{
-   		type: 'string'
-  	},
-    group_parent:{
-      type: 'string'
-    },
-    key:{
-      type: 'string'
     },
     users:{
       collection: 'user',
@@ -48,14 +35,5 @@ module.exports = {
       via: 'group'
     },
   },
-  findGroupByKey: function(value,cb){
-    Group.findOne({key:value}).exec(function (err, group) {
-      if (err) return cb(err,null);
-      if (!group){
-        var err = {mesage:'Llave inválida'};
-        return cb(err,null);
-      }
-      return cb(null,group);
-    });
-  }
+
 };

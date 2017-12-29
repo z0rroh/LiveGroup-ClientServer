@@ -37,7 +37,7 @@ class SignInForm extends Component{
           intent: Intent.SUCCESS,
           message: "BIEVENIDO A LIVEGROUP"
         })
-        this.props.history.push('/anuncios')
+        //this.props.history.push('/anuncios')
       }
     })
     .catch((err)=>{

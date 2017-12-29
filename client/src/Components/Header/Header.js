@@ -22,7 +22,6 @@ class Header extends Component{
         intent: Intent.SUCCESS,
         message: "HASTA LA PROXIMA!"
       })
-      this.props.history.push('/auth')
     })
   }
 

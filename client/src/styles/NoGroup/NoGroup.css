@@ -1,0 +1,75 @@
+.Header-NoGroup {
+  height: 70px; }
+  .Header-NoGroup .box-NoGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 1000px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto; }
+    .Header-NoGroup .box-NoGroup .Logo-NoGroup {
+      height: 60px;
+      padding-left: 0px;
+      padding-right: 0px;
+      float: left; }
+    .Header-NoGroup .box-NoGroup .Header-img-NoGroup {
+      height: 60px;
+      width: 60px;
+      float: left; }
+      .Header-NoGroup .box-NoGroup .Header-img-NoGroup img {
+        height: 60px;
+        width: 60px; }
+
+.background {
+  background-color: #8bc34a;
+  min-height: 100vh; }
+
+.NoGroup-Card {
+  background-color: #fff !important;
+  margin-top: 60px; }
+  .NoGroup-Card .adminUser h3 {
+    text-align: left;
+    color: #333;
+    margin: 0px;
+    font-size: 22px; }
+  .NoGroup-Card .input-field i {
+    width: 30px !important;
+    margin-top: 3px;
+    color: #8bc34a; }
+  .NoGroup-Card .input-field .inputParams {
+    margin-left: 2.5rem !important;
+    width: calc(100% - 2.5rem);
+    margin-bottom: 0px;
+    background-color: #f5f8fa;
+    height: 2.5rem;
+    border: none !important; }
+  .NoGroup-Card .NoGroup-Button {
+    margin-top: 2em; }
+    .NoGroup-Card .NoGroup-Button input {
+      padding: 0 5em;
+      background-color: #8bc34a;
+      width: 100%;
+      border-radius: 30px;
+      height: 42px; }
+    .NoGroup-Card .NoGroup-Button input:hover {
+      color: #fff; }
+
+.NoGroup-Logo {
+  position: absolute;
+  top: 0%;
+  right: 0;
+  left: 0; }
+  .NoGroup-Logo img {
+    height: 100px;
+    width: 100px; }
+
+.SignUp {
+  margin-top: 1em;
+  border-top: 1px solid #e0e0e0; }
+  .SignUp .SignUp-Button {
+    margin-top: 1rem;
+    color: #424242;
+    text-transform: capitalize;
+    font-size: 1.3em;
+    text-decoration: none; }

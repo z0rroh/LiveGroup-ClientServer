@@ -68,6 +68,23 @@ export function editAvatar(avatar, config){
     }
 }
 
+export function newGroup(group){
+    return dispatch =>{
+      return axios.post('/crear/grupo',{group: group})
+      .then((res)=>{
+        console.log(res);
+        switch (res.data.code) {
+            case "SUCCESS":
+              dispatch(setCurrentUser(res.data.user));
+              break;
+            default:
+              return res.data.message
+              break;
+          }
+      })
+    }
+}
+
 export function logout(){
   return dispatch =>{
     return axios.get('/session/destroy')

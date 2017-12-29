@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import { Route, Redirect} from 'react-router-dom'
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 
-import PropTypes from 'prop-types';
-
-
-const PRIVATE_ROOT = '/anuncios';
-const PUBLIC_ROOT = '/auth/login';
 const C_USER = '/noGroup/waiting';
 const A_USER = '/noGroup/newGroup';
 
-const AuthRoute = ({component, ...props}) => {
+const GroupTypeRoute = ({component, ...props}) => {
   const { isPrivate } = component;
-
-  if (props.isAuthenticated) {
+  if (props.user.admin) {
     //User is Authenticated
     if (isPrivate === true) {
       //If the route is private the user may proceed.
@@ -22,15 +17,14 @@ const AuthRoute = ({component, ...props}) => {
     }
     else {
       //If the route is public, the user is redirected to the app's private root.
-        console.log("Tiene grupo, renderizar a /anuncios");
-        return <Redirect to={ PRIVATE_ROOT } />;
+        return <Redirect to={ A_USER} />;
     }
   }
   else {
     //User is not Authenticated
     if (isPrivate === true) {
       //If the route is private the user is redirected to the app's public root.
-      return <Redirect to={ PUBLIC_ROOT } />;
+      return <Redirect to={ C_USER } />;
     }
     else {
       //If the route is public, the user may proceed.
@@ -39,21 +33,18 @@ const AuthRoute = ({component, ...props}) => {
   }
 };
 
-AuthRoute.propTypes = {
+GroupTypeRoute.propTypes = {
   component: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.func
   ]).isRequired,
-  isAuthenticated: PropTypes.bool,
-  user: PropTypes.object,
+  user: PropTypes.object.isRequired
 };
 
 const stateToProps = ({ auth }) => ({
   //isFetching: auth.isFetching,
-  user: auth.user,
-  isAuthenticated: auth.isAuthenticated
+  user: auth.user
 })
 
 
-
-export default connect(stateToProps)(AuthRoute)
+export default connect(stateToProps)(GroupTypeRoute)

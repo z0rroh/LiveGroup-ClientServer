@@ -55,12 +55,6 @@ module.exports = {
 					});
 					User.publishUpdate(user.id, {id:user.id, name: user.name, user_image: user.user_image,online: user.online});
 
-					if(user.group == null){
-						return res.json({
-							code: 'NO_GROUP',
-							message: 'No formas parte de ningun grupo'
-						});
-					}
 
 					return res.json({
 						code:'SUCCESS',

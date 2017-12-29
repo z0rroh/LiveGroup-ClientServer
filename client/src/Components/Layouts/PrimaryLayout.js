@@ -30,11 +30,19 @@ class PrimaryLayout extends Component{
   static isPrivate = true;
   render(){
     const {match, history, user} = this.props;
+    if(!user.group){
+      return (<Redirect to="/noGroup/waiting"/>)
+    }
     return(
       <div className="primary-layout">
         <PrimaryHeader history={history} user={user}/>
         <main>
           <Switch>
+            <TypeRoute
+              exact
+              path={`${match.path}`}
+              user={user}
+              component={AnunciosApp}/>
             <TypeRoute
               exact
               path={`${match.path}perfil`}
@@ -58,6 +66,7 @@ class PrimaryLayout extends Component{
               user={user}
               component={NotFound}/>
           </Switch>
+
         </main>
       </div>
     );

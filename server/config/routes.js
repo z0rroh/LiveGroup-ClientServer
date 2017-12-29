@@ -42,6 +42,7 @@ module.exports.routes = {
   'POST /newAccount': 'UserController.create',
   'GET /buscar/user': 'UserController.searchUser',
   'POST /agregar/user': 'UserController.addUserToGroup',
+  'POST /crear/grupo': 'GroupController.create',
   //'delete /userDelete/:id?': 'UserController.destroy'
 
 
