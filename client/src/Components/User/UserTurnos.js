@@ -18,8 +18,8 @@ class UserTurnos extends Component{
         )
       })
       return(
-        <div className="User-Info-Datos col-lg-6 col-xs-12">
-          <div className="Tittle-Element col-lg">
+        <div className="User-Info-Datos col-lg-6 col-xs-6">
+          <div className="Tittle-Element col-xs">
             <h4>Turnos Semana</h4>
           </div>
           {turnosRender}

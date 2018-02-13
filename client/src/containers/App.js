@@ -36,12 +36,12 @@ class App extends Component {
       const isFetch = this.state.isFetch;
       return (
         isFetch ?
-        (<div className="ContainerLoader">
-          <div className="LoaderPosition">
+        (<div className="ContainerLoader row col-xs-12 center-xs">
+          <div className="LoaderPosition row middle-xs">
             <div><Loading type='circles' width={110} height={110} fill='#fff'/></div>
           </div>
         </div>) :
-        (<div className="App">
+        (<div className="App ">
           <ToastList/>
           <Switch>
             <AuthRoute

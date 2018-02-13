@@ -50,17 +50,16 @@ class Semana extends Component{
       )
     }
     return(
-      <div className="Semana col-lg-12">
+      <div className="Semana col-xs-12">
         <div className="SemanaTitle">
-          <div className="row between-lg">
-            <div className="col-lg-4 col-xs-12"><p> Fecha: {this.state.fecha}</p></div>
-            <div className="col-lg-4 col-xs-12"><p> Hora: </p></div>
-          <div className="Tokens col-lg-4 col-xs-12"><p>  Tokens: {this.props.tokens}</p></div>
-
+          <div className="row between-lg col-xs-12 start-xs">
+            <div className="col-lg-4 col-xs-8"><p> Fecha: {this.state.fecha}</p></div>
+            <div className="col-lg-4 col-xs-4"><p> Hora: 10:00 </p></div>
+            <div className="Tokens col-lg-4 col-xs-12"><p>  Tokens: {this.props.tokens}</p></div>
           </div>
         </div>
-        <div className="MesName"><span>{this.state.mesName}</span></div>
-        <div className="SemanaContent row center-xs">
+        <div className="MesName col-xs-12 center-xs"><span>{this.state.mesName}</span></div>
+        <div className="SemanaContent row col-xs-12 center-xs">
           { Dias }
         </div>
       </div>

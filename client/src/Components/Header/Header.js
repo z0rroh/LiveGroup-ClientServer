@@ -32,10 +32,10 @@ class Header extends Component{
   render(){
     const user = this.state.user;
     return(
-      <div className="Header col-lg-12">
-        <div className="box col-lg-11">
-          <div className="row box between-lg middle-lg">
-            <div className="Logo col-lg-4">
+      <div className="Header col-lg-12 col-xs-12">
+        <div className="box col-lg-11 col-xs-12">
+          <div className="row box between-lg middle-lg middle-xs">
+            <div className="Logo col-lg-4 col-lg-offset-1 col-xs-4">
               <div className="Header-img-logo" >
                 <img src="/images/newLogo.png" alt="some"/>
               </div>
@@ -43,22 +43,23 @@ class Header extends Component{
                 <img src="/images/logo11.png" alt="some"/>
               </div>
             </div>
-
-            <div className="User col-lg-4 col-lg-offset-3">
+            <div className="User col-lg-4 col-lg-offset-3 col-xs-8">
               <div className="box">
-                <div className="row">
-                  <div className="no-padding col-lg-10">
+                <div className="row end-xs">
+                  <div className="no-padding col-lg-8">
                     <a className="User-name dropdown-button">{user.name}</a>
                     <p className="User-empresa">{user.groupName}</p>
                   </div>
-                  <div className="User-image"><img src={"/images/avatars/"+user.user_image}/></div>
+                  <div className="col-lg-2"><div className="User-image"><img src={"/images/avatars/"+user.user_image}/></div></div>
+                  <div className="col-lg-2">
+                    <div className="Logout">
+                      <a title="Cerrar Sesion"
+                         className="material-icons profile"
+                         onClick = {()=>this.onClick()}>power_settings_new</a>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="Logout">
-              <a title="Cerrar Sesion"
-                 className="material-icons profile"
-                 onClick = {()=>this.onClick()}>power_settings_new</a>
             </div>
           </div>
         </div>

@@ -86,7 +86,6 @@
     text-align: center
     height: auto
 
-
   .Turno-Log
     h5
       margin: 4px
@@ -102,11 +101,48 @@
         line-height: 2em
         box-shadow: none
       a:hover
-        background-color: #e22838
-        i:hover
-          color: #fafafa
+        background-color: #c0d332
+        color: #fafafa
       i
         font-size: 2em
+  .Turno-Button-Full
+      text-align: center
+      margin: auto 0
+      height: auto
+      padding: 4px
+      a
+        background-color: #e22838
+        line-height: 2em
+        box-shadow: none
+        pointer-events: none
+        cursor: default
+      i
+        font-size: 2em
+
   .Turno-progress
     margin: 0
     height: 5px
+
+  .Turno-progress-full
+    background-color: #e22838
+
+.Turno-users-container
+  padding: 0
+  margin: 0
+  max-width: 250px
+  min-width: 180px
+  .Turno-user-element
+    padding: 0
+    margin: 0 0 5px
+    .Turno-user-element-img
+      img
+        height: 20px
+        width: 20px
+    .Turno-user-element-name
+      padding: 0px
+      p
+        margin: 0
+        max-width: 100%
+        text-overflow: ellipsis
+        white-space: nowrap
+        overflow: hidden

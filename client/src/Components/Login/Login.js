@@ -19,11 +19,11 @@ class Login extends Component{
     return(
       <div className="LoginContainer">
         <header className="row">
-          <div className="line col-lg-12"> </div>
-          <div className="Header col-lg-12">
-            <div className="box col-lg-11">
-              <div className="row box between-lg middle-lg">
-                <div className="Logo col-lg-4">
+          <div className="line col-lg-12 col-xs-12"></div>
+        <div className="Header col-lg-12 col-xs-12">
+            <div className="box col-lg-10 col-xs-12">
+              <div className="row box between-lg middle-lg middle-xs col-xs-12 col-lg-12">
+                <div className="Logo col-lg-4 col-xs-10">
                   <div className="Header-img-logo" >
                     <img src="/images/newLogo.png" alt="some"/>
                   </div>
@@ -35,9 +35,9 @@ class Login extends Component{
             </div>
           </div>
         </header>
-        <section className="background particles-js">
-          <div className="row center-xs middle-xs">
-            <div className="col-xs-4">
+        <section className="background">
+          <div className="row center-lg middle-xs">
+            <div className="col-lg-4 col-xs-12">
               <div className="Login-Card card-panel">
                 <Switch>
                   <Route exact path="/auth/login" component={() => <SignInForm addToast={addToast} history={history} loginServer={loginServer}/>}/>

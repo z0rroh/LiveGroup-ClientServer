@@ -14,7 +14,7 @@ export default class Dia extends Component{
       return <Turno key={turno.id} data={turno} onPostTurno={this.props.onPostTurno}/>
     });
     return(
-      <div className="Dia col-1-7" >
+      <div className="Dia col-lg-1-7 col-xs-12-12" >
         <div className="box">
           <div className="row">
           <div className="Dia-Colour col-xs-12">
@@ -24,7 +24,7 @@ export default class Dia extends Component{
           </div>
             <div className="Dia-Content col-xs-12">
               <div className="Turnos">
-                <div className="row">
+                <div className="row around-xs">
                   { Turnos }
                 </div>
               </div>

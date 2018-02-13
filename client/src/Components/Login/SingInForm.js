@@ -49,7 +49,7 @@ class SignInForm extends Component{
   render(){
     return(
       <div className="formContainer">
-        <form onSubmit={e => this.onSubmit(e)} className="row center-xs">
+        <form onSubmit={e => this.onSubmit(e)} className="row">
           <div className="col-xs-12 input-field"><i className="material-icons prefix">mail</i>
             <input
               onChange={ e => this.onChange(e) }
@@ -75,7 +75,7 @@ class SignInForm extends Component{
           </div>
         </form>
         <div className="row center-lg">
-          <div className="SignUp col-lg-12">
+          <div className="SignUp col-xs-12">
             <Link className="SignUp-Button btn-flat" to="/auth/registrar">Registrate</Link>
           </div>
         </div>

@@ -93,11 +93,45 @@
       line-height: 2em;
       box-shadow: none; }
     .SemanaContent .Turno-Button a:hover {
-      background-color: #e22838; }
-      .SemanaContent .Turno-Button a:hover i:hover {
-        color: #fafafa; }
+      background-color: #c0d332;
+      color: #fafafa; }
     .SemanaContent .Turno-Button i {
+      font-size: 2em; }
+  .SemanaContent .Turno-Button-Full {
+    text-align: center;
+    margin: auto 0;
+    height: auto;
+    padding: 4px; }
+    .SemanaContent .Turno-Button-Full a {
+      background-color: #e22838;
+      line-height: 2em;
+      box-shadow: none;
+      pointer-events: none;
+      cursor: default; }
+    .SemanaContent .Turno-Button-Full i {
       font-size: 2em; }
   .SemanaContent .Turno-progress {
     margin: 0;
     height: 5px; }
+  .SemanaContent .Turno-progress-full {
+    background-color: #e22838; }
+
+.Turno-users-container {
+  padding: 0;
+  margin: 0;
+  max-width: 250px;
+  min-width: 180px; }
+  .Turno-users-container .Turno-user-element {
+    padding: 0;
+    margin: 0 0 5px; }
+    .Turno-users-container .Turno-user-element .Turno-user-element-img img {
+      height: 20px;
+      width: 20px; }
+    .Turno-users-container .Turno-user-element .Turno-user-element-name {
+      padding: 0px; }
+      .Turno-users-container .Turno-user-element .Turno-user-element-name p {
+        margin: 0;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden; }

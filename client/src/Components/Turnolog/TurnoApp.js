@@ -128,7 +128,7 @@ class TurnoApp extends Component{
   render(){
     console.log(this.state.turnos);
     return(
-      <div className="ContainerTurnos col-lg-12">
+      <div className="ContainerTurnos col-xs-12">
         {this.whatRender()}
       </div>
 

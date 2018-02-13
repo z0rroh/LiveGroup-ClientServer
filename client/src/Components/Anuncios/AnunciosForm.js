@@ -38,11 +38,11 @@ class AnunciosForm extends Component {
   render(){
     const user = this.props.user;
     return(
-        <section className="col-lg-8 card">
+        <section className="col-lg-8 card col-xs-10">
             <div className="AnuncioNuevo">
               <div className="row center-lg">
-                <div className="AnuncioNuevo-Image col-lg-1"><img src={"/images/avatars/"+user.user_image}/></div>
-                <div className="AnuncioNuevo-Form col-lg-10">
+                <div className="AnuncioNuevo-Image col-lg-1 col-xs-2"><img src={"/images/avatars/"+user.user_image}/></div>
+                <div className="AnuncioNuevo-Form col-lg-10 col-xs-9">
                   <form onSubmit={(e) => this.onSubmit(e)}
                         onKeyDown={(e) => { this.handleKeyDown(e); }}
                         className="box" acceptCharset="utf-8">

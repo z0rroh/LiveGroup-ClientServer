@@ -44,7 +44,7 @@ class Anuncios extends Component{
   render(){
     const {anuncios,isFetching} = this.state;
     return (
-        <section className="Main row center-lg">
+        <section className="Main row center-xs">
           <AnunciosForm/>
           <AnunciosList
                   isFetching={this.state.isFetching}

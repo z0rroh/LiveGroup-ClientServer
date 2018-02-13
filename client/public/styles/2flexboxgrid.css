@@ -155,6 +155,11 @@
   flex-basis: 100%;
   max-width: 100%;
 }
+.col-xs-12-12 {
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  max-width: 100%;
+}
 
 .col-xs-offset-0 {
   margin-left: 0;
@@ -732,7 +737,6 @@
   .container {
     width: 76rem;
   }
-
   .col-lg,
   .col-lg-1,
   .col-lg-2,
@@ -765,6 +769,11 @@
     flex: 0 0 auto;
     padding-right: 0.5rem;
     padding-left: 0.5rem;
+  }
+  .col-lg-1-7{
+    -ms-flex-preferred-size: 14.28%;
+    flex-basis: 14.28%;
+    max-width: 14.28%;
   }
 
   .col-lg {
