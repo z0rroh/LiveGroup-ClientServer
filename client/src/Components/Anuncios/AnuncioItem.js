@@ -85,7 +85,7 @@ class AnuncioItem extends Component {
       )
     })
     return(
-        <li id={this.state.anuncio.id}>
+        <li id={this.state.anuncio.id} className="comment-line">
           <div className="comment-main-level">
             <div className="comment-avatar"><img src={"/images/avatars/"+anuncio.autor.user_img}/></div>
             <div className="comment-box">

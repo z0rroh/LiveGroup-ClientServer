@@ -130,15 +130,15 @@ class CrearTurnos extends Component {
 
   render(){
     return(
-      <div className="col-lg-12 crearTurnosContainer">
-        <div className="col-lg-12 crearTurnosTitle">
+      <div className="col-xs-12 crearTurnosContainer">
+        <div className="col-xs-12 crearTurnosTitle">
           <h3>Creacion de turnos</h3>
         </div>
-        <div className="col-lg-10 CrearTurnosFormContainer">
+        <div className="col-xs-10 CrearTurnosFormContainer">
           <form onSubmit={e => this.onSubmit(e)}>
-            <div className="TurnoC-Info col-lg">
-              <div className="col-lg"><h5>Informacion de turno</h5></div>
-              <div className="Turno-Time row col-lg-12">
+            <div className="TurnoC-Info col-xs">
+              <div className="col-xs"><h5>Informacion de turno</h5></div>
+              <div className="Turno-Time row col-xs-12">
                 <div className="Time-Range">
                   <span>Hora Inicio:</span>
                   <TimePicker
@@ -177,8 +177,8 @@ class CrearTurnos extends Component {
                   required="true"/>
               </div>
             </div>
-            <div className="Turno-Days col-lg">
-              <div className="col-lg"><h5>Seleccionar dias</h5></div>
+            <div className="Turno-Days col-xs">
+              <div className="col-xs"><h5>Seleccionar dias</h5></div>
               <label className="pt-control pt-checkbox pt-inline">
                 <input
                   name="todos"
@@ -260,7 +260,7 @@ class CrearTurnos extends Component {
               </label>
 
             </div>
-            <div className="TurnoC-Button col-lg-12">
+            <div className="TurnoC-Button col-xs-12">
               <input className="btn " type="submit" value="Enviar" />
             </div>
           </form>

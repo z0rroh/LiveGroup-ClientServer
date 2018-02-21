@@ -2911,7 +2911,7 @@ header {
 .comments-list {
   position: relative; }
 
-.comments-list::before {
+.comment-line::before {
   content: '';
   width: 2px;
   height: 100%;
@@ -2920,11 +2920,11 @@ header {
   left: 32px;
   top: 0; }
 
-.comments-list::after {
+.comment-line::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 29px;
+  left: 30px;
   width: 7px;
   height: 7px;
   border: 3px solid #8bc34a;
@@ -2936,13 +2936,13 @@ header {
   display: none; }
 
 .reply-list li:before {
-  content: '';
-  width: 60px;
-  height: 2px;
-  background: #8bc34a;
-  position: absolute;
-  top: 25px;
-  left: -55px; }
+  content: "";
+    content-width: 2px;
+    content-height: 100%;
+    content-background: #8bc34a;
+    content-position: absolute;
+    content-left: 32px;
+    content-top: 0; }
 
 .comments-list li {
   margin-bottom: 15px;
@@ -3708,50 +3708,47 @@ div.material-table {
   font-size: 20px; }
 
 .sub-layout {
-  display: flex; }
+  margin: 0px;
+  padding: 0px; }
   .sub-layout .primary-content {
-    margin: 2em 1em 1em 1em;
+    padding: 2em 1em 1em 1em;
     width: 100%; }
-    .sub-layout .primary-content .react-datepicker__input-container input {
-      padding: 0 5px; }
-    .sub-layout .primary-content .react-datepicker__time-list {
-      padding: 0px !important; }
   .sub-layout .Panel-container {
-    width: 230px;
+    padding: 0px;
+    width: 100%;
     height: 100%;
     border-top: 1px solid #000; }
   .sub-layout .main-menu {
-    vertical-align: top;
+    padding: 0px;
     background: #24292e;
     border-right: 1px solid #000;
     border-top: rgba(255, 255, 255, 0.05);
     height: 100vh;
-    width: 100%;
+    width: 230px;
     -webkit-transition: width .05s linear;
     transition: width .05s linear;
     -webkit-transform: translateZ(0) scale(1, 1); }
     .sub-layout .main-menu ul {
+      padding: 0px;
       display: table-cell;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
     .sub-layout .main-menu li {
+      padding: 0px;
       position: relative;
       display: block;
-      width: 229px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       border-bottom: 1px solid #000; }
     .sub-layout .main-menu .navLinkSub {
+      padding: 0px;
       position: relative;
-      width: 100%;
-      display: table;
       border-collapse: collapse;
       border-spacing: 0;
       color: #999;
       font-family: arial;
       font-size: 14px;
-      text-decoration: none;
-      -webkit-transform: translateZ(0) scale(1, 1);
-      -webkit-transition: all .1s linear;
-      transition: all .1s linear; }
+      text-decoration: none; }
+      .sub-layout .main-menu .navLinkSub div {
+        padding: 0px; }
     .sub-layout .main-menu .navLinkSub::before {
       background-color: transparent;
       content: '';
@@ -3767,19 +3764,14 @@ div.material-table {
     .sub-layout .main-menu .navLinkSubActive::before, .sub-layout .main-menu .navLinkSub:hover::before {
       background-color: #8bc34a; }
     .sub-layout .main-menu .nav-icon {
-      position: relative;
-      display: table-cell;
-      width: 60px;
       height: 36px;
       text-align: center;
       vertical-align: middle;
       font-size: 24px;
-      padding: 10px 20px 10px 40px !important; }
+      padding: 6px 0 0 0 !important; }
     .sub-layout .main-menu .nav-text {
+      padding: 0px;
       position: relative;
-      display: table-cell;
-      vertical-align: middle;
-      text-align: left;
       font-size: 14px;
       font-weight: 500; }
 
@@ -3812,6 +3804,10 @@ nav {
   background: #e2e2e2;
   width: 100%;
   height: 100%; }
+
+@media only screen and (max-width: 1200px) {
+  .nav-icon {
+    padding: 10px 0 0 0 !important; } }
 
 @font-face {
   font-family: 'Titillium Web';

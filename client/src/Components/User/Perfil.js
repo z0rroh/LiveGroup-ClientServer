@@ -38,6 +38,8 @@ class Perfil extends Component{
     }.bind(this));
 
   }
+
+  
    renderContent(){
      if(this.state.isFetching){
        return(<PerfilSkeleton/>)

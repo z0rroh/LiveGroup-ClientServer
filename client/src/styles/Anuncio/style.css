@@ -43,7 +43,7 @@
 .comments-list {
   position: relative; }
 
-.comments-list::before {
+.comment-line::before {
   content: '';
   width: 2px;
   height: 100%;
@@ -52,11 +52,11 @@
   left: 32px;
   top: 0; }
 
-.comments-list::after {
+.comment-line::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 29px;
+  left: 30px;
   width: 7px;
   height: 7px;
   border: 3px solid #8bc34a;
@@ -68,13 +68,13 @@
   display: none; }
 
 .reply-list li:before {
-  content: '';
-  width: 60px;
-  height: 2px;
-  background: #8bc34a;
-  position: absolute;
-  top: 25px;
-  left: -55px; }
+  content: "";
+    content-width: 2px;
+    content-height: 100%;
+    content-background: #8bc34a;
+    content-position: absolute;
+    content-left: 32px;
+    content-top: 0; }
 
 .comments-list li {
   margin-bottom: 15px;

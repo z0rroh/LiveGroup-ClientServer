@@ -93,12 +93,12 @@ class addUsers extends Component {
   render(){
     const {user, show} = this.state;
     return(
-      <div className="col-lg-12 addUsersContainer">
-        <div className="col-lg-12 addUsersTitle">
+      <div className="col-xs-12 addUsersContainer">
+        <div className="col-xs-12 addUsersTitle">
           <h3>Buscar Usuarios</h3>
         </div>
-        <div className="col-lg-10 addUsersFormContainer row">
-          <div className="col-lg-6 addUsersEmail">
+        <div className="col-xs-10 addUsersFormContainer row">
+          <div className="col-xs-6 addUsersEmail">
             <form
               onSubmit={(e) => this.onSubmit(e)}
               onKeyDown={(e) => { this.handleKeyDown(e); }}>
@@ -108,12 +108,12 @@ class addUsers extends Component {
                 name="email"
                 value={this.state.email}
                 type="email"
-                className="pt-input pt-round inputParams col-lg-12"
+                className="pt-input pt-round inputParams col-xs-12"
                 placeholder="Ingresa el email a buscar"
                 required="true"/>
             </form>
           </div>
-          <div className="addUsersSearchButton col-lg-6">
+          <div className="addUsersSearchButton col-xs-6">
             <input
               onClick={this.onSubmit}
               className="btn"
@@ -122,25 +122,25 @@ class addUsers extends Component {
           </div>
         </div>
         {  show &&
-        <div className="col-lg-10 addUsersResContainer row">
+        <div className="col-xs-10 addUsersResContainer row">
 
           { user.group ?
-            (<div className="col-lg-6 yesGroup">
+            (<div className="col-xs-6 yesGroup">
               <p>El usuario solicitado ya posee un grupo</p>
             </div>) :
-            (<div className="col-lg-6 noGroup">
-              <div className="User-element col-lg">
+            (<div className="col-xs-6 noGroup">
+              <div className="User-element col-xs">
                 <p>El usuario "{user.name} " no se encuentra en ningun grupo, ¿Deseas añadirlo a tu grupo de trabajo?</p>
               </div>
-              <div className="col-lg btnsContainer row">
-                <div className="col-lg-6 btnContainer">
+              <div className="col-xs btnsContainer row">
+                <div className="col-xs-6 btnContainer">
                   <input
                     onClick={this.cancelButton}
                     className="btn cancel"
                     type="submit"
                     value="Cancelar"/>
                 </div>
-                <div className="col-lg-6 btnContainer">
+                <div className="col-xs-6 btnContainer">
                   <input
                     onClick={this.acceptButton}
                     className="btn accept"

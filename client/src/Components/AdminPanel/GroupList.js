@@ -76,6 +76,10 @@ class GroupList extends Component {
   render() {
     const { users, isFetching } = this.state;
     return(
+      <div className="col-xs-12 crearTurnosContainer">
+        <div className="col-xs-12 crearTurnosTitle">
+          <h3>Listar Grupo</h3>
+        </div>
        <ReactTable
           data={users}
           columns={[
@@ -164,7 +168,8 @@ class GroupList extends Component {
              height: "auto"
            }}
           onFetchData={this.fetchData}
-        />)
+        />
+    </div>)
 
   }
 

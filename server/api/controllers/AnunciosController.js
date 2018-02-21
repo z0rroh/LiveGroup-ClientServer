@@ -31,25 +31,24 @@ module.exports = {
 
 		Anuncio.create(anuncioObj,function (err, anuncio) {
 
-			if(err){
-				var noAnuncio=[{message: 'No se creo el anuncio'}]
-				req.session.flash={
-						err: noAnuncio
-				}
-				return res.redirect('anuncios/new');
+			if (err){
+				return res.json({
+				code: 'FAIL',
+				message: 'No se pudo crear el anuncio'
+				});
 			}
 
-			var sucessAnuncio=[{message: 'Anuncio creado correctamente'}]
-			req.session.flash={
-					err: sucessAnuncio
-			}
 			Anuncio.anuncioFindByGroup(anuncio, function(err, anuncio){
-					res.ok(anuncio);
+				return res.json({
+					code: 'SUCCESS',
+					anuncio: "Anuncio creado correctamente"
+				});
 			})
 
 		});
 
 	},
+
 	getAnuncios: function(req, res){
 
 		Anuncio.anunciosFindByGroup(req.session.User.group, function(err, anuncios){

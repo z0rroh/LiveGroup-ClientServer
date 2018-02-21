@@ -15,11 +15,11 @@ class SubLayout extends Component {
   render(){
     const match = this.props.match;
     return(
-      <div className="sub-layout">
-        <div className="Panel-container">
+      <div className="sub-layout row col-xs-12">
+        <div className="Panel-container col-xs-2">
           <Panel/>
         </div>
-        <div className="primary-content">
+        <div className="primary-content col-xs-10">
           <Switch>
             <Route path={`${match.path}/agregar`} component={addUsers} />
             <Route path={`${match.path}/grupo`} component={GroupList} />
