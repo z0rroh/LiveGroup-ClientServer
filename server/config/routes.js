@@ -43,6 +43,7 @@ module.exports.routes = {
   'GET /buscar/user': 'UserController.searchUser',
   'POST /agregar/user': 'UserController.addUserToGroup',
   'POST /crear/grupo': 'GroupController.create',
+  'GET /listTurnsFromDate': 'TurnologController.listTurnsFromDate',
   //'delete /userDelete/:id?': 'UserController.destroy'
 
 

@@ -5,6 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var lang = require('lodash/lang');
+var moment=require('moment');
+
  module.exports = {
 
    subscribe: function(req,res){
@@ -119,7 +121,7 @@ var lang = require('lodash/lang');
        });
    },
 
-   postTurno:function (req,res) {
+   postTurno: function (req,res) {
 
          Turnolog.findOne(req.param('id')).populate('users')
                  .then(function(result){
@@ -216,5 +218,56 @@ var lang = require('lodash/lang');
          .fail(function(err){
            res.json({code:"FAIL", message:"Ocurrio un problema al tomar el turno"})
          });
+       },
+
+
+       listTurnsFromDate: (req, res)=>{
+         var date = req.param('date');
+         var formatDate = moment(date,'DD-MM-YYYY').format('YYYY-MM-DD');
+         Turnolog.find({group:req.session.User.group, createdAt: { '>': formatDate, '<': moment(formatDate).add(1,'days').format() }}).populate('users')
+         .exec((err,turnos)=>{
+           if(err) {
+             return res.json({code:"FAIL", message:"Ah ocurrido un error inesperado"})
+           }
+           var turnologs = [];
+           for(var i in turnos){
+             var aux = "";
+             if( turnos[i].day === "0"){
+               aux = "lunes"
+             }
+             if( turnos[i].day === "1"){
+               aux = "martes"
+             }
+             if( turnos[i].day === "2"){
+               aux = "miercoles"
+             }
+             if( turnos[i].day === "3"){
+               aux = "jueves"
+             }
+             if( turnos[i].day === "4"){
+               aux = "viernes"
+             }
+             if( turnos[i].day === "5"){
+               aux = "sabado"
+             }
+             if( turnos[i].day === "6"){
+               aux = "domingo"
+             }
+             var turno={
+              name: turnos[i].name,
+              start: turnos[i].start,
+              end: turnos[i].end,
+              day: aux,
+              cupoTotal: turnos[i].cupoTotal,
+              cupoActual: turnos[i].cupoActual,
+              estado: turnos[i].estado,
+              users: turnos[i].users,
+              id: turnos[i].id
+             }
+             turnologs.push(turno);
+           }
+           return res.json({code: 'SUCCESS', turnos: turnologs})
+         });
+
        }
  };

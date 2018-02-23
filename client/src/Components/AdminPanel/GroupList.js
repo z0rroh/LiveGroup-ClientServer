@@ -131,6 +131,7 @@ class GroupList extends Component {
                Cell: this.renderEditable,
                Cell: ({ value }) => (value === true ? "Admin" : "Comun"),
                filterMethod: (filter, row) => {
+                  console.log(row[filter.id]);
                   if (filter.value === "all") {
                     return true;
                   }
@@ -161,7 +162,7 @@ class GroupList extends Component {
           showPaginationBottom= {true}
           showPageSizeOptions= {false}
           //pageSizeOptions= {[5, 10, 20, 30]}
-          defaultPageSize= {14}
+          defaultPageSize= {13}
           filterable= {true}
           defaultSortMethod= {this.defaultSort}
           style={{

@@ -12,8 +12,11 @@ module.exports = {
 	  	name:{
 	  		type:'string',
 	      required: true
-
 	  	},
+			rut:{
+				type:'string',
+				required: true
+			},
 	  	password:{
 	  	  type:'string',
 	      required: true
