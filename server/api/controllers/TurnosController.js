@@ -8,88 +8,108 @@ var moment = require('moment');
 
 module.exports = {
 
-	create: function(req, res,next){
+	create: function(req, res){
+		moment.locale('es-cl');
 		var params = req.params.all();
-		var turnosObj=[]
+		var turnosObject=[]
 		if(!params.name.length){
 			return res.status(400).json({code: 'NO_NAME', message: 'Debes ingresar un nombre'});
+		}
+		if(params.timeStart === params.timeEnd ){
+			return res.status(400).json({code: 'NO_HH', message: 'La hora de inicio y de fin deben ser distintas'});
 		}
 		if(params.cupo === 0){
 			return res.status(400).json({code: 'NO_CUPO', message: 'Debes ingresar la cantidad de cupos'});
 		}
-		if(!params.dias.length){
-			return res.status(400).json({code: 'NO_DIAS', message: 'No se ha seleccionado ningun dia'});
+		if(params.startDate === null){
+			return res.status(400).json({code: 'NO_STARTDAY', message: 'No se ha seleccionado ningun dia'});
 		}
-		else{
-			for (var i in params.dias){
-				auxObj= {
-					start: params.timeStart,
-					end : params.timeEnd,
-					name: params.name,
-					cupo: params.cupo,
-					day: params.dias[i].id,
-					group: req.session.User.group,
-				}
-				turnosObj.push(auxObj);
+		if(params.startDate && params.endDate === null){
+			var dia = moment(params.startDate).format("dddd");
+			var despliegue = moment(params.startDate).toDate();
+			auxObj= {
+				start: params.timeStart,
+				end : params.timeEnd,
+				name: params.name,
+				cupo: params.cupo,
+				day: dia,
+				despliegue: despliegue,
+				group: req.session.User.group,
 			}
-			Turno.create(turnosObj).exec(function(err, turnos){
-
-				for(var i in turnos){
-					var exp = Turnolog.expiracion(turnos[i].day,turnos[i].start,function(fecha){
+			Turno.create(auxObj)
+			.exec(function(err, turno){
+					var exp = Turnolog.expiracion(turno.day,turno.start,function(fecha){
 						return fecha;
 					});
 					var turnologObj={
-					 name: turnos[i].name,
-					 start: turnos[i].start,
-					 end: turnos[i].end,
-					 day: turnos[i].day,
-					 cupoTotal: turnos[i].cupo,
+					 name: turno.name,
+					 start: turno.start,
+					 end: turno.end,
+					 day: turno.day,
+					 cupoTotal: turno.cupo,
 					 cupoActual: 0,
 					 expiracion: exp,
 					 estado: 'activo',
-					 group: turnos[i].group,
-					 id_turno: turnos[i].id,
+					 despliegue: turno.despliegue,
+					 group: turno.group,
+					 id_turno: turno.id,
 					}
 					Turnolog.create(turnologObj,function (err,turnolog) {
 						if(err){
 							return res.json({code: 'FAIL', message: 'Se produjo un error en el servidor'})
 						}
 						Turnolog.publishCreate(turnolog);
-
 					});
-				}
-				return res.json({code: 'SUCCESS', message: 'Turnos creados correctamente'})
+					return res.json({code: 'SUCCESS', message: 'Turno creado correctamente'})
 			});
-
 		}
+		else{
+			var firstDay = moment(params.startDate).toDate();
+			var ultimateDay = moment(params.endDate).toDate();
+			for (var i=firstDay; i<=ultimateDay; i=moment(i).add(1,'days').toDate()){
+	      var dia = moment(i).format("dddd");
+	      var despliegue = i;
+	      auxObj= {
+	        start: params.timeStart,
+	        end : params.timeEnd,
+	        name: params.name,
+	        cupo: params.cupo,
+	        day: dia,
+	        despliegue: despliegue,
+	        group: req.session.User.group,
+	      }
+	      turnosObject.push(auxObj);
+	    }
+	    Turno.create(turnosObject)
+	    .exec(function(err, turnos){
+	      for(var i in turnos){
+	        var exp = Turnolog.expiracion(turnos[i].day,turnos[i].start,function(fecha){
+	          return fecha;
+	        });
+	        var turnologObj={
+	         name: turnos[i].name,
+	         start: turnos[i].start,
+	         end: turnos[i].end,
+	         day: turnos[i].day,
+	         cupoTotal: turnos[i].cupo,
+	         cupoActual: 0,
+	         expiracion: exp,
+	         estado: 'activo',
+	         despliegue: turnos[i].despliegue,
+	         group: turnos[i].group,
+	         id_turno: turnos[i].id,
+	        }
+	        Turnolog.create(turnologObj,function (err,turnolog) {
+	          if(err){
+	            return res.json({code: 'FAIL', message: 'Se produjo un error en el servidor'})
+	          }
+	          Turnolog.publishCreate(turnolog);
+	        });
+	      }
+	      return res.json({code: 'SUCCESS', message: 'Turnos creados correctamente'})
+	    });
+	  }
 
-	},
-
-	index: function(req, res, next){
-		Turno.find({group:req.session.User.group},function foundUsers(err, turnos){
-			for(var i in turnos){
-				var diaSemana="";
-
-				if ( turnos[i].day === '0' )
-					diaSemana = "Lunes";
-				if ( turnos[i].day === '1' )
-					diaSemana = "Martes";
-				if ( turnos[i].day === '2' )
-					diaSemana = "Miercoles";
-				if ( turnos[i].day === '3' )
-					diaSemana = "Jueves";
-				if ( turnos[i].day === '4' )
-					diaSemana = "Viernes";
-				if ( turnos[i].day === '5' )
-					diaSemana = "Sabado";
-				if ( turnos[i].day === '6' )
-					diaSemana = "Domingo";
-				turnos[i].dia = diaSemana;
-			}
-			res.view({
-				turnos: turnos
-			});
-		});
 	},
 
 	destroy: function(req, res, next){
@@ -105,41 +125,5 @@ module.exports = {
 
 		});
 	},
-	populateTurnolog: function(req,res,next){
-		Turno.find({group: req.session.User.group},function(err,turnos){
-			if(err){
-				var noTurn=[{message: 'no hay turnos registrados'}]
-				req.session.flash={
-						err: noTurn
-				}
-				res.redirect('/admin');
-			}
-			if(turnos){
-				for(var i in turnos){
-					var exp = Turnolog.expiracion(turnos[i].day,turnos[i].start,function(fecha){
-						return fecha;
-					});
-					var turnologObj={
-				   name: turnos[i].name,
-				   start: turnos[i].start,
-				   end: turnos[i].end,
-				   day: turnos[i].day,
-				   cupoTotal: turnos[i].cupo,
-					 cupoActual: 0,
-					 expiracion: exp,
-				   estado: 'activo',
-				   group: req.session.User.group,
-				   id_turno: turnos[i].id,
-				  }
-					Turnolog.findOrCreate({id_turno: turnos[i].id, estado: 'activo'},turnologObj,function (err,turnologs) {
-						if(err){
-							return next(err);
-						}
 
-					});
-				}
-				res.redirect('/turnos');
-			}
-		});
-	},
 };

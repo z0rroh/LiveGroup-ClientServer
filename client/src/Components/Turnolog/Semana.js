@@ -28,6 +28,18 @@ class Semana extends Component{
   }
   componentDidMount(){
     this.getDate();
+    this.intervalID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+  tick() {
+  this.setState({
+      hora: new Date()
+    });
   }
 
 
@@ -51,10 +63,10 @@ class Semana extends Component{
     }
     return(
       <div className="Semana col-xs-12">
-        <div className="SemanaTitle">
-          <div className="row between-lg col-xs-12 start-xs">
+        <div className="SemanaTitleContainer">
+          <div className="SemanaTitleBox row between-lg col-xs-10">
             <div className="col-lg-4 col-xs-8"><p> Fecha: {this.state.fecha}</p></div>
-            <div className="col-lg-4 col-xs-4"><p> Hora: 10:00 </p></div>
+            <div className="row col-lg-4 col-xs-4 center-xs"><p>Hora: {this.state.hora.toLocaleTimeString()}</p></div>
             <div className="Tokens col-lg-4 col-xs-12"><p>  Tokens: {this.props.tokens}</p></div>
           </div>
         </div>

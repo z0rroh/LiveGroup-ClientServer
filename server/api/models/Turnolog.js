@@ -38,6 +38,9 @@ module.exports = {
     expiracion:{
       type: 'date'
     },
+    despliegue:{
+      type: 'date'
+    },
     group: {
       type: 'string',
       required: true

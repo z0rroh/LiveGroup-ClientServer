@@ -24,6 +24,9 @@ module.exports = {
       type: 'string',
       required: true
     },
+    despliegue:{
+      type: 'date'
+    },
     cupo:{
       type: 'int',
       required: true

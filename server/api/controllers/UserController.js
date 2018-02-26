@@ -53,34 +53,13 @@ module.exports = {
       var grupo;
       var admin;
       user.turnos.map(turno =>{
-        var dia;
-        if( turno.day === "0"){
-          dia = "Lunes"
-        }
-        if( turno.day === "1"){
-          dia = "Martes"
-        }
-        if( turno.day === "2"){
-          dia = "Miercoles"
-        }
-        if( turno.day === "3"){
-          dia = "Jueves"
-        }
-        if( turno.day === "4"){
-          dia = "Viernes"
-        }
-        if( turno.day === "5"){
-          dia = "Sabado"
-        }
-        if( turno.day === "6"){
-          dia = "Domingo"
-        }
+
         var turno = {
           id: turno.id,
           name: turno.name,
           start: turno.start,
           end: turno.end,
-          day: dia
+          day: turno.day
         }
         turnos.push(turno);
       })
@@ -178,7 +157,7 @@ module.exports = {
         user.group = req.session.User.group;
         user.save(
           function(err){
-          
+
         });
       }
       else{

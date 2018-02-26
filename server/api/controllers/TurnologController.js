@@ -21,7 +21,10 @@ var moment=require('moment');
    },
 
    getTurnos: (req,res)=>{
-       Turnolog.find({group:req.session.User.group,estado: 'activo'}).populate('users')
+       moment.locale('es-cl');
+       var formatDate1 = moment().startOf('week').toDate();;
+       var formatDate2 = moment().endOf('week').toDate();;
+       Turnolog.find({group:req.session.User.group,estado: 'activo',despliegue: {$gte: formatDate1, $lte: formatDate2}}).populate('users')
        .exec(function(err,turnologs){
          var tokens = req.session.User.tokens;
          if(err) {
@@ -41,19 +44,19 @@ var moment=require('moment');
          var domingo = [];
 
          for(var i in turnologs){
-           if ( turnologs[i].day === '0' )
+           if ( turnologs[i].day === 'lunes' )
                lunes.push(turnologs[i]);
-           if ( turnologs[i].day === '1' )
+           if ( turnologs[i].day === 'martes' )
                martes.push(turnologs[i]);
-           if ( turnologs[i].day === '2' )
+           if ( turnologs[i].day === 'miércoles' )
                miercoles.push(turnologs[i]);
-           if ( turnologs[i].day === '3' )
+           if ( turnologs[i].day === 'jueves' )
                jueves.push(turnologs[i]);
-           if ( turnologs[i].day === '4' )
+           if ( turnologs[i].day === 'viernes' )
                viernes.push(turnologs[i]);
-           if ( turnologs[i].day === '5' )
+           if ( turnologs[i].day === 'sábado' )
                sabado.push(turnologs[i]);
-           if ( turnologs[i].day === '6' )
+           if ( turnologs[i].day === 'domingo' )
                domingo.push(turnologs[i]);
          }
 
@@ -62,7 +65,7 @@ var moment=require('moment');
            if( i === 0){
              aux = {
                name: "Lunes",
-               id: i,
+               id: "lunes",
                data: lunes
              }
              allDays.push(aux);
@@ -70,7 +73,7 @@ var moment=require('moment');
            if( i === 1){
              aux = {
                name: "Martes",
-               id: i,
+               id: "martes",
                data: martes
              }
              allDays.push(aux);
@@ -78,7 +81,7 @@ var moment=require('moment');
            if( i === 2){
              aux = {
                name: "Miercoles",
-               id: i,
+               id: "miércoles",
                data: miercoles
              }
              allDays.push(aux);
@@ -86,7 +89,7 @@ var moment=require('moment');
            if( i === 3){
              aux = {
                name: "Jueves",
-               id: i,
+               id: "jueves",
                data: jueves
              }
              allDays.push(aux);
@@ -94,7 +97,7 @@ var moment=require('moment');
            if( i === 4){
              aux = {
                name: "Viernes",
-               id: i,
+               id: "viernes",
                data: viernes
              }
              allDays.push(aux);
@@ -102,7 +105,7 @@ var moment=require('moment');
            if( i === 5){
              aux = {
                name: "Sabado",
-               id: i,
+               id: "sábado",
                data: sabado
              }
              allDays.push(aux);
@@ -110,7 +113,7 @@ var moment=require('moment');
            if( i === 6){
              aux = {
                name: "Domingo",
-               id: i,
+               id: "domingo",
                data: domingo
              }
              allDays.push(aux);
@@ -222,52 +225,33 @@ var moment=require('moment');
 
 
        listTurnsFromDate: (req, res)=>{
-         var date = req.param('date');
-         var formatDate = moment(date,'DD-MM-YYYY').format('YYYY-MM-DD');
-         Turnolog.find({group:req.session.User.group, createdAt: { '>': formatDate, '<': moment(formatDate).add(1,'days').format() }}).populate('users')
+         moment.locale('es-cl');
+         var dateFilter1 = req.param('date');
+         var formatDate1 = moment(dateFilter1,'DD-MM-YYYY').toDate();
+         var formatDate2 = moment(formatDate1).add(1,'days').toDate();
+         Turnolog.find({group:req.session.User.group, despliegue: {$gte: formatDate1, $lt: formatDate2}}).populate('users')
          .exec((err,turnos)=>{
-           if(err) {
-             return res.json({code:"FAIL", message:"Ah ocurrido un error inesperado"})
-           }
-           var turnologs = [];
-           for(var i in turnos){
-             var aux = "";
-             if( turnos[i].day === "0"){
-               aux = "lunes"
+             if(err) {
+               return res.json({code:"FAIL", message:"Ah ocurrido un error inesperado"})
              }
-             if( turnos[i].day === "1"){
-               aux = "martes"
+             var turnologs = [];
+             for (var i in turnos){
+               var turno={
+                name: turnos[i].name,
+                start: turnos[i].start,
+                end: turnos[i].end,
+                day: turnos[i].day,
+                cupoTotal: turnos[i].cupoTotal,
+                cupoActual: turnos[i].cupoActual,
+                estado: turnos[i].estado,
+                users: turnos[i].users,
+                id: turnos[i].id
+               }
+               turnologs.push(turno);
              }
-             if( turnos[i].day === "2"){
-               aux = "miercoles"
-             }
-             if( turnos[i].day === "3"){
-               aux = "jueves"
-             }
-             if( turnos[i].day === "4"){
-               aux = "viernes"
-             }
-             if( turnos[i].day === "5"){
-               aux = "sabado"
-             }
-             if( turnos[i].day === "6"){
-               aux = "domingo"
-             }
-             var turno={
-              name: turnos[i].name,
-              start: turnos[i].start,
-              end: turnos[i].end,
-              day: aux,
-              cupoTotal: turnos[i].cupoTotal,
-              cupoActual: turnos[i].cupoActual,
-              estado: turnos[i].estado,
-              users: turnos[i].users,
-              id: turnos[i].id
-             }
-             turnologs.push(turno);
-           }
-           return res.json({code: 'SUCCESS', turnos: turnologs})
-         });
+             return res.json({code: 'SUCCESS', turnos: turnologs})
+           })
 
-       }
+        },
+
  };

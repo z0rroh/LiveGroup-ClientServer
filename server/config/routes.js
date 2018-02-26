@@ -33,10 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   'GET /user/group': 'UserController.addGroup',
-  'GET /turnos/index': 'TurnosController.index',
   'GET /salir': 'SessionController.destroy',
-  'GET /admin': 'TurnosController.index',
-  'GET /populateturnos': 'TurnosController.populateTurnolog',
   'GET /anuncios': 'AnunciosController.index',
   'GET /groupList': 'GroupController.getUsers',
   'POST /newAccount': 'UserController.create',

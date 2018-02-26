@@ -55,6 +55,8 @@
         text-align: left; }
       .crearTurnosContainer .CrearTurnosFormContainer .Turno-Days label {
         margin: 0 10px; }
+      .crearTurnosContainer .CrearTurnosFormContainer .Turno-Days .pickerContainer div {
+        padding: 0; }
     .crearTurnosContainer .CrearTurnosFormContainer .TurnoC-Button {
       margin-top: 15px; }
       .crearTurnosContainer .CrearTurnosFormContainer .TurnoC-Button input {

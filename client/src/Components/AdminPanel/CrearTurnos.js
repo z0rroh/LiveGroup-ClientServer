@@ -15,20 +15,15 @@ class CrearTurnos extends Component {
   constructor(props){
     super(props);
     this.state={
-      timeStart: "00:00",
-      timeEnd: "00:00",
+      timeStart: "0:00",
+      timeEnd: "0:00",
       name: "",
       cupo: 0,
-      todos: false,
-      lunes: {id:0, value: false},
-      martes: {id:1, value: false},
-      miercoles: {id:2, value: false},
-      jueves: {id:3, value: false},
-      viernes: {id:4, value: false},
-      sabado: {id:5, value: false},
-      domingo: {id:6, value: false}
+      startDate: null,
+      endDate: null,
     }
-
+    this.handleChangeStart = this.handleChangeStart.bind(this);
+    this.handleChangeEnd = this.handleChangeEnd.bind(this);
   }
 
   handleChange(e){
@@ -41,29 +36,6 @@ class CrearTurnos extends Component {
     });
   }
 
-  handleCheckChange(e){
-    const target = e.target;
-    const value = target.checked
-    const name = target.name;
-    const id = target.id
-    if(name === "todos"){
-      this.setState({
-        todos: target.checked,
-        lunes: {id:0, value: target.checked},
-        martes: {id:1, value: target.checked},
-        miercoles: {id:2, value: target.checked},
-        jueves: {id:3, value: target.checked},
-        viernes: {id:4, value: target.checked},
-        sabado: {id:5, value: target.checked},
-        domingo: {id:6, value: target.checked},
-      })
-    }else{
-      this.setState({
-        [name]: {id: id, value: value}
-      });
-    }
-  }
-
   changeHour(time,name){
     var mo = moment(time).format('HH:mm')
     this.setState({[name]: mo})
@@ -72,39 +44,13 @@ class CrearTurnos extends Component {
 
   onSubmit(e){
     e.preventDefault();
-    const dias = [];
-    if(this.state.todos){
-      dias.push(this.state.lunes, this.state.martes, this.state.miercoles, this.state.jueves, this.state.viernes, this.state.sabado, this.state.domingo)
-    }else{
-      if(this.state.lunes.value){
-        dias.push(this.state.lunes)
-      }
-      if(this.state.martes.value){
-        dias.push(this.state.martes)
-      }
-      if(this.state.miercoles.value){
-        dias.push(this.state.miercoles)
-      }
-      if(this.state.jueves.value){
-        dias.push(this.state.jueves)
-      }
-      if(this.state.viernes.value){
-        dias.push(this.state.viernes)
-      }
-      if(this.state.sabado.value){
-        dias.push(this.state.sabado)
-      }
-      if(this.state.domingo.value){
-        dias.push(this.state.domingo)
-      }
-    }
-
     axios.post('/turnos/create', {
       timeStart:this.state.timeStart,
       timeEnd: this.state.timeEnd,
       name: this.state.name,
       cupo: this.state.cupo,
-      dias: dias})
+      startDate: this.state.startDate,
+      endDate: this.state.endDate})
     .then((response)=>{
       console.log(response);
       const res = response.data
@@ -113,10 +59,12 @@ class CrearTurnos extends Component {
         message: res.message
       })
       this.setState({
-        timeStart: "00:00",
-        timeEnd: "00::00",
+        timeStart: "0:00",
+        timeEnd: "0:00",
         name: "",
-        cupo: 0
+        cupo: 0,
+        startDate: null,
+        endDate: null
       })
     })
     .catch((error)=>{
@@ -126,6 +74,15 @@ class CrearTurnos extends Component {
         message: err.message
       })
     })
+  }
+
+  handleChangeStart(date){
+    this.setState({startDate: date});
+
+  }
+
+  handleChangeEnd(date){
+    this.setState({endDate: date});
   }
 
   render(){
@@ -177,88 +134,50 @@ class CrearTurnos extends Component {
                   required="true"/>
               </div>
             </div>
-            <div className="Turno-Days col-xs">
-              <div className="col-xs"><h5>Seleccionar dias</h5></div>
-              <label className="pt-control pt-checkbox pt-inline">
-                <input
-                  name="todos"
-                  checked={this.state.todos}
-                  onChange={(e) => this.handleCheckChange(e)}
-                  type="checkbox" />
-                <span className="pt-control-indicator"></span>
-                Todos
-              </label>
-              <label className="pt-control pt-checkbox pt-inline">
-                <input
-                  id="0"
-                  name="lunes"
-                  checked={this.state.lunes.value}
-                  onChange={(e) => this.handleCheckChange(e)}
-                  type="checkbox" />
-                <span className="pt-control-indicator"></span>
-                Lunes
-              </label>
-              <label className="pt-control pt-checkbox pt-inline">
-                <input
-                  id="1"
-                  name="martes"
-                  checked={this.state.martes.value}
-                  onChange={(e) => this.handleCheckChange(e)}
-                  type="checkbox" />
-                <span className="pt-control-indicator"></span>
-                Martes
-              </label>
-              <label className="pt-control pt-checkbox pt-inline">
-                <input
-                  id="2"
-                  name="miercoles"
-                  checked={this.state.miercoles.value}
-                  onChange={(e) => this.handleCheckChange(e)}
-                  type="checkbox" />
-                <span className="pt-control-indicator"></span>
-                Miercoles
-              </label>
-              <label className="pt-control pt-checkbox pt-inline">
-                <input
-                  id="3"
-                  name="jueves"
-                  checked={this.state.jueves.value}
-                  onChange={(e) => this.handleCheckChange(e)}
-                  type="checkbox" />
-                <span className="pt-control-indicator"></span>
-                Jueves
-              </label>
-              <label className="pt-control pt-checkbox pt-inline">
-                <input
-                  id="4"
-                  name="viernes"
-                  checked={this.state.viernes.value}
-                  onChange={(e) => this.handleCheckChange(e)}
-                  type="checkbox" />
-                <span className="pt-control-indicator"></span>
-                Viernes
-              </label>
-              <label className="pt-control pt-checkbox pt-inline">
-                <input
-                  id="5"
-                  name="sabado"
-                  checked={this.state.sabado.value}
-                  onChange={(e) => this.handleCheckChange(e)}
-                  type="checkbox" />
-                <span className="pt-control-indicator"></span>
-                Sabado
-              </label>
-              <label className="pt-control pt-checkbox pt-inline">
-                <input
-                  id="6"
-                  name="domingo"
-                  checked={this.state.domingo.value}
-                  onChange={(e) => this.handleCheckChange(e)}
-                  type="checkbox" />
-                <span className="pt-control-indicator"></span>
-                Domingo
-              </label>
-
+            <div className="Turno-Days row col-xs-12">
+              <div className="col-xs-12">
+                <h5>Seleccionar dias</h5>
+              </div>
+              <div className="row pickerContainer col-xs-6">
+                <div className="col-xs-1 col-xs-offset-5">
+                  <div className="row col-xs-12 end-xs">
+                    <i className="fa fa-calendar fa-2x nav-icon"></i>
+                  </div>
+                </div>
+                <div className="col-xs-6 start-xs">
+                  <DatePicker
+                      selected={this.state.startDate}
+                      isClearable={true}
+                      placeholderText=" Repetir Desde..."
+                      selectsStart
+                      startDate={this.state.startDate}
+                      endDate={this.state.endDate}
+                      onChange={this.handleChangeStart}
+                      locale="es-cl"
+                      dateFormat="DD/MM/YYYY"
+                      minDate={moment()}
+                    />
+                </div>
+              </div>
+              <div className="row pickerContainer col-xs-6">
+                <div className="row col-xs-1 end-xs">
+                  <i className="fa fa-calendar fa-2x nav-icon"></i>
+                </div>
+                <div className="col-xs-6 start-xs">
+                  <DatePicker
+                      selected={this.state.endDate}
+                      isClearable={true}
+                      placeholderText=" Repetir Hasta..."
+                      selectsEnd
+                      startDate={this.state.startDate}
+                      endDate={this.state.endDate}
+                      onChange={this.handleChangeEnd}
+                      locale="es-cl"
+                      dateFormat="DD/MM/YYYY"
+                      minDate={moment()}
+                    />
+                </div>
+              </div>
             </div>
             <div className="TurnoC-Button col-xs-12">
               <input className="btn " type="submit" value="Enviar" />

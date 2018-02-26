@@ -7,6 +7,7 @@ import { addToast } from '../../actions/Toast.js'
 import { Intent } from '@blueprintjs/core'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
+import moment from 'moment'
 
 class TurnoApp extends Component{
   constructor(){
@@ -15,26 +16,23 @@ class TurnoApp extends Component{
       turnos:[],
       tokens: null,
       isFetching: false,
-      hayTurnos: false
+      hayTurnos: false,
     }
     this.handlePostTurno = this.handlePostTurno.bind(this);
   }
 
   componentDidMount(){
-    this.setState({isFetching: true})
+    moment.locale('es-cl');
+    this.setState({isFetching: true});
     io.socket.get('/turnolog/subscribe', function(res) {
       console.log("Subscrito a turnos");
     }.bind(this));
-
     axios.get('/turnolog/getTurnos')
     .then((res)=>{
       const turnos = res.data;
       switch (turnos.code) {
         case 'SUCCESS':
           this.setState({isFetching: false, turnos: turnos.allDays})
-          break;
-        case 'NO_TURNOS':
-          this.setState({isFetching:false, hayTurnos: true})
           break;
         case 'FAIL':
           this.props.addToast({
@@ -53,25 +51,44 @@ class TurnoApp extends Component{
     })
 
     io.socket.on('turnolog', function serverSentEvent(newTurno) {
-      console.log(newTurno);
       let prevState = [];
       let nextState = [];
+      let auxArr;
       prevState = this.state.turnos;
       nextState = this.state.turnos;
+      if(newTurno.data.day === "lunes")
+        auxArr = 0;
+      if(newTurno.data.day === "martes")
+        auxArr = 1;
+      if(newTurno.data.day === "miércoles")
+        auxArr = 2;
+      if(newTurno.data.day === "jueves")
+        auxArr = 3;
+      if(newTurno.data.day === "viernes")
+        auxArr = 4;
+      if(newTurno.data.day === "sábado")
+        auxArr = 5;
+      if(newTurno.data.day === "domingo")
+        auxArr = 6;
       switch (newTurno.verb) {
         case 'updated':
-            for(let i = 0;i<prevState[newTurno.data.day].data.length;i++){
-              if(prevState[newTurno.data.day].data[i].id === newTurno.id){
-                console.log(nextState[newTurno.data.day].data[i]);
-                Object.assign(nextState[newTurno.data.day].data[i], newTurno.data);
+          if(newTurno.data.estado === "activo"){
+            for(let i = 0;i<prevState[auxArr].data.length;i++){
+              if(prevState[auxArr].data[i].id === newTurno.id){
+                //console.log(nextState[auxArr].data[i]);
+                Object.assign(nextState[auxArr].data[i], newTurno.data);
               }
             }
             this.setState({turnos: nextState});
+          }
           break;
         case 'created':
-          console.log(nextState[newTurno.data.day].data);
-          nextState[newTurno.data.day].data.splice(0,0,newTurno.data)
-          this.setState({turnos: nextState})
+          //console.log(nextState[auxArr].data);
+          var currentWeek = moment(newTurno.data.despliegue).isBetween(moment().startOf('week').subtract(1,'seconds'), moment().endOf('week'));
+          if(currentWeek){
+            nextState[auxArr].data.splice(0,0,newTurno.data)
+            this.setState({turnos: nextState})
+          }
           break;
 
         default:
@@ -106,8 +123,10 @@ class TurnoApp extends Component{
     })
   }
 
+
   whatRender(){
-    if(this.state.hayTurnos){
+    const emptyTurnos = false;
+    if(emptyTurnos){
       return( <div className="no-turnos">
                 <div><i className="material-icons">access_time</i></div>
                   <h2>No hay turnos disponibles</h2>
@@ -126,7 +145,6 @@ class TurnoApp extends Component{
   static isPrivate = false;
 
   render(){
-    console.log(this.state.turnos);
     return(
       <div className="ContainerTurnos col-xs-12">
         {this.whatRender()}

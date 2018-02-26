@@ -3343,15 +3343,18 @@ div.material-table {
 .Semana {
   margin-bottom: 20px; }
 
-.SemanaTitle {
+.SemanaTitleContainer {
+  padding-top: 3px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 15px; }
-  .SemanaTitle p {
-    margin: 0px; }
-  .SemanaTitle .Tokens {
-    text-align: left; }
+  .SemanaTitleContainer .SemanaTitleBox {
+    margin: auto; }
+    .SemanaTitleContainer .SemanaTitleBox p {
+      margin: 0px; }
+    .SemanaTitleContainer .SemanaTitleBox .Tokens {
+      text-align: left; }
 
 .MesName {
   background: #24292e;
@@ -3380,6 +3383,7 @@ div.material-table {
   .SemanaContent .Dia-Content {
     border-top: 0px; }
   .SemanaContent .Turno {
+    padding: 0;
     margin: 0;
     margin-top: 15px; }
   .SemanaContent .Turno-Info {
@@ -3872,6 +3876,8 @@ nav {
         text-align: left; }
       .crearTurnosContainer .CrearTurnosFormContainer .Turno-Days label {
         margin: 0 10px; }
+      .crearTurnosContainer .CrearTurnosFormContainer .Turno-Days .pickerContainer div {
+        padding: 0; }
     .crearTurnosContainer .CrearTurnosFormContainer .TurnoC-Button {
       margin-top: 15px; }
       .crearTurnosContainer .CrearTurnosFormContainer .TurnoC-Button input {

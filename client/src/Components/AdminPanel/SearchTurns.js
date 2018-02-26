@@ -8,7 +8,7 @@ import axios from 'axios'
 import DatePicker from 'react-datepicker';
 import { Position } from "@blueprintjs/core";
 import moment from 'moment'
-
+import 'moment/locale/es';
 
 class GroupList extends Component {
   constructor(){
@@ -84,7 +84,7 @@ class GroupList extends Component {
                 <div className="row col-xs-5 start-xs pickerContainer">
                   <DatePicker
                       isClearable={true}
-                      placeholderText="Dia/Mes/Año"
+                      placeholderText="  Dia/Mes/Año"
                       withPortal
                       locale="es-cl"
                       dateFormat="DD/MM/YYYY"
