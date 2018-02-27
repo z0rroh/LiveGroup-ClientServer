@@ -4,22 +4,21 @@
 
 import React, { Component } from 'react';
 import {Button, Intent, Popover, PopoverInteractionKind, Position} from "@blueprintjs/core";
+import PropTypes from 'prop-types';
+
 class Turno extends Component {
 
   constructor(props){
     super(props);
     this.state={
       isOpen: false,
+      user: this.props.user,
     }
 
   }
 
   handleClick(e, id){
     this.props.onPostTurno(id);
-  }
-
-  handleInteraction() {
-    this.setState({ isOpen: !this.state.isOpen });
   }
 
   render(){
@@ -30,6 +29,8 @@ class Turno extends Component {
     if(porcentaje === "100%"){
       var full = true
     }
+    const take = this.props.data.users.filter((usuario) => usuario.id === this.state.user.id);
+
     const users = this.props.data.users.map((user)=>{
       return (
         <div key={user.id} id={user.id} className="Turno-user-element row col-xs-12 middle-xs">
@@ -47,9 +48,7 @@ class Turno extends Component {
         <div className="Turno-Content">
           <div className="row center-xs">
             <Popover
-                isOpen={this.state.isOpen}
-                onInteraction={() => this.handleInteraction()}
-                interactionKind={PopoverInteractionKind.CLICK}
+                interactionKind={PopoverInteractionKind.HOVER}
                 popoverClassName="pt-popover-content-sizing"
                 position={Position.TOP}>
                 <div className="Turno-Info col-lg-12 col-xs-12">
@@ -58,13 +57,16 @@ class Turno extends Component {
                 </div>
                 {
                   users.length ? ( <div className="Turno-users-container col-xs-12">
-                                    {users}
-                                  </div>) : null
+                                     <div className="Turno-users-tittle row col-xs-12 center-xs">
+                                       <strong>Usuarios en Turno</strong>
+                                     </div>
+                                     {users}
+                                   </div>) : null
                 }
             </Popover>
-            <div className={full ? "Turno-Button-Full row col-lg-12 col-xs-12 center-xs" : "Turno-Button row col-lg-12 col-xs-12 center-xs"}>
+            <div className={full ? "Turno-Button-Full row col-lg-12 col-xs-12 center-xs" : take.length ? "Turno-Button-Take row col-lg-12 col-xs-12 center-xs" : "Turno-Button row col-lg-12 col-xs-12 center-xs"}>
                 <a onClick={(e)=>this.handleClick(e,this.props.data.id)} className="row btn waves-effect waves-light col-xs-10 col-sm-7 col-md-5 col-lg-10 center-xs middle-xs">
-                {full ? <i className="material-icons">block</i> : <i className="material-icons">add_box</i>}
+                <i className="material-icons">{full ? 'block' : take.length ? 'remove_circle' : 'add_box'}</i>
                 </a>
             </div>
             <div className="Turno-Log col-lg-12 col-xs-12">
@@ -78,6 +80,11 @@ class Turno extends Component {
       </section>
     )
   }
+};
+
+Turno.propTypes = {
+  user: PropTypes.object.isRequired,
+  users: PropTypes.array
 };
 
 export default Turno;

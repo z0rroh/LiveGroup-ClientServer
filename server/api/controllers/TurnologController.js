@@ -128,8 +128,7 @@ var moment=require('moment');
    postTurno: function (req,res) {
 
          Turnolog.findOne(req.param('id')).populate('users')
-                 .then(function(result){
-                   var turnolog = result;
+                 .then(function(turnolog){
                    if(_.isEmpty(turnolog.users) === false){
                        var resul= false;
                        turnolog.users.map(user =>{
@@ -148,31 +147,24 @@ var moment=require('moment');
                            var parsed = parseInt(actual, 10);
                            parsed = parsed + 1;
                            turnolog.cupoActual = parsed;
-                           turnolog.users.add(req.session.User.id);
-                           turnolog.save(function(err){
-                               Turnolog.publishUpdate(turnolog.id, {
-                                 id: turnolog.id,
-                                 name: turnolog.name,
-                                 start: turnolog.start,
-                                 end: turnolog.end,
-                                 day: turnolog.day,
-                                 cupoTotal: turnolog.cupoTotal,
-                                 cupoActual: turnolog.cupoActual,
-                                 expiracion: turnolog.expiracion,
-                                 estado: turnolog.estado,
-                                 group: turnolog.group,
-                                 createdAt: turnolog.createdAt,
-                                 updatedAt: turnolog.updatedAt,
-                                 users: turnolog.users
-                               });
-                           });
-                           var tk = req.session.User.tokens;
-                           tk = tk-1;
-                           req.session.User.tokens = tk;
-                           req.session.save();
-                           User.update({id:req.session.User.id},{tokens:tk},function(err, user) {
-                             return res.json({code:"SUCCESS", message: "El turno fue tomado con exito"})
-                           });
+                           var users = turnolog.users;
+                           users.push(req.session.User);
+                           Turnolog.update({id: turnolog.id},{cupoActual: parsed, users: users})
+                           .exec(function(err, turnolog){
+                              if(err){
+                                return res.json({code: 'FAIL', message: 'Se produjo un error inesperado'})
+                              }
+                              var tk = req.session.User.tokens;
+                              tk = tk-1;
+                              req.session.User.tokens = tk;
+                              req.session.save();
+                              User.update({id:req.session.User.id},{tokens:tk},function (err,user) {
+                                if(err){
+                                  return res.json({code: 'FAIL', message: 'Se produjo un error inesperado'})
+                                }
+                                return res.json({code:"SUCCESS", message: "El turno fue tomado con exito"});
+                              });
+                           })
                        }
                      }
                      else{
@@ -181,41 +173,28 @@ var moment=require('moment');
                        }
                        if(turnolog.estado==='activo' && turnolog.cupoActual<turnolog.cupoTotal && req.session.User.tokens>0){
 
-                         var actual = turnolog.cupoActual;
-                         var parsed = parseInt(actual, 10);
-                         parsed = parsed + 1;
-                         turnolog.cupoActual = parsed;
-                         turnolog.users.add(req.session.User.id);
-
-                         turnolog.save(function(err){
-                             Turnolog.publishUpdate(turnolog.id, {
-                             id: turnolog.id,
-                             name: turnolog.name,
-                             start: turnolog.start,
-                             end: turnolog.end,
-                             day: turnolog.day,
-                             cupoTotal: turnolog.cupoTotal,
-                             cupoActual: turnolog.cupoActual,
-                             expiracion: turnolog.expiracion,
-                             estado: turnolog.estado,
-                             group: turnolog.group,
-                             createdAt: turnolog.createdAt,
-                             updatedAt: turnolog.updatedAt,
-                             users: turnolog.users
-                             });
-                         });
-
-                         var tk = req.session.User.tokens;
-                         tk = tk-1;
-                         req.session.User.tokens = tk;
-                         req.session.save();
-                         User.update({id:req.session.User.id},{tokens:tk},function(err, user) {
-                           if (err){
-                           }
-                           return res.json({code:"SUCESS", message: "El turno fue tomado con exito"})
-                         });
-                       }
-
+                           var actual = turnolog.cupoActual;
+                           var parsed = parseInt(actual, 10);
+                           parsed = parsed + 1;
+                           var users = [];
+                           users.push(req.session.User);
+                           Turnolog.update({id: turnolog.id},{cupoActual: parsed, users: users})
+                           .exec(function (err,turnolog){
+                              if(err){
+                                return res.json({code: 'FAIL', message: 'Se produjo un error inesperado'})
+                              }
+                              var tk = req.session.User.tokens;
+                              tk = tk-1;
+                              req.session.User.tokens = tk;
+                              req.session.save();
+                              User.update({id:req.session.User.id},{tokens:tk},function (err,user) {
+                                if(err){
+                                  return res.json({code: 'FAIL', message: 'Se produjo un error inesperado'})
+                                }
+                                return res.json({code:"SUCCESS", message: "El turno fue tomado con exito"});
+                              });
+                           })
+                        }
                      }
 
          })

@@ -32,7 +32,7 @@ class TurnoApp extends Component{
       const turnos = res.data;
       switch (turnos.code) {
         case 'SUCCESS':
-          this.setState({isFetching: false, turnos: turnos.allDays})
+          this.setState({isFetching: false, turnos: turnos.allDays, tokens: this.props.user.tokens})
           break;
         case 'FAIL':
           this.props.addToast({
@@ -106,7 +106,8 @@ class TurnoApp extends Component{
             this.props.addToast({
             intent: Intent.SUCCESS,
             message: res.data.message
-          })
+          });
+          this.setState({tokens: this.state.tokens-1})
           break;
         case 'FAIL':
           this.props.addToast({
@@ -134,6 +135,7 @@ class TurnoApp extends Component{
     }else{
       return(
         <Semana
+          user={this.props.user}
           handlePostTurno={this.handlePostTurno}
           tokens={this.state.tokens}
           isFetching={this.state.isFetching}
@@ -160,5 +162,8 @@ TurnoApp.propTypes = {
   turnos: PropTypes.array
 };
 
+const stateToProps = ({ auth }) => ({
+  user: auth.user
+})
 
-export default connect(null,{addToast} )(TurnoApp);
+export default connect(stateToProps,{addToast})(TurnoApp);

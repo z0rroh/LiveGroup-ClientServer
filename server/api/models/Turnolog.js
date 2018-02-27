@@ -75,5 +75,14 @@ module.exports = {
       return cb(salida.format());
     },
 
+    afterUpdate: function(turnolog, next) {
+
+      Turnolog.findOne({id: turnolog.id}).populateAll()
+      .exec((err, turnolog)=>{
+        Turnolog.publishUpdate(turnolog.id, turnolog);
+      })
+      return next()
+    }
+
 
 };

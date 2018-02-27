@@ -11,7 +11,8 @@ class TurnoItem extends Component{
     }
 
     render(){
-      const turno = this.state.turno
+      const turno = this.state.turno;
+      console.log(turno);
       return(
           <div id={turno.id} className="Turno-element row col-xs">
               <div className="col-xs-12 col-lg-6">

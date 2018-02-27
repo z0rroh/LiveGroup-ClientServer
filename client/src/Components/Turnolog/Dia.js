@@ -11,7 +11,11 @@ export default class Dia extends Component{
   }
   render(){
     const Turnos = this.props.data.map((turno) => {
-      return <Turno key={turno.id} data={turno} onPostTurno={this.props.onPostTurno}/>
+      return <Turno
+                key={turno.id}
+                data={turno}
+                user={this.props.user} 
+                onPostTurno={this.props.onPostTurno}/>
     });
     return(
       <div className="Dia col-lg-1-7 col-xs-12-12" >

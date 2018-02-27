@@ -14,11 +14,13 @@ class Semana extends Component{
     this.state = {
       fecha: [],
       hora: new Date(),
-      mesName: ""
+      mesName: "",
     };
 
   }
-
+  componentDidMount(){
+    this.getDate();
+  }
   getDate(){
     var currMonthName  = moment().format('MMMM').toUpperCase();
     var fecha = new Date();
@@ -31,7 +33,12 @@ class Semana extends Component{
   render(){
     const isFetching = this.props.isFetching;
     const Dias = this.props.turnos.map((day) => {
-      return (<Dia key={day.id} name={day.name} data={day.data} onPostTurno={this.props.handlePostTurno}/>)
+      return (<Dia
+                  key={day.id}
+                  name={day.name}
+                  data={day.data}
+                  onPostTurno={this.props.handlePostTurno}
+                  user={this.props.user}/>)
     });
     if(isFetching){
       return(
