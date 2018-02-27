@@ -8,11 +8,18 @@ class Turno extends Component {
 
   constructor(props){
     super(props);
+    this.state={
+      isOpen: false,
+    }
 
   }
 
   handleClick(e, id){
     this.props.onPostTurno(id);
+  }
+
+  handleInteraction() {
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
   render(){
@@ -40,6 +47,8 @@ class Turno extends Component {
         <div className="Turno-Content">
           <div className="row center-xs">
             <Popover
+                isOpen={this.state.isOpen}
+                onInteraction={() => this.handleInteraction()}
                 interactionKind={PopoverInteractionKind.CLICK}
                 popoverClassName="pt-popover-content-sizing"
                 position={Position.TOP}>

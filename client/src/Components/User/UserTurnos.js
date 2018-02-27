@@ -22,7 +22,11 @@ class UserTurnos extends Component{
           <div className="Tittle-Element col-xs">
             <h4>Turnos Semana</h4>
           </div>
-          {turnosRender}
+          {turnosRender.length ? (turnosRender) :
+            (<div className="perfil-no-turnos col-xs-12">
+                <div><i className="material-icons">access_time</i></div>
+                <h3>No has tomado turnos</h3>
+            </div>)}
         </div>
       )
     }

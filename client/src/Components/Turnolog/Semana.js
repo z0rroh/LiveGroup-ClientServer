@@ -26,21 +26,6 @@ class Semana extends Component{
     var hoy = new Intl.DateTimeFormat('es-Ch',options).format(fecha);
     this.setState({mesName: currMonthName, fecha: hoy})
   }
-  componentDidMount(){
-    this.getDate();
-    this.intervalID = setInterval(
-      () => this.tick(),
-      1000
-    );
-  }
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-  tick() {
-  this.setState({
-      hora: new Date()
-    });
-  }
 
 
   render(){

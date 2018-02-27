@@ -62,6 +62,19 @@
       padding: 0px; }
     .Perfil-Container .User-Info .User-Info-Turnos {
       display: inline-block; }
+    .Perfil-Container .User-Info .perfil-no-turnos {
+      top: 20%;
+      background-color: #fafafa;
+      border-radius: 50%;
+      position: relative; }
+      .Perfil-Container .User-Info .perfil-no-turnos i {
+        position: relative;
+        font-size: 100px;
+        color: rgba(151, 151, 151, 0.5); }
+      .Perfil-Container .User-Info .perfil-no-turnos h3 {
+        position: relative;
+        color: rgba(151, 151, 151, 0.5) !important;
+        font-size: 30px !important; }
     .Perfil-Container .User-Info .User-element {
       padding: 20px 20px 20px 10px;
       display: flex; }
