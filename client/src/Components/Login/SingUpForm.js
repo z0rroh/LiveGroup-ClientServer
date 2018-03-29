@@ -12,6 +12,7 @@ class SignUpForm extends Component{
       this.state={
         name: "",
         email: "",
+        rut: "",
         password: "",
         repassword: ""
       }
@@ -76,6 +77,16 @@ class SignUpForm extends Component{
                 type="text"
                 className="pt-input pt-round inputParams"
                 placeholder="Nombre Completo"
+                required="true"/>
+              </div>
+              <div className="col-xs-12 input-field"><i className="material-icons prefix">face</i>
+              <input
+                onChange={ this.onChange }
+                name="rut"
+                value={this.state.rut}
+                type="text"
+                className="pt-input pt-round inputParams"
+                placeholder="Rut sin digito verificador"
                 required="true"/>
               </div>
               <div className="col-xs-12 input-field"><i className="material-icons prefix">mail</i>

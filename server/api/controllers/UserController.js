@@ -95,6 +95,7 @@ module.exports = {
       var userObj={
   			name : newUser.name,
   			email : newUser.email,
+        rut: newUser.rut,
         password: newUser.password
   		}
   		User.create(userObj,function (err, user) {
