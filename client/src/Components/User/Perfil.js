@@ -17,9 +17,29 @@ class Perfil extends Component{
       turnos: [],
       isFetching: false
     };
+    this.handleChange=this.handleChange.bind(this);
+  }
+
+  handleChange(e,name){
+
+    console.log(name,":",e);
+    //this.setState({[name]: e})
+    this.setState(prevState => ({
+        user: {
+            ...prevState.user,
+            [name]: e
+        }
+    }))
+    /*
+    const data = {
+      id: this.props.funcionario.id,
+      [name]: e,
+    }
+*/
   }
 
   componentDidMount(){
+    console.log("holaaaa");
     this.setState({isFetching: true})
     axios.get('/user/getUser')
     .then((response)=>{
@@ -39,7 +59,7 @@ class Perfil extends Component{
 
   }
 
-  
+
    renderContent(){
      if(this.state.isFetching){
        return(<PerfilSkeleton/>)
@@ -54,6 +74,7 @@ class Perfil extends Component{
 
                <div className="User-Info col-lg-8 col-xs-12">
                      <UserInfo
+                       handleChange={this.handleChange}
                        user={this.state.user}/>
                      <UserTurnos
                        turnos={this.state.turnos}/>

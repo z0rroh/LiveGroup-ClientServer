@@ -12,7 +12,7 @@ class UserAvatar extends Component{
     constructor(props){
       super(props);
       this.state = {
-        avatar: "/images/avatars/",
+        avatar: null,
         isOpen: false,
         file: null,
         avatarName: "Seleccionar foto de perfil...",
@@ -70,16 +70,16 @@ class UserAvatar extends Component{
     }
 
     componentDidMount(){
-      this.setState({avatar: this.state.avatar+this.props.avatar});
+      this.setState({avatar: this.props.avatar});
     }
 
     render(){
       return(
         <div className="User-Edit-img">
           {
-            this.state.avatar === "/images/avatars/" || this.state.avatar === 'undefined' ?
+            this.state.avatar === null || this.state.avatar === 'undefined' ?
             (<div className="user-img-skeleton pt-skeleton"></div>) :
-            (<img src={this.state.avatar} />)
+            (<img src={"/images/avatars/"+this.state.avatar} />)
           }
           <Popover
              isOpen={this.state.isOpen}

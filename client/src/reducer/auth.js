@@ -4,7 +4,7 @@ import { SET_CURRENT_USER, SET_ISFETCHING } from '../actions/types'
 
 const initialState = {
   isAuthenticated: false,
-  isFetching: false,
+  isFetching: true,
   user: {}
 }
 

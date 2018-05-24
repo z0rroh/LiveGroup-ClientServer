@@ -9,32 +9,10 @@ class UserInfo extends Component{
 
     constructor(props){
       super(props);
-      this.state={
-        id: this.props.user.id,
-        name: this.props.user.name,
-        group: this.props.user.group,
-        email: this.props.user.email,
-        phone: this.props.user.phone,
-        adress: this.props.user.adress,
-        tokens: this.props.user.tokens,
-        admin: this.props.user.admin
-      }
-      this.handleChange=this.handleChange.bind(this);
-    }
-    handleChange = (e,name)=>{
-      console.log(name,":",e);
-      //this.setState({[name]: e})
-      /*
-      const data = {
-        id: this.props.funcionario.id,
-        [name]: e,
-      }
-  */
-    }
 
+    }
 
     render(){
-      console.log(this.props.user);
       return(
         <div className="User-Info-Datos col-lg-6 col-xs-6">
             <div className="Tittle-Element col-lg">
@@ -44,39 +22,40 @@ class UserInfo extends Component{
               <strong>Nombre:</strong>
               <EditableText
                 className="pt-intent-success"
-                defaultValue={this.state.name}
+                defaultValue={this.props.user.name}
                 selectAllOnFocus={true}
-                ></EditableText>
+                onChange={(e)=>this.props.handleChange(e,'name')}></EditableText>
             </div>
             <div className="User-element col-lg">
               <strong>Grupo:</strong>
             <EditableText
-              value={this.state.group} disabled={true} minWidth={2}></EditableText>
+              value={this.props.user.group} disabled={true} minWidth={2}></EditableText>
             </div>
             <div className="User-element col-lg">
               <strong>Email:</strong>
             <EditableText
               className="pt-intent-success"
-              value={this.state.email}
+              value={this.props.user.email}
               selectAllOnFocus={true}
               name="email"
-              onChange={(e)=>this.handleChange(e,'email')}></EditableText>
+              onChange={(e)=>this.props.handleChange(e,'email')}></EditableText>
             </div>
             <div className="User-element col-lg">
               <strong>Telefono:</strong>
             <EditableText
+              type="int"
               className="pt-intent-success"
-              value={this.state.phone}
+              value={this.props.user.phone}
               selectAllOnFocus={true}
-              onChange={(e)=>this.handleChange(e,'phone')}></EditableText>
+              onChange={(e)=>this.props.handleChange(e,'phone')}></EditableText>
             </div>
             <div className="User-element col-lg">
               <strong>Direccion:</strong>
               <EditableText
                 className="pt-intent-success"
-                value={this.state.adress}
+                value={this.props.user.adress}
                 selectAllOnFocus={true}
-                onChange={(e)=>this.handleChange(e,'adress')}></EditableText>
+                onChange={(e)=>this.props.handleChange(e,'adress')}></EditableText>
             </div>
             <div className="User-element col-lg">
               <strong>Tokens:</strong>

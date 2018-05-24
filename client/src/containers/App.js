@@ -9,15 +9,6 @@ import Login from '../Components/Login/Login'
 import Loading from 'react-loading-components';
 import noGroup from '../Components/NoGroup/noGroup'
 
-class newGroup extends Component {
-  static isPrivate = true;
-  render() {
-      console.log("componente crear grupo");
-      return (<h1>crear grupo</h1>)
-  }
-
-}
-
 
 class App extends Component {
 
