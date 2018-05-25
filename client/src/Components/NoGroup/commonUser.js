@@ -10,7 +10,7 @@ class commonUser extends Component {
   render() {
       return (
         <div>
-          <h4>WHOOPS!</h4><p>No te encuentras en ningun grupo de trabajo, vuelve en otro momento</p>
+          <h4>WHOOPS!</h4><p>No te encuentras asociado a ningun grupo de trabajo, comunicate con tu empleador o vuelve en otro momento.</p>
        </div>)
   }
 

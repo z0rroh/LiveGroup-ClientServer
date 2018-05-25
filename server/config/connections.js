@@ -58,7 +58,7 @@ module.exports.connections = {
   ***************************************************************************/
   Mongo: {
     adapter: 'sails-mongo',
-    host: 'localhost',
+    host: 'livegroup_database_mongo',
     port: 27017,
     //user: 'username', //optional
     //password: 'password', //optional
