@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-
 import {EditableText} from "@blueprintjs/core";
 
-import Editable from 'react-x-editable';
 
 class UserInfo extends Component{
 
-    constructor(props){
-      super(props);
-
-    }
 
     render(){
       return(
