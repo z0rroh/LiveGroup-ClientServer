@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Redirect} from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -7,8 +7,7 @@ import PropTypes from 'prop-types';
 
 const PRIVATE_ROOT = '/anuncios';
 const PUBLIC_ROOT = '/auth/login';
-const C_USER = '/noGroup/waiting';
-const A_USER = '/noGroup/newGroup';
+
 
 const AuthRoute = ({component, ...props}) => {
   const { isPrivate } = component;

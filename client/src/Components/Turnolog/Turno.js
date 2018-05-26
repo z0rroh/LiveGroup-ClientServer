@@ -1,9 +1,5 @@
-/*
-* app Turno
-*/
-
 import React, { Component } from 'react';
-import {Button, Intent, Popover, PopoverInteractionKind, Position} from "@blueprintjs/core";
+import {Popover, PopoverInteractionKind, Position} from "@blueprintjs/core";
 import PropTypes from 'prop-types';
 
 class Turno extends Component {
@@ -23,11 +19,11 @@ class Turno extends Component {
 
   render(){
     var full = false;
-    let porcentaje = (parseInt(this.props.data.cupoActual) * 100)/parseInt(this.props.data.cupoTotal);
-      porcentaje = porcentaje+"%";
+    let porcentaje = (parseInt(this.props.data.cupoActual * 100,10)/parseInt(this.props.data.cupoTotal,10));
+    porcentaje = porcentaje+"%";
     let datermianteStyle = { width: porcentaje};
     if(porcentaje === "100%"){
-      var full = true
+      full = true
     }
     const take = this.props.data.users.filter((usuario) => usuario.id === this.state.user.id);
 
@@ -35,7 +31,7 @@ class Turno extends Component {
       return (
         <div key={user.id} id={user.id} className="Turno-user-element row col-xs-12 middle-xs">
           <div className="Turno-user-element-img col-xs-2 row middle-xs">
-            <img src={"/images/avatars/"+user.user_image}/>
+            <img src={"/images/avatars/"+user.user_image} alt="TurnoUserAvatar"/>
           </div>
           <div className="Turno-user-element-name col-xs-10">
             <p>{user.name}</p>

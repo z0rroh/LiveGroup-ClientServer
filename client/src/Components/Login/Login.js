@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import SignInForm from './SingInForm.js'
 import SignUpForm from './SingUpForm.js'
 import { loginServer, SignupServer } from '../../actions/auth'
@@ -9,9 +8,6 @@ import { Switch, Route, Redirect } from 'react-router'
 import { addToast } from '../../actions/Toast.js'
 
 class Login extends Component{
-  constructor(){
-    super();
-  }
 
   static isPrivate = false;
   render(){

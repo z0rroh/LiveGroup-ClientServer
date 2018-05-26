@@ -11,7 +11,6 @@ class AnunciosForm extends Component {
     }
   }
 
-
   onChange(e){
     this.setState({text:e.target.value})
 
@@ -41,7 +40,9 @@ class AnunciosForm extends Component {
         <section className="col-lg-8 card col-xs-10">
             <div className="AnuncioNuevo">
               <div className="row center-lg">
-                <div className="AnuncioNuevo-Image col-lg-1 col-xs-2"><img src={"/images/avatars/"+user.user_image}/></div>
+                <div className="AnuncioNuevo-Image col-lg-1 col-xs-2">
+                  <img src={"/images/avatars/"+user.user_image} alt="AnuncioFormAvatar"/>
+                </div>
                 <div className="AnuncioNuevo-Form col-lg-10 col-xs-9">
                   <form onSubmit={(e) => this.onSubmit(e)}
                         onKeyDown={(e) => { this.handleKeyDown(e); }}

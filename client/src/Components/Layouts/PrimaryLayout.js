@@ -1,5 +1,5 @@
 import React, {Component}  from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Redirect } from 'react-router-dom'
 import PrimaryHeader from '../Header/PrimaryHeader'
 import AnunciosApp from '../Anuncios/AnunciosApp.js'
 import TurnoApp from '../Turnolog/TurnoApp.js'

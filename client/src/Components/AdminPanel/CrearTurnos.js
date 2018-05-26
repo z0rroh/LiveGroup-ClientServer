@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import { TimePicker,TimePickerPrecision } from "@blueprintjs/datetime";
+import { TimePicker } from "@blueprintjs/datetime";
 import moment from 'moment';
 import axios from 'axios'
 import { addToast } from '../../actions/Toast.js'

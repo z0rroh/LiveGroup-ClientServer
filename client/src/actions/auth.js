@@ -28,7 +28,6 @@ export function loginServer(data){
         default:
           dispatch(isFetching(false));
           return res.data.message
-          break;
       }
     })
     .catch(err =>{
@@ -62,7 +61,6 @@ export function editAvatar(avatar, config){
               break;
             default:
               return res.data.message
-              break;
           }
       })
     }
@@ -79,7 +77,6 @@ export function newGroup(group){
               break;
             default:
               return res.data.message
-              break;
           }
       })
     }

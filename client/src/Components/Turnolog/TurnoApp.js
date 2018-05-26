@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Semana from './Semana.js';
 import io from '../../io.js'
 import axios from 'axios'
@@ -26,7 +25,7 @@ class TurnoApp extends Component{
     this.setState({isFetching: true});
     io.socket.get('/turnolog/subscribe', function(res) {
       console.log("Subscrito a turnos");
-    }.bind(this));
+    });
     axios.get('/turnolog/getTurnos')
     .then((res)=>{
       const turnos = res.data;

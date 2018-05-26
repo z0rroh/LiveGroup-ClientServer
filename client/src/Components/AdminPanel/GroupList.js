@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
-import { ReactTableDefaults } from 'react-table'
 import matchSorter from 'match-sorter'
 import axios from 'axios'
 
-/*Object.assign(ReactTableDefaults, {
-  defaultPageSize: 10,
-  minRows: 3,
-  // etc...
-})*/
 
 class GroupList extends Component {
   constructor(){
@@ -35,9 +28,9 @@ class GroupList extends Component {
           users[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
           this.setState({ users });
           console.log(users[cellInfo.index].id);
-          var columnId = cellInfo.column.id;
-          var id = users[cellInfo.index].id;
-          var param = { [columnId]: users[cellInfo.index][cellInfo.column.id]}
+          //var columnId = cellInfo.column.id;
+          //var id = users[cellInfo.index].id;
+          //var param = { [columnId]: users[cellInfo.index][cellInfo.column.id]}
 
         }}
         dangerouslySetInnerHTML={{
@@ -127,8 +120,6 @@ class GroupList extends Component {
                id: 'admin',
                accessor: 'tipo',
                width: 80,
-               id: "type",
-               Cell: this.renderEditable,
                Cell: ({ value }) => (value === true ? "Admin" : "Comun"),
                filterMethod: (filter, row) => {
                   console.log(row[filter.id]);
@@ -155,7 +146,6 @@ class GroupList extends Component {
               accessor: 'tokens',
               width: 70,
               Cell: props => <span className='number'>{props.value}</span>,
-              Cell: this.renderEditable
             }]}
           loading= {isFetching}
           showPagination= {true}

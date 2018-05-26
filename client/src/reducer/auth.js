@@ -15,12 +15,10 @@ export default (state = initialState, action = {}) => {
               isAuthenticated: !isEmpty(action.user),
               user: action.user,
              })
-             break;
     case SET_ISFETCHING:
         return Object.assign({},state,{
           isFetching: action.isFetching
         })
-        break;
 
     /* case SET_TOKEN:
        return Object.assign({}, state, {

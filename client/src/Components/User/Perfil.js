@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import UserInfo from './UserInfo';
 import UserTurnos from './UserTurnos'
 import UserAvatar from './UserAvatar'
@@ -55,7 +54,7 @@ class Perfil extends Component{
         avatar: user.data[0].user_image
     })*/
     console.log(user);
-    }.bind(this));
+    });
 
   }
 

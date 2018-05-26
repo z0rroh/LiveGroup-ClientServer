@@ -11,7 +11,6 @@ class ComentarioForm extends Component {
     }
   }
 
-
   onChange(e){
     this.setState({text:e.target.value})
 
@@ -40,7 +39,9 @@ class ComentarioForm extends Component {
     return(
         <div className="ComentarioNuevo col-lg-12">
           <div className="row start-lg">
-            <div className="ComentarioNuevo-Image col-lg-1"><img src={"/images/avatars/"+user.user_image}/></div>
+            <div className="ComentarioNuevo-Image col-lg-1">
+              <img src={"/images/avatars/"+user.user_image} alt="ComentarioFormAvatar"/>
+            </div>
             <div className="ComentarioNuevo-Form col-lg-11">
                 <form onSubmit={(e) => this.onSubmit(e)}
                       onKeyDown={(e) => { this.handleKeyDown(e); }}

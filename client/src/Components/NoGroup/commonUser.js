@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Switch, Route, Redirect } from 'react-router'
-
-
 
 class commonUser extends Component {
 

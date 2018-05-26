@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Skeleton} from "@blueprintjs/core";
 import ComentarioForm from './ComentarioForm'
 import ComentarioItem from './ComentarioItem'
 import io from '../../io.js'
@@ -87,7 +86,9 @@ class AnuncioItem extends Component {
     return(
         <li id={this.state.anuncio.id} className="comment-line">
           <div className="comment-main-level">
-            <div className="comment-avatar"><img src={"/images/avatars/"+anuncio.autor.user_img}/></div>
+            <div className="comment-avatar">
+              <img src={"/images/avatars/"+anuncio.autor.user_img} alt="AnuncioAvatar"/>
+            </div>
             <div className="comment-box">
                 <div className="comment-head">
                   <h6 className="comment-name by-author"><a>{this.state.anuncio.autor.name}</a></h6>

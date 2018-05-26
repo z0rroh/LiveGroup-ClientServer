@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Anuncios from './Anuncios.js'
 import axios from 'axios'
 import io from '../../io.js'
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 class AnunciosApp extends Component {
 
@@ -19,11 +19,11 @@ class AnunciosApp extends Component {
     io.socket.get('/anuncios/subscribe', function (res){
       console.log(res);
       console.log("Subscrito a anuncios");
-    }.bind(this));
+    });
 
     io.socket.get('/comentario/subscribe', function () {
         console.log("Subscrito a comentarios");
-    }.bind(this));
+    });
 
     this.setState({isFetching:true});
     axios.get('/anuncios/getAnuncios')
@@ -42,7 +42,7 @@ class AnunciosApp extends Component {
           id: anuntio.autor.id,
           user_img: anuntio.autor.user_img
         }
-        let newAnuncio = {autor: anuntio.autor, id: anuntio.id, text: anuntio.text, fecha: anuntio.fecha, comment: anuntio.comment}
+        let newAnuncio = {autor: autor, id: anuntio.id, text: anuntio.text, fecha: anuntio.fecha, comment: anuntio.comment}
         let newState = this.state.anuncios;
         newState.splice(0,0,newAnuncio)
         this.setState({anuncios: newState})

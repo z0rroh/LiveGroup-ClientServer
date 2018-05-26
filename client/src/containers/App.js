@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Switch, Route,  Redirect, withRouter } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import AuthRoute from '../AuthorizedRoute.js'
 import PrimaryLayout from '../Components/Layouts/PrimaryLayout.js'
 import ToastList from './ToastList/ToastList.js'
-import { connect } from 'react-redux'
 import Login from '../Components/Login/Login'
 import Loading from 'react-loading-components';
 import noGroup from '../Components/NoGroup/noGroup'

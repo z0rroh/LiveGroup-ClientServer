@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { ReactTableDefaults } from 'react-table'
-import matchSorter from 'match-sorter'
 import axios from 'axios'
 import DatePicker from 'react-datepicker';
-import { Position } from "@blueprintjs/core";
 import moment from 'moment'
 import 'moment/locale/es';
 
@@ -39,7 +35,6 @@ class GroupList extends Component {
 
   handleDateChange(date){
     this.setState({isFetching: true, turnos: [],date: date });
-    var date = date;
     var formatDate = moment(date).format('DD/MM/YYYY');
     this.setState({isFetching: true})
     axios.get('/listTurnsFromDate',{params: {date: formatDate}})
@@ -68,7 +63,7 @@ class GroupList extends Component {
 
   render() {
 
-    const { turnos, isFetching, date, show } = this.state;
+    const { turnos, isFetching,date} = this.state;
 
     return(
       <div className="col-xs-12 ">
@@ -88,7 +83,7 @@ class GroupList extends Component {
                       withPortal
                       locale="es-cl"
                       dateFormat="DD/MM/YYYY"
-                      selected={this.state.date}
+                      selected={date}
                       onChange={this.handleDateChange}/>
                 </div>
             </div>
@@ -153,11 +148,7 @@ class GroupList extends Component {
                            </select>
                        }
                     ]}
-                    style={{
-                       height: "auto"
-                     },{
-                       border: "1px solid rgba(0,0,0,0.3)"
-                     }}
+                    style={{height: "auto",border: "1px solid rgba(0,0,0,0.3)"}}
                     defaultPageSize={3}
                     filterable= {true}
                     showPagination={true}
@@ -263,11 +254,7 @@ class GroupList extends Component {
                showPaginationBottom= {true}
                showPageSizeOptions= {false}
                defaultPageSize= {10}
-               style={{
-                  height: "auto"
-                },{
-                  border: "none"
-                }}
+               style={{height: "auto", border: "none"}}
 
                onFetchData={this.onSubmit}
                defaultSortMethod= {this.defaultSort}

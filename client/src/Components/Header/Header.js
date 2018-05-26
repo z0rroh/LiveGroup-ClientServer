@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import { addToast } from '../../actions/Toast'
 import { logout } from '../../actions/auth'
 import { Intent } from '@blueprintjs/core'
-import io from '../../io.js'
 
 class Header extends Component{
   constructor(){
@@ -50,7 +48,11 @@ class Header extends Component{
                     <a className="User-name dropdown-button">{user.name}</a>
                     <p className="User-empresa">{user.groupName}</p>
                   </div>
-                  <div className="col-lg-2"><div className="User-image"><img src={"/images/avatars/"+user.user_image}/></div></div>
+                  <div className="col-lg-2">
+                    <div className="User-image">
+                      <img src={"/images/avatars/"+user.user_image} alt="HeaderAvatar"/>
+                    </div>
+                  </div>
                   <div className="col-lg-2">
                     <div className="Logout">
                       <a title="Cerrar Sesion"

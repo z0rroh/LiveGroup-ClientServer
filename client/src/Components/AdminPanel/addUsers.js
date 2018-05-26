@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import moment from 'moment';
 import axios from 'axios'
 import { addToast } from '../../actions/Toast.js'
 import { connect } from 'react-redux'

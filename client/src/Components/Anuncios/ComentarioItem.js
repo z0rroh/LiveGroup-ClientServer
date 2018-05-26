@@ -15,7 +15,9 @@ class ComentarioItem extends Component {
 
     return(
       <li id={comment.id}>
-        <div className="comment-avatar"><img src={"/images/avatars/"+comment.autor.user_img} /></div>
+        <div className="comment-avatar">
+          <img src={"/images/avatars/"+comment.autor.user_img} alt="ComentarioAvatar"/>
+        </div>
         <div className="comment-box">
           <div className="comment-head">
             <h6 className="comment-name"><a>{comment.autor.name}</a></h6>

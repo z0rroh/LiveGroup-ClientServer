@@ -3,10 +3,6 @@ import Perfil from './Perfil.js'
 import io from '../../io.js'
 
 class PerfilApp extends Component {
-  constructor(){
-    super();
-
-  }
 
   componentDidMount(){
     io.socket.get('/user/announce', ()=> {

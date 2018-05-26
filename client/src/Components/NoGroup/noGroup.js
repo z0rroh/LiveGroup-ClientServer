@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import { addToast } from '../../actions/Toast'
 import { logout } from '../../actions/auth'
 import { Intent } from '@blueprintjs/core'
-import { Switch, Route, Redirect } from 'react-router'
+import { Switch, Redirect } from 'react-router'
 import commonUser from './commonUser'
 import adminUser from './adminUser'
 import GroupTypeRoute from '../../GroupTypeRoute'

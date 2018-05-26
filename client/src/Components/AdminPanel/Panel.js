@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import { NavLink, withRouter } from 'react-router-dom'
 
 class Panel extends Component {
-  constructor(){
-    super();
-  }
-
 
   render(){
     const match = this.props.match;

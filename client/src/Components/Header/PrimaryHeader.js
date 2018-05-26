@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Header from './Header'
-import ChatApp from '../Chat/ChatApp.js'
-import ChatBoxList from '../Chat/ChatBoxList'
 
 class PrimaryHeader extends Component{
 

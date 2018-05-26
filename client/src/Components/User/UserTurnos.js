@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import TurnoItem from './TurnoItem.js'
 
 class UserTurnos extends Component{
-
-    constructor(props){
-      super(props);
-
-    }
 
     render(){
       const turnosRender = this.props.turnos.map(turno =>{

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Route, Redirect, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Intent } from '@blueprintjs/core'
 
 class SignInForm extends Component{

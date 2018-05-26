@@ -1,14 +1,7 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import {Skeleton} from "@blueprintjs/core";
 
 
 class PerfilSkeleton extends Component{
-
-  constructor(){
-    super();
-  }
-
 
   render(){
     return(
@@ -23,7 +16,7 @@ class PerfilSkeleton extends Component{
         <div className="User-Info-skeleton col-lg-8 col-xs-12">
           <div className="User-Info-Datos-skeleton col-lg-6">
             <div className="Tittle-Element-skeleton col-lg">
-              <h4 className="pt-skeleton"></h4>
+              <span className="pt-skeleton"></span>
             </div>
             <div className="User-element-skeleton col-lg">
               <span className="pt-skeleton"></span>
@@ -49,7 +42,7 @@ class PerfilSkeleton extends Component{
           </div>
           <div className="User-Info-Datos-skeleton col-lg-6">
             <div className="Tittle-Element-skeleton col-lg">
-              <h4 className="pt-skeleton"></h4>
+              <span className="pt-skeleton"></span>
             </div>
             <div className="Turno-element-skeleton col-lg">
               <span className="pt-skeleton"></span>

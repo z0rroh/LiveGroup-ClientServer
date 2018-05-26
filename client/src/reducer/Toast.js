@@ -12,15 +12,13 @@ export default (state = initialState, action = {}) => {
         ...state,
         toastQueue: [...state.toastQueue, action.toast]
       };
-      break;
     case CLEAR_TOASTS:
       return {
         ...state,
         toastQueue: [],
       };
-      break;
     default:
       return state;
   }
-  
+
 };

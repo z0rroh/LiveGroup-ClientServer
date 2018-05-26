@@ -5,9 +5,6 @@ import { clearToasts } from '../../actions/Toast'
 import PropTypes from 'prop-types';
 
 class ToastList extends Component{
-      constructor(props){
-        super(props);
-      }
 
       componentDidMount() {
         if (this.props.toasts.length > 0) {

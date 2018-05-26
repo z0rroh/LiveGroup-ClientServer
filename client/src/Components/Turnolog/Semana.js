@@ -1,11 +1,6 @@
-/*
-* app Semana
-*/
-
 import React, { Component } from 'react';
 import Dia from './Dia'
 import moment from 'moment'
-import {Spinner} from "@blueprintjs/core";
 
 
 class Semana extends Component{

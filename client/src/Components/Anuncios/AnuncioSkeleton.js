@@ -1,14 +1,6 @@
 import React, { Component } from 'react'
-import {Skeleton} from "@blueprintjs/core";
 
 class AnuncioSkeleton extends Component {
-
-  constructor(){
-    super();
-    this.state = {
-
-    }
-  }
 
   render(){
     return(
@@ -18,7 +10,7 @@ class AnuncioSkeleton extends Component {
             <div className="comment-avatar-skeleton pt-skeleton"></div>
             <div className="comment-box-skeleton">
                 <div className="comment-head-skeleton">
-                  <h6 className="comment-name-skeleton pt-skeleton"></h6>
+                  <span className="comment-name-skeleton pt-skeleton"></span>
                   <span className="pt-skeleton"></span>
                   <i className="reply material-icons pt-skeleton">reply</i>
                   <i className="heart material-icons pt-skeleton">favorite</i>
@@ -35,7 +27,7 @@ class AnuncioSkeleton extends Component {
             <div className="comment-avatar-skeleton pt-skeleton"></div>
             <div className="comment-box-skeleton">
                 <div className="comment-head-skeleton">
-                  <h6 className="comment-name-skeleton pt-skeleton"></h6>
+                  <span className="comment-name-skeleton pt-skeleton"></span>
                   <span className="pt-skeleton"></span>
                   <i className="reply material-icons pt-skeleton">reply</i>
                   <i className="heart material-icons pt-skeleton">favorite</i>

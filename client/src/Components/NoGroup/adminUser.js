@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Switch, Route, Redirect } from 'react-router'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { addToast } from '../../actions/Toast'
 import { Intent } from '@blueprintjs/core'
-import axios from 'axios'
 import { newGroup } from '../../actions/auth'
 
 class adminUser extends Component {

@@ -1,20 +1,14 @@
-/*
-* app Dia
-*/
-
 import React, { Component } from 'react';
 import Turno from './Turno.js'
 
 export default class Dia extends Component{
-  constructor(props){
-    super(props);
-  }
+
   render(){
     const Turnos = this.props.data.map((turno) => {
       return <Turno
                 key={turno.id}
                 data={turno}
-                user={this.props.user} 
+                user={this.props.user}
                 onPostTurno={this.props.onPostTurno}/>
     });
     return(

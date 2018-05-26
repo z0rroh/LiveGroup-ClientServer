@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import {Button, Intent, Popover, PopoverInteractionKind, Position} from "@blueprintjs/core";
-import axios from 'axios'
-import {Skeleton} from "@blueprintjs/core";
+import {Intent, Popover, PopoverInteractionKind, Position} from "@blueprintjs/core";
 import PropTypes from 'prop-types';
 import { editAvatar } from '../../actions/auth'
 import { connect } from 'react-redux'
@@ -70,7 +67,7 @@ class UserAvatar extends Component{
     }
 
     componentDidMount(){
-      this.setState({avatar: this.props.avatar});
+      this.setState({avatar: "/images/avatars/"+this.props.avatar});
     }
 
     render(){
@@ -79,7 +76,7 @@ class UserAvatar extends Component{
           {
             this.state.avatar === null || this.state.avatar === 'undefined' ?
             (<div className="user-img-skeleton pt-skeleton"></div>) :
-            (<img src={"/images/avatars/"+this.state.avatar} />)
+            (<img src={this.state.avatar} alt="PerfilAvatar" />)
           }
           <Popover
              isOpen={this.state.isOpen}
