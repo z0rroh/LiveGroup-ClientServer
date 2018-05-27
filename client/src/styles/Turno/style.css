@@ -51,6 +51,7 @@
 
 .SemanaContent {
   width: 100%;
+  padding: 0;
   padding-bottom: 15px;
   border: 1px solid #24292e; }
   .SemanaContent .Dia-Colour {
@@ -134,7 +135,12 @@
       font-size: 2em; }
   .SemanaContent .Turno-progress {
     margin: 0;
-    height: 5px; }
+    height: 6.5px; }
+    .SemanaContent .Turno-progress span {
+      font-size: 6px;
+      z-index: 1;
+      position: absolute;
+      font-weight: 600; }
   .SemanaContent .Turno-progress-full {
     background-color: #e22838; }
 

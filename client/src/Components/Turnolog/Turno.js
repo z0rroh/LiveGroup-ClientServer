@@ -70,7 +70,8 @@ class Turno extends Component {
             </div>
           </div>
         </div>
-        <div className="Turno-progress progress col-xs-12" data-placeholder="1/5">
+        <div className="Turno-progress progress col-xs-12 row center-xs" data-placeholder="1/5">
+          <span style={{color: full ? "#000" : "#000"}}>{porcentaje}</span>
           <div className={full ? "determinate Turno-progress-full" : "determinate"} style={datermianteStyle}></div>
         </div>
       </section>
