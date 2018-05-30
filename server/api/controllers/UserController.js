@@ -8,40 +8,16 @@
 
 module.exports = {
 
-    announce: function(req, res) {
-        if(req.isSocket && req.session.User){
+  announce: function(req, res) {
+      if(req.isSocket && req.session.User){
 
-                  User.find({id_group:req.session.User.group}).exec(function (err, users) {
-                  // Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
-                      User.subscribe(req, users,['update','create','destroy']);
-                  });
+                User.find({id_group:req.session.User.group}).exec(function (err, users) {
+                // Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
+                    User.subscribe(req, users);
+                });
 
-                    // Get the socket ID from the reauest
-                    var socketId = sails.sockets.getId(req);
-
-                    // Get the session from the request
-
-                    // Create the session.users hash if it doesn't exist already
-                    req.session.users = req.session.users || {};
-                      // Save this user in the session, indexed by their socket ID.
-                      // This way we can look the user up by socket ID later.
-                      req.session.users[socketId] = req.session.User;
-
-                      // Subscribe the connected socket to custom messages regarding the user.
-                      // While any socket subscribed to the user will receive messages about the
-                      // user changing their name or being destroyed, ONLY this particular socket
-                      // will receive "message" events.  This allows us to send private messages
-                      // between users.
-                      User.subscribe(req, req.session.User, 'message');
-
-                      // Get updates about users being created
-                      User.watch(req);
-                      sails.log( 'Usuario suscrito a user con la id: ' + req.socket.id );
-                      /*
-                      User.findOne({id: req.session.User.id}).populate('groups').populate('turnos')
-                      .then(function(user){
-                        res.ok(user);
-                      });*/
+                User.watch(req);
+                sails.log( 'Usuario suscrito a user con la id: ' + req.socket.id );
 
       }
   },

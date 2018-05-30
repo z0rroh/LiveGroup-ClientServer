@@ -34,7 +34,6 @@ module.exports.routes = {
 
   'GET /user/group': 'UserController.addGroup',
   'GET /salir': 'SessionController.destroy',
-  'GET /anuncios': 'AnunciosController.index',
   'GET /groupList': 'GroupController.getUsers',
   'POST /newAccount': 'UserController.create',
   'GET /buscar/user': 'UserController.searchUser',

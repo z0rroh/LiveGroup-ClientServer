@@ -26,46 +26,12 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': 'flash',
-  'user':{
-    new : 'flash',
-    create : 'flash',
-    show : 'authenticated',
-    edit : 'authenticated',
-    update : 'authenticated',
-    destroy: 'authenticated',
-    //index: 'flash',
-    modal: 'authenticated',
-    addGroup: 'flash',
-    updateUser: 'authenticated',
-    announce: 'flash',
-    perfil: 'authenticated',
-  },
-  'group':{
-    show: 'authenticated',
-    new: 'flash'
-  },
-  'anuncios':{
-    new: 'flash',
-    index: 'authenticated'
-  },
-  'turno':{
-    create: 'flash',
-    show: 'authenticated'
-  },
-  'turnolog':{
-    index: 'authenticated',
-    entrar: 'authenticated',
 
-   },
-  'session':{
-    new: 'flash'
-  },
-  'archivo':{
-    index: 'authenticated',
-    upload: 'authenticated'
+  '*': ['isAuthenticated'],
+
+  SessionController: {
+     '*': true
   }
-
 
   /***************************************************************************
   *                                                                          *

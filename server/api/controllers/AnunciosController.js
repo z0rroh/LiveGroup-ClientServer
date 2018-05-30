@@ -8,19 +8,17 @@ var moment=require('moment');
 
 module.exports = {
 
-	index: function(req,res){
-		res.view('anuncios/index');
-	},
 	subscribe: function(req,res){
-
-			if(req.isSocket && req.session.User){
-					Anuncio.find({group:req.session.User.group}).exec(function (err, anuncios) {
-					// Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
-							Anuncio.subscribe(req, anuncios,['update','create','destroy']);
-					});
-					Anuncio.watch(req);
-					sails.log( 'Usuario suscrito a anuncios con la id: ' + req.socket.id );
-			}
+		/*
+		var user = req.user;
+		if(req.isSocket && user){
+				Anuncio.find({group:req.session.User.group}).exec(function (err, anuncios) {
+				// Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
+						Anuncio.subscribe(req, anuncios,['update','create','destroy']);
+				});
+				Anuncio.watch(req);
+				sails.log( 'Usuario suscrito a anuncios con la id: ' + req.socket.id );
+		}*/
 	},
 	create: function(req, res){
 		var anuncioObj={

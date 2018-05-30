@@ -5,8 +5,6 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-var bcrypt = require('bcrypt');
-
 module.exports = {
 	attributes: {
 	  	name:{
@@ -15,7 +13,6 @@ module.exports = {
 	  	},
 			rut:{
 				type:'string',
-				required: true
 			},
 	  	password:{
 	  	  type:'string',
@@ -75,6 +72,14 @@ module.exports = {
   		}
 
     },
+		beforeUpdate: function (values, next) {
+		CipherService.hashPassword(values);
+		next();
+		},
+		beforeCreate: function (values, next) {
+				CipherService.hashPassword(values);
+				next();
+		},
 		Validate: function(value,cb){
 			User.findOne({email:value}).exec(function (err, user) {
       	if (err) return cb(err);
@@ -84,14 +89,6 @@ module.exports = {
 				return cb(true)
 			});
 		},
-    beforeCreate: function (values, next) {
-	    bcrypt.hash(values.password, 10, function passwordEncrypted(err, hash) {
-	      if (err) return next(err);
-	      values.password = hash;
-	      next();
-	    });
-	  },
-
 	  usersFindByGroup: function (options, cb) {
 			 var groupList = [];
 			 User.find({group:options}).populateAll()
