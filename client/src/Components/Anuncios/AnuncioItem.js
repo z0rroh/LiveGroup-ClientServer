@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ComentarioForm from './ComentarioForm'
 import ComentarioItem from './ComentarioItem'
-import io from '../../io.js'
+import {io} from '../../io.js'
 
 class AnuncioItem extends Component {
 

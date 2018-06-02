@@ -1,10 +1,10 @@
 import isEmpty from 'lodash/isEmpty'
-import { SET_CURRENT_USER, SET_ISFETCHING } from '../actions/types'
-
+import { SET_CURRENT_USER, SET_ISFETCHING, SET_TOKEN } from '../actions/types'
 
 const initialState = {
   isAuthenticated: false,
   isFetching: true,
+  token: "",
   user: {}
 }
 
@@ -20,10 +20,10 @@ export default (state = initialState, action = {}) => {
           isFetching: action.isFetching
         })
 
-    /* case SET_TOKEN:
+    case SET_TOKEN:
        return Object.assign({}, state, {
                 token: action.token
-              })*/
+              })
     default:
         return state;
   }

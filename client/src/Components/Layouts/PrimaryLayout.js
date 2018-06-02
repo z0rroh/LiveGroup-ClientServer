@@ -27,6 +27,7 @@ const NotFound = ({props})=>{
   </section>);}
 
 class PrimaryLayout extends Component{
+
   static isPrivate = true;
   render(){
     const {match, history, user} = this.props;
@@ -66,7 +67,6 @@ class PrimaryLayout extends Component{
               user={user}
               component={NotFound}/>
           </Switch>
-
         </main>
       </div>
     );

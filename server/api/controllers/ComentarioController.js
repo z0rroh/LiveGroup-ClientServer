@@ -7,44 +7,40 @@
 
 module.exports = {
 
-		subscribe: function(req,res){
-				if(req.isSocket && req.session.User){
-						Comentario.find({group:req.session.User.group}).exec(function (err, comentarios) {
-						// Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
-								Comentario.subscribe(req, comentarios,['update','create','destroy']);
-						});
-						Comentario.watch(req);
-						sails.log( 'Usuario suscrito a comentarios con la id: ' + req.socket.id );
-				}
-		},
-		create: function(req, res){
+	subscribe: function(req,res){
+			var user = req.user;
+			if(req.isSocket && user){
+					Comentario.find({group: user.group}).exec(function (err, comentarios) {
+							Comentario.subscribe(req, comentarios);
+					});
+					Comentario.watch(req);
+					sails.log( 'Usuario suscrito a comentarios con la id: ' + req.socket.id );
+			}
+	},
+	create: function(req, res){
+			var user = req.user;
 
 			var commentObj={
 				text: req.param('text'),
-				autor: req.session.User.id,
+				autor: user.id,
 				anuncio: req.param('anuncio')
 			}
 			Comentario.create(commentObj,function (err, comentario) {
 
-				if(err){
-					var noAnuncio=[{message: 'No se pudo publicar el comentario'}]
-					req.session.flash={
-							err: noAnuncio
-					}
-					return res.redirect('/anuncios');
+				if (err){
+					return res.json({
+					code: 'FAIL',
+					message: 'No se pudo crear el comentario'
+					});
 				}
-				//console.log("se creo bien el anuncio");
-
-				var sucessAnuncio=[{message: 'Comentario creado correctamente'}]
-				req.session.flash={
-						err: sucessAnuncio
-				}
-
 				Comentario.comentarioFindByGroup(comentario, function(err, comentario){
-						res.ok(comentario);
+					return res.json({
+						code: 'SUCCESS',
+						anuncio: "Comentario creado correctamente"
+					});
 				});
 
 			});
-		},
+	},
 
 };

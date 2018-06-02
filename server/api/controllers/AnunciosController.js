@@ -9,24 +9,25 @@ var moment=require('moment');
 module.exports = {
 
 	subscribe: function(req,res){
-		/*
+
 		var user = req.user;
 		if(req.isSocket && user){
-				Anuncio.find({group:req.session.User.group}).exec(function (err, anuncios) {
-				// Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
-						Anuncio.subscribe(req, anuncios,['update','create','destroy']);
+				Anuncio.find({group: user.group}).exec(function (err, anuncios) {
+						Anuncio.subscribe(req, anuncios);
 				});
 				Anuncio.watch(req);
 				sails.log( 'Usuario suscrito a anuncios con la id: ' + req.socket.id );
-		}*/
+		}
 	},
+
 	create: function(req, res){
+
+		var user = req.user;
 		var anuncioObj={
 			text: req.param('text'),
-			autor: req.session.User.id,
-			group: req.session.User.group
+			autor: user.id,
+			group: user.group
 		}
-
 		Anuncio.create(anuncioObj,function (err, anuncio) {
 
 			if (err){
@@ -35,7 +36,6 @@ module.exports = {
 				message: 'No se pudo crear el anuncio'
 				});
 			}
-
 			Anuncio.anuncioFindByGroup(anuncio, function(err, anuncio){
 				return res.json({
 					code: 'SUCCESS',
@@ -49,7 +49,8 @@ module.exports = {
 
 	getAnuncios: function(req, res){
 
-		Anuncio.anunciosFindByGroup(req.session.User.group, function(err, anuncios){
+		var user = req.user;
+		Anuncio.anunciosFindByGroup(user.group, function(err, anuncios){
 					res.ok(anuncios);
 			});
 	}

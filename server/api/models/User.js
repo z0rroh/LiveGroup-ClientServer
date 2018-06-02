@@ -66,19 +66,16 @@ module.exports = {
 			},
 	  	toJSON: function(){
 		 	var obj= this.toObject();
-		  	//delete obj.password;
+		  	delete obj.password;
 		  	delete obj._csrf;
 		  	return obj;
   		}
 
     },
-		beforeUpdate: function (values, next) {
-		CipherService.hashPassword(values);
-		next();
-		},
+
 		beforeCreate: function (values, next) {
-				CipherService.hashPassword(values);
-				next();
+			CipherService.hashPassword(values);
+			next();
 		},
 		Validate: function(value,cb){
 			User.findOne({email:value}).exec(function (err, user) {

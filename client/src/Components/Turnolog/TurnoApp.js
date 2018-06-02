@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Semana from './Semana.js';
-import io from '../../io.js'
+import {io} from '../../io.js'
 import axios from 'axios'
 import { addToast } from '../../actions/Toast.js'
 import { Intent } from '@blueprintjs/core'

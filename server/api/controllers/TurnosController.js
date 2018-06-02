@@ -9,6 +9,7 @@ var moment = require('moment');
 module.exports = {
 
 	create: function(req, res){
+		var user = req.user;
 		moment.locale('es-cl');
 		var params = req.params.all();
 		var turnosObject=[]
@@ -16,7 +17,7 @@ module.exports = {
 			return res.status(400).json({code: 'NO_NAME', message: 'Debes ingresar un nombre'});
 		}
 		if(params.timeStart === params.timeEnd ){
-			return res.status(400).json({code: 'NO_HH', message: 'La hora de inicio y de fin deben ser distintas'});
+			return res.status(400).json({code: 'NO_HH', message: 'La hora de inicio y termino deben ser distintas'});
 		}
 		if(params.cupo === 0){
 			return res.status(400).json({code: 'NO_CUPO', message: 'Debes ingresar la cantidad de cupos'});
@@ -34,13 +35,10 @@ module.exports = {
 				cupo: params.cupo,
 				day: dia,
 				despliegue: despliegue,
-				group: req.session.User.group,
+				group: user.group,
 			}
-			Turno.create(auxObj)
-			.exec(function(err, turno){
-					var exp = Turnolog.expiracion(turno.day,turno.start,function(fecha){
-						return fecha;
-					});
+			Turno.create(auxObj, function(err, turno){
+					var exp = Turnolog.expiracion(turno.day,turno.start, function(fecha){ return fecha; });
 					var turnologObj={
 					 name: turno.name,
 					 start: turno.start,
@@ -60,8 +58,8 @@ module.exports = {
 						}
 						Turnolog.publishCreate(turnolog);
 					});
-					return res.json({code: 'SUCCESS', message: 'Turno creado correctamente'})
 			});
+			return res.json({code: 'SUCCESS', message: 'Turno creado correctamente'})
 		}
 		else{
 			var firstDay = moment(params.startDate).toDate();
@@ -76,16 +74,13 @@ module.exports = {
 	        cupo: params.cupo,
 	        day: dia,
 	        despliegue: despliegue,
-	        group: req.session.User.group,
+	        group: user.group,
 	      }
 	      turnosObject.push(auxObj);
 	    }
-	    Turno.create(turnosObject)
-	    .exec(function(err, turnos){
+	    Turno.create(turnosObject, function(err, turnos){
 	      for(var i in turnos){
-	        var exp = Turnolog.expiracion(turnos[i].day,turnos[i].start,function(fecha){
-	          return fecha;
-	        });
+	        var exp = Turnolog.expiracion(turnos[i].day,turnos[i].start,function(fecha){ return fecha; });
 	        var turnologObj={
 	         name: turnos[i].name,
 	         start: turnos[i].start,
@@ -106,8 +101,8 @@ module.exports = {
 	          Turnolog.publishCreate(turnolog);
 	        });
 	      }
-	      return res.json({code: 'SUCCESS', message: 'Turnos creados correctamente'})
 	    });
+			return res.json({code: 'SUCCESS', message: 'Turnos creados correctamente'})
 	  }
 
 	},

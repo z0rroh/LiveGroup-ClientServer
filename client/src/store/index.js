@@ -22,7 +22,7 @@ const store = createStore(
   ),
 );
 persistStore(store,{whitelist: ['auth']},() => {
-  //console.log('rehydration complete')
+
 })
 
 

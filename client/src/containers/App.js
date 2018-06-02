@@ -14,12 +14,14 @@ class App extends Component {
   constructor(){
     super();
     this.state={
-      isFetch: true
+      isFetch: false
     }
   }
 
   componentDidMount(){
+    this.setState({isFetch: true})
     setTimeout(() => this.setState({ isFetch: false }), 1000);
+
   }
 
   render() {

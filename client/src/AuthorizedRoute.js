@@ -21,7 +21,7 @@ const AuthRoute = ({component, ...props}) => {
     }
     else {
       //If the route is public, the user is redirected to the app's private root.
-        console.log("Tiene grupo, renderizar a /anuncios");
+        console.log("esta autentificado, renderizar a /anuncios");
         return <Redirect to={ PRIVATE_ROOT } />;
     }
   }

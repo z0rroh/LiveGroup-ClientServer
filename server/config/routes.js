@@ -31,7 +31,8 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
+  'POST /session/signin' : 'AuthController.signin',
+	'POST /session/signup' : 'AuthController.signup',
   'GET /user/group': 'UserController.addGroup',
   'GET /salir': 'SessionController.destroy',
   'GET /groupList': 'GroupController.getUsers',

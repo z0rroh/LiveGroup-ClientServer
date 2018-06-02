@@ -8,28 +8,29 @@
 
 module.exports = {
 
-  announce: function(req, res) {
-      if(req.isSocket && req.session.User){
+  subscribe: function(req, res) {
 
-                User.find({id_group:req.session.User.group}).exec(function (err, users) {
-                // Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
-                    User.subscribe(req, users);
-                });
+      var user = req.user;
+      if(req.isSocket && user){
+          User.findOne({id:user.id}).exec(function (err, user) {
+          // Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
+              User.subscribe(req, user);
+          });
 
-                User.watch(req);
-                sails.log( 'Usuario suscrito a user con la id: ' + req.socket.id );
-
+          User.watch(req);
+          sails.log( 'Usuario suscrito a el mismo con la id: ' + req.socket.id );
       }
   },
 
   getUser: function(req,res){
-    User.findOne({id: req.session.User.id}).populate('group').populate('turnos')
+
+    var user = req.user;
+    User.findOne({id: user.id}).populate('group').populate('turnos')
     .then(function(user){
       var turnos = [];
       var grupo;
       var admin;
       user.turnos.map(turno =>{
-
         var turno = {
           id: turno.id,
           name: turno.name,
@@ -40,7 +41,7 @@ module.exports = {
         turnos.push(turno);
       })
 
-      if ( user.admin === true){
+      if ( user.admin ){
         admin = "Administrador"
       }
       else{
@@ -110,32 +111,18 @@ module.exports = {
     })
   },
 
-	destroy: function(req, res, next){
-      User.findOne(req.param('id'), function foundUser(err, user){
-        if (err) return next(err);
-
-    		User.destroy(req.param('id'), function userDestroy(err){
-    			if(err) return next(err);
-          User.publishDestroy(user.id);
-
-    		});
-        res.redirect('/group/show');
-      });
-	},
-
   addUserToGroup: function(req,res){
+
+    var userSession = req.user;
     var addUser = req.param('user');
     User.findOne({id:addUser.id}, function(err, user){
       if(err){
         return res.json({code:"FAIL", message: "Se produjo un error"})
       }
       if(user.group !== null){
-        user.groupName = req.session.User.groupName;
-        user.group = req.session.User.group;
-        user.save(
-          function(err){
-
-        });
+        user.groupName = userSession.groupName;
+        user.group = userSession.group;
+        user.save(function(err){});
       }
       else{
         return res.json({code:"FAIL", message: "Este usuario ya fue asociado a un grupo de trabajo"})
@@ -146,41 +133,25 @@ module.exports = {
   },
 
   addGroup: function(req,res){
+
+    var userSession = req.user;
     Group.findGroupByKey(req.param('key'),function(err,group){
       if(err){
-        var NoValidate =[{message: 'La clave de grupo ingresa no es valida'}]
-  			req.session.flash={
-  				err: NoValidate
-  			}
-        return res.view('user/group');
+  			return res.json({code:"FAIL",message: 'La clave de grupo ingresa no es valida'});
       }
-      User.findOne({id:req.session.User.id})
-        .then(function(result){
-          var user = result;
-          user.groupName= group.name;
+      User.findOne({id: userSession})
+        .then(function(user){
+          user.groupName = group.name;
           user.online = true;
           user.group= group.id;
-          user.save(
-            function(err){
-              req.session.flash={
-                err:err
-              }
-            });
-            User.publishCreate(user);
+          user.save(function(err){});
+          User.publishCreate(user);
 
-            req.session.User.group = user.group;
-            Group.findOne(req.session.User.group, function foundGroup(err, group){
-              if (err) return next(err);
-              req.session.Group = group;
-            });
-            res.redirect('/session/new');
+          return res.json({code: 'SUCCESS', message: "Te has unido correctamente al grupo de trabajo", user: user})
 
         })
         .fail(function(err){
-          req.session.flash={
-            err:err
-          }
-          return res.view('user/group');
+          return res.json({code:"FAIL",message: err});
         });
     });
 	}

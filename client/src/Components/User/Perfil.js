@@ -4,7 +4,7 @@ import UserTurnos from './UserTurnos'
 import UserAvatar from './UserAvatar'
 import axios from 'axios'
 import PerfilSkeleton from './PerfilSkeleton.js'
-import io from '../../io.js'
+import {io} from '../../io.js'
 
 class Perfil extends Component{
 
@@ -38,7 +38,6 @@ class Perfil extends Component{
   }
 
   componentDidMount(){
-    console.log("holaaaa");
     this.setState({isFetching: true})
     axios.get('/user/getUser')
     .then((response)=>{

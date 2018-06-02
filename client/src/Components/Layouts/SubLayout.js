@@ -24,7 +24,7 @@ class SubLayout extends Component {
             <Route path={`${match.path}/grupo`} component={GroupList} />
             <Route path={`${match.path}/turnos/crear`} component={CrearTurnos} />
             <Route path={`${match.path}/turnos/buscar`} component={SearchTurns} />
-            <Redirect to={`${match.path}/agregar`}/>
+            <Redirect to={`${match.path}/agregar`} />
           </Switch>
         </div>
       </div>)

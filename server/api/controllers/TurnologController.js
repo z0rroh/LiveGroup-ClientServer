@@ -11,9 +11,9 @@ var moment=require('moment');
  module.exports = {
 
    subscribe: function(req,res){
-       if(req.isSocket && req.session.User){
-           Turnolog.find({group:req.session.User.group}).exec(function (err, turnologs) {
-           // Subscribe the requesting socket (e.g. req.socket) to all users (e.g. users)
+       var user = req.user;
+       if(req.isSocket && user){
+           Turnolog.find({group:user.group}).exec(function (err, turnologs) {
                Turnolog.subscribe(req,turnologs);
            });
            Turnolog.watch(req);
@@ -22,18 +22,17 @@ var moment=require('moment');
    },
 
    getTurnos: (req,res)=>{
+
+       var user = req.user;
        moment.locale('es-cl');
        var formatDate1 = moment().startOf('week').toDate();;
        var formatDate2 = moment().endOf('week').toDate();;
-       Turnolog.find({group:req.session.User.group,estado: 'activo',despliegue: {$gte: formatDate1, $lte: formatDate2}}).populate('users')
+       Turnolog.find({group:user.group,estado: 'activo',despliegue: {$gte: formatDate1, $lte: formatDate2}}).populate('users')
        .exec(function(err,turnologs){
-         var tokens = req.session.User.tokens;
+         var tokens = req.tokens;
          if(err) {
            return res.json({code:"FAIL", message:"Ah ocurrido un error inesperado"})
          }
-         /*if(!turnologs.length){
-           return res.json({code:"NO_TURNOS", message:"No hay turnos creados"})
-         }*/
          var allDays = [];
          var tokensUpdate;
          var lunes = [];
@@ -127,111 +126,110 @@ var moment=require('moment');
 
    postTurno: function (req,res) {
 
-         Turnolog.findOne(req.param('id')).populate('users')
-                 .then(function(turnolog){
-                   if(_.isEmpty(turnolog.users) === false){
-                       var resul= false;
-                       turnolog.users.map(user =>{
-                         if(user.id === req.session.User.id){
-                           resul = true;
-                         }
-                       })
-                       if(resul){
-                          return res.json({code:"FAIL", message: "Ya has tomado este turno"});
-                       }
-                       if(req.session.User.tokens <= 0){
-                         return res.json({code:"FAIL", message: "No tienes tokens disponibles"});
-                       }
-                       if (resul===false && turnolog.estado==='activo' && turnolog.cupoActual<turnolog.cupoTotal && req.session.User.tokens>0){
-                           var actual = turnolog.cupoActual;
-                           var parsed = parseInt(actual, 10);
-                           parsed = parsed + 1;
-                           turnolog.cupoActual = parsed;
-                           var users = turnolog.users;
-                           users.push(req.session.User);
-                           Turnolog.update({id: turnolog.id},{cupoActual: parsed, users: users})
-                           .exec(function(err, turnolog){
-                              if(err){
-                                return res.json({code: 'FAIL', message: 'Se produjo un error inesperado'})
-                              }
-                              var tk = req.session.User.tokens;
-                              tk = tk-1;
-                              req.session.User.tokens = tk;
-                              req.session.save();
-                              User.update({id:req.session.User.id},{tokens:tk},function (err,user) {
-                                if(err){
-                                  return res.json({code: 'FAIL', message: 'Se produjo un error inesperado'})
-                                }
-                                return res.json({code:"SUCCESS", message: "El turno fue tomado con exito"});
-                              });
-                           })
-                       }
-                     }
-                     else{
-                       if(req.session.User.tokens <= 0){
-                         return res.json({code:"FAIL", message: "No tienes tokens disponibles"});
-                       }
-                       if(turnolog.estado==='activo' && turnolog.cupoActual<turnolog.cupoTotal && req.session.User.tokens>0){
-
-                           var actual = turnolog.cupoActual;
-                           var parsed = parseInt(actual, 10);
-                           parsed = parsed + 1;
-                           var users = [];
-                           users.push(req.session.User);
-                           Turnolog.update({id: turnolog.id},{cupoActual: parsed, users: users})
-                           .exec(function (err,turnolog){
-                              if(err){
-                                return res.json({code: 'FAIL', message: 'Se produjo un error inesperado'})
-                              }
-                              var tk = req.session.User.tokens;
-                              tk = tk-1;
-                              req.session.User.tokens = tk;
-                              req.session.save();
-                              User.update({id:req.session.User.id},{tokens:tk},function (err,user) {
-                                if(err){
-                                  return res.json({code: 'FAIL', message: 'Se produjo un error inesperado'})
-                                }
-                                return res.json({code:"SUCCESS", message: "El turno fue tomado con exito"});
-                              });
-                           })
-                        }
-                     }
-
-         })
-         .fail(function(err){
-           res.json({code:"FAIL", message:"Ocurrio un problema al tomar el turno"})
-         });
-       },
-
-
-       listTurnsFromDate: (req, res)=>{
-         moment.locale('es-cl');
-         var dateFilter1 = req.param('date');
-         var formatDate1 = moment(dateFilter1,'DD-MM-YYYY').toDate();
-         var formatDate2 = moment(formatDate1).add(1,'days').toDate();
-         Turnolog.find({group:req.session.User.group, despliegue: {$gte: formatDate1, $lt: formatDate2}}).populate('users')
-         .exec((err,turnos)=>{
-             if(err) {
-               return res.json({code:"FAIL", message:"Ah ocurrido un error inesperado"})
-             }
-             var turnologs = [];
-             for (var i in turnos){
-               var turno={
-                name: turnos[i].name,
-                start: turnos[i].start,
-                end: turnos[i].end,
-                day: turnos[i].day,
-                cupoTotal: turnos[i].cupoTotal,
-                cupoActual: turnos[i].cupoActual,
-                estado: turnos[i].estado,
-                users: turnos[i].users,
-                id: turnos[i].id
+      var userSession = req.user;
+       Turnolog.findOne(req.param('id')).populate('users')
+       .then(function(turnolog){
+         if(_.isEmpty(turnolog.users) === false){
+             var resul= false;
+             turnolog.users.map(user =>{
+               if(user.id === userSession.id){
+                 resul = true;
                }
-               turnologs.push(turno);
+             })
+             if(resul){
+                return res.json({code:"FAIL", message: "Ya has tomado este turno"});
              }
-             return res.json({code: 'SUCCESS', turnos: turnologs})
-           })
+             if(userSession.tokens <= 0){
+               return res.json({code:"FAIL", message: "No tienes tokens disponibles"});
+             }
+             if (resul===false && turnolog.estado==='activo' && turnolog.cupoActual<turnolog.cupoTotal && userSession.tokens>0){
+                 var actual = turnolog.cupoActual;
+                 var parsed = parseInt(actual, 10);
+                 parsed = parsed + 1;
+                 turnolog.cupoActual = parsed;
+                 var users = turnolog.users;
+                 users.push(userSession);
+                 Turnolog.update({id: turnolog.id},{cupoActual: parsed, users: users})
+                 .exec(function(err, turnolog){
+                    if(err){
+                      return res.json({code: 'FAIL', message: 'Se produjo un error al actualizar turno'})
+                    }
+                    var tk = userSession.tokens;
+                    tk = tk-1;
+                    User.update({id:userSession.id},{tokens:tk}, function (err,user) {
 
-        },
+                      if(err){
+                        return res.json({code: 'FAIL', message: 'Se produjo un error al actualizar usuario'})
+                      }
+                      return res.json({code:"SUCCESS", message: "El turno fue tomado con exito"});
+                    });
+                 })
+             }
+           }
+           else{
+             if(userSession.tokens <= 0){
+               return res.json({code:"FAIL", message: "No tienes tokens disponibles"});
+             }
+             if(turnolog.estado==='activo' && turnolog.cupoActual<turnolog.cupoTotal && userSession.tokens>0){
+
+                 var actual = turnolog.cupoActual;
+                 var parsed = parseInt(actual, 10);
+                 parsed = parsed + 1;
+                 var users = [];
+                 users.push(userSession);
+                 Turnolog.update({id: turnolog.id},{cupoActual: parsed, users: users})
+                 .exec(function (err,turnolog){
+                    if(err){
+                      return res.json({code: 'FAIL', message: 'Se produjo un error al actualizar turno'})
+                    }
+                    var tk = userSession.tokens;
+                    tk = tk-1;
+                    User.update({id:userSession.id},{tokens:tk}, function (err,user) {
+                      
+                      if(err){
+                        return res.json({code: 'FAIL', message: 'Se produjo un error al actualizar usuario'})
+                      }
+                      return res.json({code:"SUCCESS", message: "El turno fue tomado con exito"});
+                    });
+                 })
+              }
+           }
+
+       })
+       .fail(function(err){
+         res.json({code:"FAIL", message:"Ocurrio un problema al tomar el turno"})
+       });
+     },
+
+     listTurnsFromDate: (req, res)=>{
+       var user = req.user;
+       moment.locale('es-cl');
+       var dateFilter1 = req.param('date');
+       var formatDate1 = moment(dateFilter1,'DD-MM-YYYY').toDate();
+       var formatDate2 = moment(formatDate1).add(1,'days').toDate();
+       Turnolog.find({group:user.group, despliegue: {$gte: formatDate1, $lt: formatDate2}}).populate('users')
+       .exec((err,turnos)=>{
+           if(err) {
+             return res.json({code:"FAIL", message:"Ah ocurrido un error inesperado"})
+           }
+           var turnologs = [];
+           for (var i in turnos){
+             var turno={
+              name: turnos[i].name,
+              start: turnos[i].start,
+              end: turnos[i].end,
+              day: turnos[i].day,
+              cupoTotal: turnos[i].cupoTotal,
+              cupoActual: turnos[i].cupoActual,
+              estado: turnos[i].estado,
+              users: turnos[i].users,
+              id: turnos[i].id
+             }
+             turnologs.push(turno);
+           }
+           return res.json({code: 'SUCCESS', turnos: turnologs})
+         })
+
+      },
 
  };

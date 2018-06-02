@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Anuncios from './Anuncios.js'
 import axios from 'axios'
-import io from '../../io.js'
+import {io} from '../../io.js'
 //import PropTypes from 'prop-types';
 
 class AnunciosApp extends Component {
@@ -20,11 +20,10 @@ class AnunciosApp extends Component {
       console.log(res);
       console.log("Subscrito a anuncios");
     });
-
-    io.socket.get('/comentario/subscribe', function () {
+    io.socket.get('/comentario/subscribe', function (res) {
+        console.log(res);
         console.log("Subscrito a comentarios");
     });
-
     this.setState({isFetching:true});
     axios.get('/anuncios/getAnuncios')
     .then((response)=>{

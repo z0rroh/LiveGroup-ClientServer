@@ -14,12 +14,10 @@ class Header extends Component{
   }
 
   onClick(){
-    this.props.logout()
-    .then(res => {
-      this.props.addToast({
-        intent: Intent.SUCCESS,
-        message: "HASTA LA PROXIMA!"
-      })
+    this.props.logout();
+    this.props.addToast({
+      intent: Intent.SUCCESS,
+      message: "HASTA LA PROXIMA!"
     })
   }
 

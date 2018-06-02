@@ -1,0 +1,30 @@
+// Copyright 2016 Palantir Technologies, Inc. All rights reserved.
+// Licensed under the BSD-3 License as modified (the “License”); you may obtain a copy
+// of the license at https://github.com/palantir/blueprint/blob/master/LICENSE
+// and https://github.com/palantir/blueprint/blob/master/PATENTS
+
+@import "../../core/src/common/variables";
+
+.pt-datetimepicker {
+  border-radius: $pt-border-radius;
+  background-color: $white;
+  padding: $pt-grid-size;
+  text-align: center;
+
+  .pt-dark & {
+    background: $dark-gray4;
+
+    .pt-datepicker {
+      border-bottom: 1px solid $pt-dark-divider-black;
+    }
+  }
+
+  .pt-datepicker {
+    border-bottom: 1px solid $pt-divider-black;
+    padding: 0 0 $pt-grid-size;
+  }
+
+  .pt-timepicker {
+    padding: $pt-grid-size 0 0;
+  }
+}

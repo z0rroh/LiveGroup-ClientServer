@@ -10,7 +10,9 @@ module.exports = {
 
 
 	getUsers: function(req,res, next){
-		User.usersFindByGroup(req.session.User.group, function(err,users){
+		
+		var user = req.user;
+		User.usersFindByGroup(user.group, function(err,users){
 			if(err)
 				return next(err);
 
@@ -19,8 +21,9 @@ module.exports = {
 	},
 
 	create: function(req, res){
+
 		var newGroup = req.param('group');
-		var user = req.session.User;
+		var user = req.user;
 		Group.create(newGroup, function(err, group){
 				if(err){
 					return res.json({code:'FAIL', message:'Error al crear grupo'});
@@ -31,20 +34,9 @@ module.exports = {
 					user.save(
 						function(err){
 					});
-					req.session.User = user;
 					return res.json({code:'SUCCESS', user: user});
 				})
 		})
 	},
-
-	destroy: function(req, res, next){
-		Group.destroy(req.param('id'), function groupDestroy(err){
-			if(err){
-				return next(err);
-			}
-			res.redirect('group/index');
-		});
-	},
-
 
 };
