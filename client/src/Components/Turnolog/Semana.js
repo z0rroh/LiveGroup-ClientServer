@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Dia from './Dia'
 import moment from 'moment'
-
+import Clock from './Clock'
 
 class Semana extends Component{
   constructor(props){
     super(props);
     this.state = {
       fecha: [],
-      hora: new Date(),
       mesName: "",
     };
 
@@ -16,7 +15,7 @@ class Semana extends Component{
   componentDidMount(){
     this.getDate();
   }
-  getDate(){
+  getDate = () => {
     var currMonthName  = moment().format('MMMM').toUpperCase();
     var fecha = new Date();
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -26,14 +25,15 @@ class Semana extends Component{
 
 
   render(){
-    const isFetching = this.props.isFetching;
-    const Dias = this.props.turnos.map((day) => {
+    const { fecha, mesName } = this.state
+    const { tokens, isFetching, user, handlePostTurno, turnos } = this.props
+    const Dias = turnos.map((day) => {
       return (<Dia
                   key={day.id}
                   name={day.name}
                   data={day.data}
-                  onPostTurno={this.props.handlePostTurno}
-                  user={this.props.user}/>)
+                  onPostTurno={handlePostTurno}
+                  user={user}/>)
     });
     if(isFetching){
       return(
@@ -52,12 +52,12 @@ class Semana extends Component{
       <div className="Semana col-xs-12">
         <div className="SemanaTitleContainer">
           <div className="SemanaTitleBox row between-lg col-xs-10">
-            <div className="col-lg-4 col-xs-8"><p> Fecha: {this.state.fecha}</p></div>
-            <div className="row col-lg-4 col-xs-4 center-xs"><p>Hora: {this.state.hora.toLocaleTimeString()}</p></div>
-            <div className="Tokens col-lg-4 col-xs-12"><p>  Tokens: {this.props.tokens}</p></div>
+            <div className="col-lg-4 col-xs-8"><p> Fecha: { fecha }</p></div>
+            <Clock />
+            <div className="Tokens col-lg-4 col-xs-12"><p>  Tokens: { tokens }</p></div>
           </div>
         </div>
-        <div className="MesName col-xs-12 center-xs"><span>{this.state.mesName}</span></div>
+        <div className="MesName col-xs-12 center-xs"><span>{ mesName }</span></div>
         <div className="SemanaContent row col-xs-12 center-xs">
           { Dias }
         </div>

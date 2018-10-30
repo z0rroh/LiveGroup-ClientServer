@@ -4,14 +4,13 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var JwtStrategy = require('passport-jwt').Strategy;
-
+var FacebookTokenStrategy = require('passport-facebook-token');
 
 var EXPIRES_IN_MINUTES = 5000;
 var SECRET = process.env.tokenSecret || "4ukI0uIVnB3iI1yxj646fVXSE3ZVk4doZgz6fTbNg7jO41EAtl20J5F7Trtwe7OM";
 var ALGORITHM = "HS256";
 var ISSUER = "livegroup.cl";
 var AUDIENCE = "livegroup.cl";
-
 /**
  * Configuration object for local strategy
  */
@@ -20,7 +19,6 @@ var LOCAL_STRATEGY_CONFIG = {
   passwordField: 'password',
   passReqToCallback: false
 };
-
 /**
  * Configuration object for JWT strategy
  */
@@ -32,7 +30,13 @@ var JWT_STRATEGY_CONFIG = {
   audience: AUDIENCE,
   passReqToCallback: false
 };
-
+/**
+ * Configuration object for FB strategy
+ */
+var FACEBOOK_STRATEGY_CONFIG = {
+  clientID: "193783801343333",
+  clientSecret: "4713ffc497a97c3d076b8909a1379c28",
+}
   /**
    * Triggers when user authenticates via local strategy
    */
@@ -61,11 +65,9 @@ var JWT_STRATEGY_CONFIG = {
           });
         }
 
-
         return next(null, user, {});
       });
   }
-
   /**
    * Triggers when user authenticates via JWT strategy
    */
@@ -74,8 +76,32 @@ var JWT_STRATEGY_CONFIG = {
     return next(null, user, {});
   }
 
+  function _onFacebookStrategyAuth(token, tokenSecret, profile, next){
+    process.nextTick(function() {
+      User.findOne({providerId: profile.id })
+      .exec((err, user)=>{
+        if(user){
+          return next(null,user)
+        }
+        else{
+          var newUser = {
+            provider: profile.provider,
+            providerId: profile.id,
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            user_image: profile.photos[0].value
+          }
+          User.create(newUser, function(err, user) {
+            return next(err, user);
+          });
+        }
+      })
+    })
+  }
+
   passport.use(new LocalStrategy(LOCAL_STRATEGY_CONFIG, _onLocalStrategyAuth));
   passport.use(new JwtStrategy(JWT_STRATEGY_CONFIG, _onJwtStrategyAuth));
+  passport.use(new FacebookTokenStrategy(FACEBOOK_STRATEGY_CONFIG, _onFacebookStrategyAuth));
 
   module.exports.jwtSettings = {
     expiresIn: EXPIRES_IN_MINUTES,

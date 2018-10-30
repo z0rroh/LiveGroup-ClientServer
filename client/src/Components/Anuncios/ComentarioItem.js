@@ -12,11 +12,10 @@ class ComentarioItem extends Component {
 
   render(){
     const comment = this.state.comentario;
-
     return(
       <li id={comment.id}>
         <div className="comment-avatar">
-          <img src={"/images/avatars/"+comment.autor.user_img} alt="ComentarioAvatar"/>
+          <img src={comment.autor.providerId ? comment.autor.user_img : "/images/avatars/"+comment.autor.user_img} alt="ComentarioAvatar"/>
         </div>
         <div className="comment-box">
           <div className="comment-head">

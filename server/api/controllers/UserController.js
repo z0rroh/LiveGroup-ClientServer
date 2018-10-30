@@ -30,6 +30,7 @@ module.exports = {
       var turnos = [];
       var grupo;
       var admin;
+      var providerId;
       user.turnos.map(turno =>{
         var turno = {
           id: turno.id,
@@ -47,6 +48,12 @@ module.exports = {
       else{
         admin = "Comun"
       }
+      if(user.providerId){
+        providerId = user.providerId;
+      }
+      else{
+        providerId = ""
+      }
       var userInfo = {
         id: user.id,
         name: user.name,
@@ -57,7 +64,8 @@ module.exports = {
         admin: admin,
         user_image: user.user_image,
         turnos: turnos,
-        group: user.groupName
+        group: user.groupName,
+        providerId: providerId
       }
       res.ok(userInfo);
     });

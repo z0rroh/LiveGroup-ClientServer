@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 import { Intent } from '@blueprintjs/core'
+import FacebookButton from './FacebookButton'
 
 class SignInForm extends Component{
   constructor(){
@@ -45,6 +46,7 @@ class SignInForm extends Component{
   }
 
   render(){
+
     return(
       <div className="formContainer">
         <form onSubmit={e => this.onSubmit(e)} className="row">
@@ -72,7 +74,7 @@ class SignInForm extends Component{
             <input className="btn" type="submit" value="Ingresar"/>
           </div>
         </form>
-        <div className="row center-lg">
+        <div className="SignUpContainer row center-lg">
           <div className="SignUp col-xs-12">
             <Link className="SignUp-Button btn-flat" to="/auth/registrar">Registrate</Link>
           </div>
@@ -86,6 +88,6 @@ class SignInForm extends Component{
 }
 SignInForm.propTypes = {
   loginServer: PropTypes.func.isRequired,
-  addToast: PropTypes.func.isRequired
+  addToast: PropTypes.func.isRequired,
 };
 export default SignInForm;

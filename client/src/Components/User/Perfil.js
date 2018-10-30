@@ -14,21 +14,22 @@ class Perfil extends Component{
       user: {},
       avatar: "",
       turnos: [],
-      isFetching: false
+      isFetching: true
     };
     this.handleChange=this.handleChange.bind(this);
   }
 
   handleChange(e,name){
-
+    const { user } = this.state
     console.log(name,":",e);
     //this.setState({[name]: e})
-    this.setState(prevState => ({
+    this.setState({
         user: {
-            ...prevState.user,
+            ...user,
             [name]: e
         }
-    }))
+    })
+
     /*
     const data = {
       id: this.props.funcionario.id,
@@ -38,7 +39,6 @@ class Perfil extends Component{
   }
 
   componentDidMount(){
-    this.setState({isFetching: true})
     axios.get('/user/getUser')
     .then((response)=>{
       const user = response.data;
@@ -46,6 +46,7 @@ class Perfil extends Component{
     })
     .catch((err)=>{
       console.log(err);
+      this.setState({ isFetching: false })
     })
     io.socket.on('user', function serverSentEvent(user) {
       /*console.log(user.data[0].user_image);
@@ -59,6 +60,8 @@ class Perfil extends Component{
 
 
    renderContent(){
+     const { user,avatar,turnos } = this.state;
+
      if(this.state.isFetching){
        return(<PerfilSkeleton/>)
      }
@@ -67,15 +70,16 @@ class Perfil extends Component{
          <div className="Perfil-Container row center-lg">
                  <div className="User-Edit col-lg-8 col-xs-12">
                    <UserAvatar
-                     avatar={this.state.avatar}/>
+                     user={user}
+                     avatar={avatar}/>
                  </div>
 
                <div className="User-Info col-lg-8 col-xs-12">
                      <UserInfo
                        handleChange={this.handleChange}
-                       user={this.state.user}/>
+                       user={user}/>
                      <UserTurnos
-                       turnos={this.state.turnos}/>
+                       turnos={turnos}/>
                  </div>
              </div>)
      }

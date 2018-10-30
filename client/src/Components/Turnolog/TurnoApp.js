@@ -15,7 +15,6 @@ class TurnoApp extends Component{
       turnos:[],
       tokens: null,
       isFetching: false,
-      hayTurnos: false,
     }
     this.handlePostTurno = this.handlePostTurno.bind(this);
   }
@@ -29,6 +28,7 @@ class TurnoApp extends Component{
     axios.get('/turnolog/getTurnos')
     .then((res)=>{
       const turnos = res.data;
+      console.log(turnos);
       switch (turnos.code) {
         case 'SUCCESS':
           this.setState({isFetching: false, turnos: turnos.allDays, tokens: this.props.user.tokens})
@@ -124,8 +124,9 @@ class TurnoApp extends Component{
   }
 
 
-  whatRender(){
-    const emptyTurnos = false;
+
+  whatRender(turnos){
+    const emptyTurnos = false
     if(emptyTurnos){
       return( <div className="no-turnos">
                 <div><i className="material-icons">access_time</i></div>
@@ -146,9 +147,11 @@ class TurnoApp extends Component{
   static isPrivate = false;
 
   render(){
+    const { turnos } = this.state
+
     return(
       <div className="ContainerTurnos col-xs-12">
-        {this.whatRender()}
+        {this.whatRender(turnos)}
       </div>
 
     )

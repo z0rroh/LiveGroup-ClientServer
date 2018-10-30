@@ -44,10 +44,18 @@ module.exports = {
             anuncios.map(anuncio =>{
               var comments = []
               anuncio.comment.map(comment =>{
+                var providerId;
+                if(comment.autor.providerId){
+                  providerId = comment.autor.providerId
+                }
+                else{
+                  providerId = ''
+                }
                 var autor = {
                   id: comment.autor.id,
                   name: comment.autor.name,
-                  user_img: comment.autor.user_image
+                  user_img: comment.autor.user_image,
+                  providerId: providerId
                 }
                 var now = moment(comment.createdAt).fromNow();
                 var newComment = {
@@ -60,10 +68,18 @@ module.exports = {
                 comments.push(newComment);
               })
               comments.reverse();
+              var providerId;
+              if(anuncio.autor.providerId){
+                providerId = anuncio.autor.providerId
+              }
+              else{
+                providerId = ''
+              }
               var autor = {
                 id: anuncio.autor.id,
                 name: anuncio.autor.name,
-                user_img: anuncio.autor.user_image
+                user_img: anuncio.autor.user_image,
+                providerId: providerId
               }
               var now = moment(anuncio.createdAt).fromNow();
               var newAnuncio = {
@@ -94,10 +110,18 @@ module.exports = {
         moment.locale('es');
         var now = moment(anuncio.createdAt).fromNow();
         var comments = [];
+        var providerId;
+        if(anuncio.autor.providerId){
+          providerId = anuncio.autor.providerId
+        }
+        else{
+          providerId = ''
+        }
         var autor = {
           id: anuncio.autor.id,
           name: anuncio.autor.name,
-          user_img: anuncio.autor.user_image
+          user_img: anuncio.autor.user_image,
+          providerId: providerId
         }
         var newAnuncio = {
           autor: autor,

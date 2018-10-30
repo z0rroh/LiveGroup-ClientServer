@@ -7,6 +7,13 @@
 
 module.exports = {
 	attributes: {
+			provider:{
+				type: 'string'
+			},
+			providerId:{
+				type: 'string',
+				unique: true
+			},
 	  	name:{
 	  		type:'string',
 	      required: true
@@ -15,8 +22,7 @@ module.exports = {
 				type:'string',
 			},
 	  	password:{
-	  	  type:'string',
-	      required: true
+	  	  type:'string'
 	  	},
 	  	email:{
 	  		type:'email',

@@ -12,6 +12,7 @@ class PerfilApp extends Component {
   static isPrivate = false;
 
   render() {
+    const { user } = this.props
     return (
       <Perfil/>
     );

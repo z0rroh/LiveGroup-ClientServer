@@ -48,7 +48,7 @@ class Header extends Component{
                   </div>
                   <div className="col-lg-2">
                     <div className="User-image">
-                      <img src={"/images/avatars/"+user.user_image} alt="HeaderAvatar"/>
+                      <img src={user.providerId ? user.user_image : "/images/avatars/"+user.user_image} alt="HeaderAvatar"/>
                     </div>
                   </div>
                   <div className="col-lg-2">

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { SET_CURRENT_USER, SET_ISFETCHING, SET_TOKEN } from './types'
+import { SET_CURRENT_USER, SET_ISFETCHING, SET_TOKEN, SET_USER_ATTRIBUTE } from './types'
 import setAuthorizationToken from '../setAuthorizationToken.js'
 import {initializeSocket} from '../io.js'
 
@@ -7,6 +7,14 @@ import {initializeSocket} from '../io.js'
     return {
       type: SET_CURRENT_USER,
       user,
+    }
+  }
+
+  export function setUserAttribute(param, value){
+    return {
+      type: SET_USER_ATTRIBUTE,
+      param,
+      value
     }
   }
 
@@ -54,6 +62,39 @@ import {initializeSocket} from '../io.js'
       .catch(err =>{
         console.log(err);
         dispatch(setIsFetching(false));
+      })
+    }
+  }
+
+  export function loginFacebook(token){
+    return dispatch => {
+      dispatch(setIsFetching(true));
+      return axios.post('/session/facebook', {access_token: token})
+      .then((res)=> {
+        const auth = res.data;
+        switch (auth.code) {
+          case "SUCCESS":
+            const authToken = new Promise((resolve, reject)=>{
+               localStorage.setItem('jwToken',auth.token);
+               initializeSocket(auth.token)
+               setAuthorizationToken(auth.token);
+               resolve("GOOD")
+            })
+            authToken
+            .then(res=>{
+              console.log(res);
+              dispatch(setToken(auth.token));
+              dispatch(setCurrentUser(auth.user));
+              dispatch(setIsFetching(false));
+            })
+            break;
+          default:
+            dispatch(setIsFetching(false));
+            return res.data.message
+        }
+      })
+      .catch(err =>{
+        console.log(err);
       })
     }
   }

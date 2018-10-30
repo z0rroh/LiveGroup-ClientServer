@@ -2,16 +2,14 @@
 FROM node:latest
 
 # set working directory
-RUN mkdir /usr/src/app
-#VOLUME ["/server"]
-WORKDIR /usr/src/app
+RUN mkdir /app
 
-# add `/usr/src/app/node_modules/.bin` to $PATH
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+WORKDIR /app
 
-# install and cache app dependencies
-COPY package.json /usr/src/app/package.json
-RUN npm install
-RUN npm install react-scripts@1.1.1 -g
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY package.json /app
+
+RUN npm install --silent
 
 EXPOSE 3000

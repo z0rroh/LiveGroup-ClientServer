@@ -29,10 +29,18 @@ module.exports = {
        moment.locale('es');
        var now = moment(comentario.createdAt).fromNow();
        var comments = [];
+       var providerId;
+       if(comentario.autor.providerId){
+         providerId = comentario.autor.providerId
+       }
+       else{
+         providerId = ''
+       }
        var autor = {
          id: comentario.autor.id,
          name: comentario.autor.name,
-         user_img: comentario.autor.user_image
+         user_img: comentario.autor.user_image,
+         providerId: providerId
        }
        var newComment = {
          autor: autor,

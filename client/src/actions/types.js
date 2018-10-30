@@ -9,3 +9,6 @@ export const ADD_TOASTS = 'ADD_TOASTS';
 export const CLEAR_TOASTS = 'CLEAR_TOASTS';
 
 export const SET_TOKEN = 'SET_TOKEN';
+
+
+export const SET_USER_ATTRIBUTE = 'SET_USER_ATTRIBUTE'

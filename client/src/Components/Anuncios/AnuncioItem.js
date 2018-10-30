@@ -26,7 +26,8 @@ class AnuncioItem extends Component {
       var autor = {
         name: comentario.data.autor.name,
         id: comentario.data.autor.id,
-        user_img: comentario.data.autor.user_img
+        user_img: comentario.data.autor.user_img,
+        providerId: comentario.data.autor.providerId
       }
       let newComment= {autor: autor, id: comentario.data.id, text: comentario.data.text, fecha: comentario.data.fecha}
       let newState = this.state.anuncio;
@@ -87,7 +88,7 @@ class AnuncioItem extends Component {
         <li id={this.state.anuncio.id} className="comment-line">
           <div className="comment-main-level">
             <div className="comment-avatar">
-              <img src={"/images/avatars/"+anuncio.autor.user_img} alt="AnuncioAvatar"/>
+              <img src={anuncio.autor.providerId ? anuncio.autor.user_img : "/images/avatars/"+anuncio.autor.user_img} alt="AnuncioAvatar"/>
             </div>
             <div className="comment-box">
                 <div className="comment-head">

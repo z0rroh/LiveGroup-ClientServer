@@ -40,7 +40,7 @@ class ComentarioForm extends Component {
         <div className="ComentarioNuevo col-lg-12">
           <div className="row start-lg">
             <div className="ComentarioNuevo-Image col-lg-1">
-              <img src={"/images/avatars/"+user.user_image} alt="ComentarioFormAvatar"/>
+              <img src={user.providerId ? user.user_image : "/images/avatars/"+user.user_image} alt="ComentarioFormAvatar"/>
             </div>
             <div className="ComentarioNuevo-Form col-lg-11">
                 <form onSubmit={(e) => this.onSubmit(e)}

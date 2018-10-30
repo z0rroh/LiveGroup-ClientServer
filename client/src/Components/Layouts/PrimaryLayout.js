@@ -1,5 +1,5 @@
 import React, {Component}  from 'react'
-import { Switch, Redirect } from 'react-router-dom'
+import { Switch, Redirect, withRouter, Route } from 'react-router-dom'
 import PrimaryHeader from '../Header/PrimaryHeader'
 import AnunciosApp from '../Anuncios/AnunciosApp.js'
 import TurnoApp from '../Turnolog/TurnoApp.js'
@@ -86,4 +86,4 @@ const stateToProps = ({ auth }) => ({
 })
 
 
-export default connect(stateToProps)(PrimaryLayout)
+export default withRouter(connect(stateToProps)(PrimaryLayout))

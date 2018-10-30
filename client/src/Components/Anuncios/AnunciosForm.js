@@ -41,7 +41,7 @@ class AnunciosForm extends Component {
             <div className="AnuncioNuevo">
               <div className="row center-lg">
                 <div className="AnuncioNuevo-Image col-lg-1 col-xs-2">
-                  <img src={"/images/avatars/"+user.user_image} alt="AnuncioFormAvatar"/>
+                  <img src={user.providerId ? user.user_image : "/images/avatars/"+user.user_image} alt="AnuncioFormAvatar"/>
                 </div>
                 <div className="AnuncioNuevo-Form col-lg-10 col-xs-9">
                   <form onSubmit={(e) => this.onSubmit(e)}

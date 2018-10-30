@@ -71,13 +71,16 @@ class UserAvatar extends Component{
     }
 
     render(){
+
+      const user = this.props.user;
       return(
         <div className="User-Edit-img">
           {
             this.state.avatar === null || this.state.avatar === 'undefined' ?
             (<div className="user-img-skeleton pt-skeleton"></div>) :
-            (<img src={this.state.avatar} alt="PerfilAvatar" />)
+            (<img src={user.providerId ? user.user_image : this.state.avatar} alt="PerfilAvatar" />)
           }
+          { !user.providerId &&
           <Popover
              isOpen={this.state.isOpen}
              onInteraction={() => this.handleInteraction()}
@@ -103,6 +106,7 @@ class UserAvatar extends Component{
                   </form>
               </div>
           </Popover>
+        }
         </div>
       )
     }

@@ -54,9 +54,24 @@ module.exports = {
 	},
 
 	signIn: function (req, res) {
-		passport.authenticate('local',
-			_onPassportAuth.bind(this, req, res))(req, res);
+		passport.authenticate('local', _onPassportAuth.bind(this, req, res))(req, res);
 	},
+
+  facebook: function(req, res) {
+    passport.authenticate('facebook-token', function(error, user, info) {
+      if (error){
+        return res.json({
+        code: 'SIGNIN_ERR',
+        message: 'Ah ocurrido un error al validar con facebook'
+        });
+      }
+      return res.json({
+        code:'SUCCESS',
+        token: CipherService.createToken(user),
+        user: user
+      });
+    })(req, res);
+  },
 
 	logout: function (req,res){
 		req.logout();

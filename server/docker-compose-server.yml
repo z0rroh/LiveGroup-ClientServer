@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+  livegroup_backend:
+
+    container_name: livegroup_backend
+    image: livegroup_server
+    build: .
+    command: sails lift
+    ports:
+      - "1337:1337"
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    depends_on:
+      - livegroup_database
+    networks:
+      - livegroup_network
+
+  livegroup_database:
+    container_name: livegroup-mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - "livegroup_database:/data/db"
+    networks:
+      - livegroup_network
+
+networks:
+  livegroup_network:
+
+volumes:
+  livegroup_database:
+    driver: local

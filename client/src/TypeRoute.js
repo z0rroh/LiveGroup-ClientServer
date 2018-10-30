@@ -9,10 +9,13 @@ const PUBLIC_ROOT = '/anuncios';
 
 const TypeRoute = ({component, ...props}) => {
   const { isPrivate } = component;
-
+  const Component = component
   if (props.user.admin) {
       //If the user is admin, is redirected to any route.
-      return <Route { ...props } component={ component } />;
+    //  return <Route { ...props } component={ component } />;
+      return <Route { ...props } render={ (routeProps) => (
+        <Component { ...routeProps } { ...props } />
+      )} />;
   }
   else {
     //User is not Admin
@@ -22,7 +25,10 @@ const TypeRoute = ({component, ...props}) => {
     }
     else {
       //If the route is public, is redirected to component.
-      return <Route { ...props } component={ component } />;
+      //return <Route { ...props } component={ component } />;
+      return <Route { ...props } render={ (routeProps) => (
+        <Component { ...routeProps } { ...props } />
+      )} />;
     }
   }
 };

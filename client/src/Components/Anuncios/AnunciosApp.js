@@ -15,12 +15,11 @@ class AnunciosApp extends Component {
   }
 
   componentDidMount(){
-
     io.socket.get('/anuncios/subscribe', function (res){
       console.log(res);
       console.log("Subscrito a anuncios");
     });
-    io.socket.get('/comentario/subscribe', function (res) {
+    io.socket.get('/comentario/subscribe', function (res){
         console.log(res);
         console.log("Subscrito a comentarios");
     });
@@ -33,13 +32,15 @@ class AnunciosApp extends Component {
     .catch((err)=>{
       console.log(err);
     })
-    io.socket.on('anuncio', function serverSentEvent(anuncio) {
+    io.socket.on('anuncio', function serverSentEvent(anuncio){
+
       if(anuncio.verb === "created"){
         var anuntio = anuncio.data;
         var autor = {
           name: anuntio.autor.name,
           id: anuntio.autor.id,
-          user_img: anuntio.autor.user_img
+          user_img: anuntio.autor.user_img,
+          providerId: anuntio.autor.providerId
         }
         let newAnuncio = {autor: autor, id: anuntio.id, text: anuntio.text, fecha: anuntio.fecha, comment: anuntio.comment}
         let newState = this.state.anuncios;
@@ -52,7 +53,7 @@ class AnunciosApp extends Component {
   static isPrivate = false;
 
   render() {
-    const {anuncios,isFetching} = this.state;
+    const { anuncios,isFetching } = this.state;
     return (
       <Anuncios
         anuncios={anuncios}

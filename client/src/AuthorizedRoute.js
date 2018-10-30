@@ -11,17 +11,19 @@ const PUBLIC_ROOT = '/auth/login';
 
 const AuthRoute = ({component, ...props}) => {
   const { isPrivate } = component;
-
+  const Component = component;
   if (props.isAuthenticated) {
     //User is Authenticated
     if (isPrivate === true) {
       //If the route is private the user may proceed.
-      return <Route { ...props } component={ component } />
+      return <Route { ...props } render={ (routeProps) => (
+        <Component { ...routeProps } { ...props } />
+      )} />;
 
     }
     else {
       //If the route is public, the user is redirected to the app's private root.
-        console.log("esta autentificado, renderizar a /anuncios");
+        //console.log("esta autentificado, renderizar a /anuncios");
         return <Redirect to={ PRIVATE_ROOT } />;
     }
   }
@@ -33,7 +35,9 @@ const AuthRoute = ({component, ...props}) => {
     }
     else {
       //If the route is public, the user may proceed.
-      return <Route { ...props } component={ component } />;
+      return <Route render={ (routeProps) => (
+        <Component { ...routeProps } { ...props } />
+      )} />;
     }
   }
 };

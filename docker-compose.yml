@@ -1,38 +1,50 @@
-version: '3.5'
+version: '3'
 services:
 
-  livegroup_api_server_container:
-    container_name: livegroup_server
+  livegroup_backend:
+    container_name: livegroup_backend
+    image: livegroup_server
+    build: ./server/
+    command: sails lift
     ports:
       - "1337:1337"
-    command: "sails lift"
     volumes:
-      - './server:/usr/src/app'
-      - '/usr/src/app/node_modules'
-    build: ./server/
+      - './server:/app'
+      - '/app/node_modules'
     depends_on:
-      - livegroup_database_mongo
-    links:
-      - livegroup_database_mongo:livegroup_database_mongo
+      - livegroup_database
+    networks:
+      - livegroup_network
 
-  livegroup_database_mongo:
-    container_name: livegroup_database
+  livegroup_database:
+    container_name: livegroup-mongo
     image: mongo
     ports:
       - "27017:27017"
+    volumes:
+      - "livegroup_database:/data/db"
+    networks:
+      - livegroup_network
 
-  livegroup_api_client_container:
-    container_name: livegroup_client
+  livegroup_frontend:
+    container_name: livegroup_frontend
+    image: livegroup_client
+    build: ./client/
+    command: npm start
     ports:
       - "3000:3000"
-    command: "npm start"
     volumes:
-      - './client:/usr/src/app'
-      - '/usr/src/app/node_modules'
-    build: ./client/
+      - './client:/app'
+      - '/app/node_modules'
     depends_on:
-      - livegroup_api_server_container
-    environment:
-        - NODE_ENV=development
-    links:
-      - livegroup_api_server_container
+      - livegroup_backend
+      - livegroup_database
+    networks:
+      - livegroup_network
+
+networks:
+  livegroup_network:
+
+volumes:
+  livegroup_database:
+    driver: local
