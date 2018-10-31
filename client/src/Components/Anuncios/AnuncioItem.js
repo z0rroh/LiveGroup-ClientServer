@@ -95,7 +95,7 @@ class AnuncioItem extends Component {
                   <h6 className="comment-name by-author"><a>{this.state.anuncio.autor.name}</a></h6>
                   <span>{this.state.anuncio.fecha}</span>
                 <i onClick={()=>this.iconCLick(this.state.answerHide)} className="reply material-icons">reply</i>
-                  <i className="heart material-icons">favorite</i>
+              
                 </div>
                 <div className="comment-content">
                   <p>{this.state.anuncio.text}</p>

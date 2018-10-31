@@ -3340,7 +3340,8 @@ div.material-table {
   .SemanaTitleContainer .SemanaTitleBox {
     margin: auto; }
     .SemanaTitleContainer .SemanaTitleBox p {
-      margin: 0px; }
+      margin: 0px;
+      margin-left: 10px; }
     .SemanaTitleContainer .SemanaTitleBox .Tokens {
       text-align: left; }
 
@@ -3392,7 +3393,6 @@ div.material-table {
       overflow: hidden;
       text-overflow: ellipsis; }
   .SemanaContent .Turno-Log {
-    text-align: center;
     height: auto; }
     .SemanaContent .Turno-Log h5 {
       margin: 4px;
@@ -3551,17 +3551,20 @@ div.material-table {
         color: rgba(151, 151, 151, 0.5) !important;
         font-size: 30px !important; }
     .Perfil-Container .User-Info .User-element {
-      padding: 20px 20px 20px 10px;
-      display: flex; }
+      padding: 20px 20px 20px 10px; }
       .Perfil-Container .User-Info .User-element strong {
         margin-left: 30px;
         float: left;
         width: auto;
         height: auto; }
+      .Perfil-Container .User-Info .User-element p {
+        margin-left: 10px; }
       .Perfil-Container .User-Info .User-element span {
         width: auto;
         height: auto;
         float: left; }
+      .Perfil-Container .User-Info .User-element .User-element-EditableText {
+        width: 100%; }
     .Perfil-Container .User-Info .Turno-element {
       padding: 20px 0 20px 0;
       display: flex;

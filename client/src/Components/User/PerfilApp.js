@@ -3,18 +3,32 @@ import Perfil from './Perfil.js'
 import {io} from '../../io.js'
 
 class PerfilApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: this.props.user
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user !== this.state.user) {
+      this.setState({user: nextProps.user})
+    }
+  }
 
   componentDidMount(){
-    io.socket.get('/user/subscribe', ()=> {
-    })
+  
   }
 
   static isPrivate = false;
 
   render() {
-    const { user } = this.props
+    const { user } = this.state
+    const { setUserAttribute } = this.props
     return (
-      <Perfil/>
+      <Perfil
+        setUserAttribute={setUserAttribute}
+        user={user}/>
     );
   }
 }

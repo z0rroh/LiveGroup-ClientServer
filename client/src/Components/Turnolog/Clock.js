@@ -29,7 +29,7 @@ class Clock extends Component {
     const { date } = this.state
     return (
       <div className="row col-lg-4 col-xs-4 center-xs">
-        <span>Hora: {date.toLocaleTimeString()}</span>
+        <strong>Hora: </strong><p>{date.toLocaleTimeString()}</p>
       </div>
     );
   }

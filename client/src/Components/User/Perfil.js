@@ -8,68 +8,51 @@ import {io} from '../../io.js'
 
 class Perfil extends Component{
 
-  constructor(){
+  constructor(props){
     super();
     this.state ={
-      user: {},
-      avatar: "",
+      user: props.user,
+      avatar: props.user.user_image,
       turnos: [],
       isFetching: true
     };
     this.handleChange=this.handleChange.bind(this);
   }
 
-  handleChange(e,name){
-    const { user } = this.state
-    console.log(name,":",e);
-    //this.setState({[name]: e})
-    this.setState({
-        user: {
-            ...user,
-            [name]: e
-        }
-    })
-
-    /*
-    const data = {
-      id: this.props.funcionario.id,
-      [name]: e,
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user !== this.state.user) {
+      this.setState({user: nextProps.user, avatar: nextProps.user.user_image})
     }
-*/
   }
 
-  componentDidMount(){
-    axios.get('/user/getUser')
-    .then((response)=>{
-      const user = response.data;
-      this.setState({isFetching: false, user: user, turnos: user.turnos, avatar: user.user_image})
-    })
-    .catch((err)=>{
-      console.log(err);
-      this.setState({ isFetching: false })
-    })
-    io.socket.on('user', function serverSentEvent(user) {
-      /*console.log(user.data[0].user_image);
-      this.setState({
-        avatar: user.data[0].user_image
-    })*/
-    console.log(user);
-    });
+  handleChange(e,name){
+    this.props.setUserAttribute(name, e)
+  }
 
+  async componentDidMount(){
+    try{
+      const req = await axios.get('/user/getUser')
+      const user = req.data
+      this.setState({isFetching: false, turnos: user.turnos})
+    }catch(e){
+      this.setState({ isFetching: false })
+    }
   }
 
 
    renderContent(){
      const { user,avatar,turnos } = this.state;
+     const { setUserAttribute } = this.props
 
      if(this.state.isFetching){
        return(<PerfilSkeleton/>)
      }
      else{
        return(
-         <div className="Perfil-Container row center-lg">
+         <div className="Perfil-Container row center-lg col-lg-12 col-xs-10">
                  <div className="User-Edit col-lg-8 col-xs-12">
                    <UserAvatar
+                     setUserAttribute={setUserAttribute}
                      user={user}
                      avatar={avatar}/>
                  </div>
@@ -87,7 +70,7 @@ class Perfil extends Component{
 
   render(){
     return(
-      <div className="Container">
+      <div className="Container row center-xs">
         {this.renderContent()}
       </div>
 

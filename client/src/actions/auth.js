@@ -119,7 +119,7 @@ import {initializeSocket} from '../io.js'
         .then(res =>{
           switch (res.data.code) {
               case "SUCCESS":
-                dispatch(setCurrentUser(res.data.user[0]));
+                //dispatch(setCurrentUser(res.data.user[0]));
                 break;
               default:
                 return res.data.message

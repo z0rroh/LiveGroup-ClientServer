@@ -7,36 +7,38 @@ import { Intent } from '@blueprintjs/core'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 import moment from 'moment'
+moment.locale('es-cl');
 
 class TurnoApp extends Component{
-  constructor(){
+  constructor(props){
     super();
-    this.state={
+    this.state = {
       turnos:[],
-      tokens: null,
-      isFetching: false,
+      isFetching: true,
+      tokens: props.user.tokens
     }
     this.handlePostTurno = this.handlePostTurno.bind(this);
   }
 
-  componentDidMount(){
-    moment.locale('es-cl');
-    this.setState({isFetching: true});
-    io.socket.get('/turnolog/subscribe', function(res) {
-      console.log("Subscrito a turnos");
-    });
-    axios.get('/turnolog/getTurnos')
-    .then((res)=>{
-      const turnos = res.data;
-      console.log(turnos);
-      switch (turnos.code) {
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user.tokens !== this.state.tokens) {
+      this.setState({tokens: nextProps.user.tokens})
+    }
+  }
+
+  getTurnos = async () => {
+    try{
+      const request = await axios.get('/turnolog/getTurnos')
+      const response = request.data
+      switch (response.code) {
         case 'SUCCESS':
-          this.setState({isFetching: false, turnos: turnos.allDays, tokens: this.props.user.tokens})
+          this.setState({turnos: response.allDays, isFetching: false })
           break;
         case 'FAIL':
           this.props.addToast({
             intent: Intent.DANGER,
-            message: res.data.message
+            message: response.data.message
           })
           this.setState({isFetching:false})
           break;
@@ -44,10 +46,17 @@ class TurnoApp extends Component{
           this.setState({isFetching:false})
           break;
       }
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
+    }catch(e){
+      throw e
+    }
+  }
+
+  async componentDidMount(){
+    io.socket.get('/turnolog/subscribe', function(res) {
+      console.log("Subscrito a turnos");
+    });
+
+    const getTurnos = await this.getTurnos()
 
     io.socket.on('turnolog', function serverSentEvent(newTurno) {
       let prevState = [];
@@ -97,7 +106,7 @@ class TurnoApp extends Component{
     }.bind(this));
   }
   handlePostTurno(id){
-
+    const setUserAttribute = this.props.setUserAttribute
     axios.post('/turnolog/postTurno',{id: id})
     .then((res)=>{
       switch (res.data.code) {
@@ -106,7 +115,8 @@ class TurnoApp extends Component{
             intent: Intent.SUCCESS,
             message: res.data.message
           });
-          this.setState({tokens: this.state.tokens-1})
+          let tokens = (this.state.tokens - 1)
+          setUserAttribute("tokens", tokens)
           break;
         case 'FAIL':
           this.props.addToast({
@@ -119,14 +129,35 @@ class TurnoApp extends Component{
       }
     })
     .catch((err)=>{
-      console.log(err);
+      //console.log(err);
     })
   }
 
+  verifyEmptyTurnos = ( turnos ) => {
+    var isEmpty = true
+    for (let i in turnos ){
+      if (turnos[i].data.length){
+        return isEmpty = false
+      }
+    }
+    return isEmpty
+  }
 
-
-  whatRender(turnos){
-    const emptyTurnos = false
+  whatRender(turnos, isFetching){
+    const emptyTurnos = this.verifyEmptyTurnos(turnos)
+    if(isFetching){
+      return(
+        <div className="pt-spinner .pt-large">
+          <div className="pt-spinner-svg-container">
+            <svg viewBox="0 0 100 100">
+              <path className="pt-spinner-track" d="M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89"></path>
+              <path className="pt-spinner-head" d="M 94.5 50 A 44.5 44.5 0 0 0 50 5.5"></path>
+            </svg>
+          </div>
+          Loading...
+        </div>
+      )
+    }
     if(emptyTurnos){
       return( <div className="no-turnos">
                 <div><i className="material-icons">access_time</i></div>
@@ -147,11 +178,11 @@ class TurnoApp extends Component{
   static isPrivate = false;
 
   render(){
-    const { turnos } = this.state
+    const { turnos, isFetching } = this.state
 
     return(
       <div className="ContainerTurnos col-xs-12">
-        {this.whatRender(turnos)}
+        {this.whatRender(turnos, isFetching)}
       </div>
 
     )

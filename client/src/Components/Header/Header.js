@@ -6,10 +6,17 @@ import { logout } from '../../actions/auth'
 import { Intent } from '@blueprintjs/core'
 
 class Header extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
-      user: {}
+      user: this.props.user,
+      avatar: "/images/avatars/"+this.props.avatar
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user !== this.state.user) {
+      this.setState({user: nextProps.user, avatar: nextProps.user.user_image})
     }
   }
 
@@ -22,7 +29,7 @@ class Header extends Component{
   }
 
   componentDidMount(){
-    this.setState({user: this.props.user});
+    //this.setState({user: this.props.user});
   }
 
   render(){

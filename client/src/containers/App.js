@@ -9,24 +9,25 @@ import Loading from 'react-loading-components';
 import noGroup from '../Components/NoGroup/noGroup'
 import {connect} from 'react-redux'
 
+
 class App extends Component {
 
   constructor(){
     super();
     this.state={
-      isFetch: true
+      isFetching: false
     }
   }
 
   componentDidMount(){
-    setTimeout(() => this.setState({ isFetch: false }), 1000);
+    //setTimeout(() => this.setState({ isFetching: false }), 1000);
   }
 
   render() {
-      const { isFetch } = this.state;
+      const { isFetching } = this.state;
       const { auth } = this.props;
       return (
-        isFetch ?
+        isFetching ?
         (<div className="ContainerLoader row col-xs-12 center-xs">
           <div className="LoaderPosition row middle-xs">
             <div><Loading type='circles' width={110} height={110} fill='#fff'/></div>
@@ -55,6 +56,7 @@ class App extends Component {
 const stateToProps = ({ auth }) => ({
   auth: auth
 })
+
 
 
 export default withRouter(connect(stateToProps)(App))

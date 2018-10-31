@@ -8,6 +8,7 @@ import SubLayout from '../Layouts/SubLayout'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import TypeRoute from '../../TypeRoute'
+import {setUserAttribute} from '../../actions/auth'
 
 const NotFound = ({props})=>{
   return(
@@ -30,7 +31,7 @@ class PrimaryLayout extends Component{
 
   static isPrivate = true;
   render(){
-    const {match, history, user} = this.props;
+    const {match, history, user, setUserAttribute} = this.props;
     if(!user.group){
       return (<Redirect to="/noGroup/waiting"/>)
     }
@@ -46,6 +47,7 @@ class PrimaryLayout extends Component{
               component={AnunciosApp}/>
             <TypeRoute
               exact
+              setUserAttribute={setUserAttribute}
               path={`${match.path}perfil`}
               user={user}
               component={PerfilApp}/>
@@ -58,6 +60,7 @@ class PrimaryLayout extends Component{
               exact
               path={`${match.path}turnos`}
               user={user}
+              setUserAttribute={setUserAttribute}
               component={TurnoApp}/>
             <TypeRoute
               path={`${match.path}administrar`}
@@ -85,5 +88,11 @@ const stateToProps = ({ auth }) => ({
   user: auth.user
 })
 
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    setUserAttribute: (param, value) => dispatch(setUserAttribute(param, value)),
+  }
+}
 
-export default withRouter(connect(stateToProps)(PrimaryLayout))
+
+export default withRouter(connect(stateToProps, mapDispatchToProps)(PrimaryLayout))

@@ -33,7 +33,8 @@
   .SemanaTitleContainer .SemanaTitleBox {
     margin: auto; }
     .SemanaTitleContainer .SemanaTitleBox p {
-      margin: 0px; }
+      margin: 0px;
+      margin-left: 10px; }
     .SemanaTitleContainer .SemanaTitleBox .Tokens {
       text-align: left; }
 
@@ -85,7 +86,6 @@
       overflow: hidden;
       text-overflow: ellipsis; }
   .SemanaContent .Turno-Log {
-    text-align: center;
     height: auto; }
     .SemanaContent .Turno-Log h5 {
       margin: 4px;

@@ -35,26 +35,13 @@ class Semana extends Component{
                   onPostTurno={handlePostTurno}
                   user={user}/>)
     });
-    if(isFetching){
-      return(
-        <div className="pt-spinner .pt-large">
-          <div className="pt-spinner-svg-container">
-            <svg viewBox="0 0 100 100">
-              <path className="pt-spinner-track" d="M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89"></path>
-              <path className="pt-spinner-head" d="M 94.5 50 A 44.5 44.5 0 0 0 50 5.5"></path>
-            </svg>
-          </div>
-          Loading...
-        </div>
-      )
-    }
     return(
       <div className="Semana col-xs-12">
         <div className="SemanaTitleContainer">
           <div className="SemanaTitleBox row between-lg col-xs-10">
-            <div className="col-lg-4 col-xs-8"><p> Fecha: { fecha }</p></div>
+            <div className="row col-lg-4 col-xs-8"><strong>Fecha: </strong><p>{ fecha }</p></div>
             <Clock />
-            <div className="Tokens col-lg-4 col-xs-12"><p>  Tokens: { tokens }</p></div>
+            <div className="Tokens row col-lg-4 col-xs-12"><strong>Tokens disponibles: </strong><p>{tokens }</p></div>
           </div>
         </div>
         <div className="MesName col-xs-12 center-xs"><span>{ mesName }</span></div>

@@ -9,7 +9,7 @@ class UserAvatar extends Component{
     constructor(props){
       super(props);
       this.state = {
-        avatar: null,
+        avatar: "/images/avatars/"+this.props.avatar,
         isOpen: false,
         file: null,
         avatarName: "Seleccionar foto de perfil...",
@@ -22,35 +22,42 @@ class UserAvatar extends Component{
     handleSubmit(e){
       const {editAvatar, addToast} = this.props;
       e.preventDefault();
-      let reader = new FileReader();
-      var avatar = new FormData();
-      avatar.append("avatar", this.state.file);
-      reader.onload = () => {
-        this.setState({
-          avatarName: "Seleccionar foto de perfil...",
-          isOpen: false,
-          avatar: reader.result
+      if ( this.state.file !== null){
+        let reader = new FileReader();
+        var avatar = new FormData();
+        avatar.append("avatar", this.state.file);
+        reader.onload = () => {
+          this.setState({
+            avatarName: "Seleccionar foto de perfil...",
+            isOpen: false,
+            avatar: reader.result
+          })
+        }
+        reader.readAsDataURL(this.state.file)
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        }
+        editAvatar(avatar, config, reader.result)
+        .then(res=>{
+            if(res){
+              addToast({
+              intent: Intent.DANGER,
+              message: res
+            })
+            }
+            else{
+              addToast({
+                intent: Intent.SUCCESS,
+                message: "ACTUALIZACIÓN EXITOSA!"
+              })
+            }
+        })
+      }else{
+        addToast({
+          intent: Intent.WARNING,
+          message: "Debes seleccionar una imagen"
         })
       }
-      reader.readAsDataURL(this.state.file)
-      const config = {
-          headers: { 'content-type': 'multipart/form-data' }
-      }
-      editAvatar(avatar, config)
-      .then(res=>{
-          if(res){
-            addToast({
-            intent: Intent.DANGER,
-            message: res
-          })
-          }
-          else{
-            addToast({
-              intent: Intent.SUCCESS,
-              message: "ACTUALIZACIÓN EXITOSA!"
-            })
-          }
-      })
     }
     handleChange(e){
       e.preventDefault();
@@ -66,12 +73,7 @@ class UserAvatar extends Component{
       this.setState({ isOpen: !this.state.isOpen });
     }
 
-    componentDidMount(){
-      this.setState({avatar: "/images/avatars/"+this.props.avatar});
-    }
-
     render(){
-
       const user = this.props.user;
       return(
         <div className="User-Edit-img">
@@ -100,6 +102,7 @@ class UserAvatar extends Component{
                       <span className="pt-file-upload-input submit-name">{this.state.avatarName}</span>
                     </label>
                     <input
+                      value="Cambiar"
                       name="Upload"
                       type="submit"
                       className="pt-button submit-file" />

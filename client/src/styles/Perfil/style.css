@@ -76,17 +76,20 @@
         color: rgba(151, 151, 151, 0.5) !important;
         font-size: 30px !important; }
     .Perfil-Container .User-Info .User-element {
-      padding: 20px 20px 20px 10px;
-      display: flex; }
+      padding: 20px 20px 20px 10px; }
       .Perfil-Container .User-Info .User-element strong {
         margin-left: 30px;
         float: left;
         width: auto;
         height: auto; }
+      .Perfil-Container .User-Info .User-element p {
+        margin-left: 10px; }
       .Perfil-Container .User-Info .User-element span {
         width: auto;
         height: auto;
         float: left; }
+      .Perfil-Container .User-Info .User-element .User-element-EditableText {
+        width: 100%; }
     .Perfil-Container .User-Info .Turno-element {
       padding: 20px 0 20px 0;
       display: flex;
